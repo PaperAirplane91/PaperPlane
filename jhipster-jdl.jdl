@@ -1,0 +1,34 @@
+
+entity UserProfile {
+userId Integer
+username String
+password String
+}
+
+entity Document {
+documentId Integer
+title String
+content Text
+}
+
+entity Images{
+imageId Integer
+documentId Integer
+imageData LongBlob
+caption String
+}
+
+entity User{
+}
+
+relationship OneToMany{
+Document{Images} to Images
+}
+
+relationship OneToMany{
+User{Document} to Document
+}
+
+relationship OneToOne{
+UserProfile to User
+}
