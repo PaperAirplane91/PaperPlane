@@ -1,6 +1,6 @@
 
 entity UserProfile {
-userId Integer
+profileId Integer
 username String
 password String
 }
@@ -13,7 +13,7 @@ content String
 
 entity Images{
 imageId Integer
-documentId Integer
+documentIndex Integer
 imageData String
 caption String
 }
