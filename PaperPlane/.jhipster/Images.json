@@ -10,7 +10,7 @@
       "fieldType": "Integer"
     },
     {
-      "fieldName": "documentId",
+      "fieldName": "documentIndex",
       "fieldType": "Integer"
     },
     {

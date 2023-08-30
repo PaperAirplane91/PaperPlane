@@ -21,8 +21,8 @@ public class UserProfile implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "user_id", insertable = false, updatable = false)
-    private Integer userId;
+    @Column(name = "profile_id")
+    private Integer profileId;
 
     @Column(name = "username")
     private String username;
@@ -49,17 +49,17 @@ public class UserProfile implements Serializable {
         this.id = id;
     }
 
-    public Integer getUserId() {
-        return this.userId;
+    public Integer getProfileId() {
+        return this.profileId;
     }
 
-    public UserProfile userId(Integer userId) {
-        this.setUserId(userId);
+    public UserProfile profileId(Integer profileId) {
+        this.setProfileId(profileId);
         return this;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setProfileId(Integer profileId) {
+        this.profileId = profileId;
     }
 
     public String getUsername() {
@@ -125,7 +125,7 @@ public class UserProfile implements Serializable {
     public String toString() {
         return "UserProfile{" +
             "id=" + getId() +
-            ", userId=" + getUserId() +
+            ", profileId=" + getProfileId() +
             ", username='" + getUsername() + "'" +
             ", password='" + getPassword() + "'" +
             "}";

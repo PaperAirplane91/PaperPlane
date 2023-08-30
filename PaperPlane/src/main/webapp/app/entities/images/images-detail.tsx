@@ -33,9 +33,9 @@ export const ImagesDetail = () => {
           </dt>
           <dd>{imagesEntity.imageId}</dd>
           <dt>
-            <span id="documentId">Document Id</span>
+            <span id="documentIndex">Document Index</span>
           </dt>
-          <dd>{imagesEntity.documentId}</dd>
+          <dd>{imagesEntity.documentIndex}</dd>
           <dt>
             <span id="imageData">Image Data</span>
           </dt>

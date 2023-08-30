@@ -124,8 +124,8 @@ public class ImagesResource {
                 if (images.getImageId() != null) {
                     existingImages.setImageId(images.getImageId());
                 }
-                if (images.getDocumentId() != null) {
-                    existingImages.setDocumentId(images.getDocumentId());
+                if (images.getDocumentIndex() != null) {
+                    existingImages.setDocumentIndex(images.getDocumentIndex());
                 }
                 if (images.getImageData() != null) {
                     existingImages.setImageData(images.getImageData());

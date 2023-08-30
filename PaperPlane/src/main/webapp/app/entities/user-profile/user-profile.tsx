@@ -47,7 +47,7 @@ export const UserProfile = () => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>User Id</th>
+                <th>Profile Id</th>
                 <th>Username</th>
                 <th>Password</th>
                 <th>User</th>
@@ -62,7 +62,7 @@ export const UserProfile = () => {
                       {userProfile.id}
                     </Button>
                   </td>
-                  <td>{userProfile.userId}</td>
+                  <td>{userProfile.profileId}</td>
                   <td>{userProfile.username}</td>
                   <td>{userProfile.password}</td>
                   <td>{userProfile.user ? userProfile.user.id : ''}</td>

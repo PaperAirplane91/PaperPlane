@@ -86,7 +86,7 @@ export const ImagesUpdate = () => {
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
               {!isNew ? <ValidatedField name="id" required readOnly id="images-id" label="ID" validate={{ required: true }} /> : null}
               <ValidatedField label="Image Id" id="images-imageId" name="imageId" data-cy="imageId" type="text" />
-              <ValidatedField label="Document Id" id="images-documentId" name="documentId" data-cy="documentId" type="text" />
+              <ValidatedField label="Document Index" id="images-documentIndex" name="documentIndex" data-cy="documentIndex" type="text" />
               <ValidatedField label="Image Data" id="images-imageData" name="imageData" data-cy="imageData" type="text" />
               <ValidatedField label="Caption" id="images-caption" name="caption" data-cy="caption" type="text" />
               <ValidatedField id="images-document" name="document" data-cy="document" label="Document" type="select">

@@ -85,7 +85,7 @@ export const UserProfileUpdate = () => {
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
               {!isNew ? <ValidatedField name="id" required readOnly id="user-profile-id" label="ID" validate={{ required: true }} /> : null}
-              <ValidatedField label="User Id" id="user-profile-userId" name="userId" data-cy="userId" type="text" />
+              <ValidatedField label="Profile Id" id="user-profile-profileId" name="profileId" data-cy="profileId" type="text" />
               <ValidatedField label="Username" id="user-profile-username" name="username" data-cy="username" type="text" />
               <ValidatedField label="Password" id="user-profile-password" name="password" data-cy="password" type="text" />
               <ValidatedField id="user-profile-user" name="user" data-cy="user" label="User" type="select">

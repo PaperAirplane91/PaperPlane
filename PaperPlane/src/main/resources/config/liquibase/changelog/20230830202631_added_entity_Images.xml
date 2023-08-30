@@ -17,7 +17,7 @@
             <column name="image_id" type="integer">
                 <constraints nullable="true" />
             </column>
-            <column name="document_id" type="integer">
+            <column name="document_index" type="integer">
                 <constraints nullable="true" />
             </column>
             <column name="image_data" type="varchar(255)">
@@ -51,7 +51,7 @@
                   usePreparedStatements="true">
             <column name="id" type="numeric"/>
             <column name="image_id" type="numeric"/>
-            <column name="document_id" type="numeric"/>
+            <column name="document_index" type="numeric"/>
             <column name="image_data" type="string"/>
             <column name="caption" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->

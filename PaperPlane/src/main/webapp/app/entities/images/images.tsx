@@ -48,7 +48,7 @@ export const Images = () => {
               <tr>
                 <th>ID</th>
                 <th>Image Id</th>
-                <th>Document Id</th>
+                <th>Document Index</th>
                 <th>Image Data</th>
                 <th>Caption</th>
                 <th>Document</th>
@@ -64,7 +64,7 @@ export const Images = () => {
                     </Button>
                   </td>
                   <td>{images.imageId}</td>
-                  <td>{images.documentId}</td>
+                  <td>{images.documentIndex}</td>
                   <td>{images.imageData}</td>
                   <td>{images.caption}</td>
                   <td>{images.document ? <Link to={`/document/${images.document.id}`}>{images.document.id}</Link> : ''}</td>

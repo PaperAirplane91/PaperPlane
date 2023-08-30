@@ -6,7 +6,7 @@
   "entityTableName": "user_profile",
   "fields": [
     {
-      "fieldName": "userId",
+      "fieldName": "profileId",
       "fieldType": "Integer"
     },
     {

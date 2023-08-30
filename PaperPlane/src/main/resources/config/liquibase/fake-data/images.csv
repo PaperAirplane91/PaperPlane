@@ -1,4 +1,4 @@
-id;image_id;document_id;image_data;caption
+id;image_id;document_index;image_data;caption
 1;72943;75367;Berkshire;Islands
 2;98845;24750;compress;Soft Franc Buckinghamshire
 3;83822;19099;Skyway user-centric Books;Dynamic

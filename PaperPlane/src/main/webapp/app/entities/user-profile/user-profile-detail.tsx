@@ -29,9 +29,9 @@ export const UserProfileDetail = () => {
           </dt>
           <dd>{userProfileEntity.id}</dd>
           <dt>
-            <span id="userId">User Id</span>
+            <span id="profileId">Profile Id</span>
           </dt>
-          <dd>{userProfileEntity.userId}</dd>
+          <dd>{userProfileEntity.profileId}</dd>
           <dt>
             <span id="username">Username</span>
           </dt>

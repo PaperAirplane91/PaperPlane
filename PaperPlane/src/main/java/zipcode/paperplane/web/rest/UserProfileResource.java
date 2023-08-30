@@ -123,8 +123,8 @@ public class UserProfileResource {
         Optional<UserProfile> result = userProfileRepository
             .findById(userProfile.getId())
             .map(existingUserProfile -> {
-                if (userProfile.getUserId() != null) {
-                    existingUserProfile.setUserId(userProfile.getUserId());
+                if (userProfile.getProfileId() != null) {
+                    existingUserProfile.setProfileId(userProfile.getProfileId());
                 }
                 if (userProfile.getUsername() != null) {
                     existingUserProfile.setUsername(userProfile.getUsername());

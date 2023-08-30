@@ -29,8 +29,8 @@ import zipcode.paperplane.repository.UserProfileRepository;
 @WithMockUser
 class UserProfileResourceIT {
 
-    private static final Integer DEFAULT_USER_ID = 1;
-    private static final Integer UPDATED_USER_ID = 2;
+    private static final Integer DEFAULT_PROFILE_ID = 1;
+    private static final Integer UPDATED_PROFILE_ID = 2;
 
     private static final String DEFAULT_USERNAME = "AAAAAAAAAA";
     private static final String UPDATED_USERNAME = "BBBBBBBBBB";
@@ -62,7 +62,7 @@ class UserProfileResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static UserProfile createEntity(EntityManager em) {
-        UserProfile userProfile = new UserProfile().userId(DEFAULT_USER_ID).username(DEFAULT_USERNAME).password(DEFAULT_PASSWORD);
+        UserProfile userProfile = new UserProfile().profileId(DEFAULT_PROFILE_ID).username(DEFAULT_USERNAME).password(DEFAULT_PASSWORD);
         return userProfile;
     }
 
@@ -73,7 +73,7 @@ class UserProfileResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static UserProfile createUpdatedEntity(EntityManager em) {
-        UserProfile userProfile = new UserProfile().userId(UPDATED_USER_ID).username(UPDATED_USERNAME).password(UPDATED_PASSWORD);
+        UserProfile userProfile = new UserProfile().profileId(UPDATED_PROFILE_ID).username(UPDATED_USERNAME).password(UPDATED_PASSWORD);
         return userProfile;
     }
 
@@ -95,7 +95,7 @@ class UserProfileResourceIT {
         List<UserProfile> userProfileList = userProfileRepository.findAll();
         assertThat(userProfileList).hasSize(databaseSizeBeforeCreate + 1);
         UserProfile testUserProfile = userProfileList.get(userProfileList.size() - 1);
-        assertThat(testUserProfile.getUserId()).isEqualTo(DEFAULT_USER_ID);
+        assertThat(testUserProfile.getProfileId()).isEqualTo(DEFAULT_PROFILE_ID);
         assertThat(testUserProfile.getUsername()).isEqualTo(DEFAULT_USERNAME);
         assertThat(testUserProfile.getPassword()).isEqualTo(DEFAULT_PASSWORD);
     }
@@ -130,7 +130,7 @@ class UserProfileResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(userProfile.getId().intValue())))
-            .andExpect(jsonPath("$.[*].userId").value(hasItem(DEFAULT_USER_ID)))
+            .andExpect(jsonPath("$.[*].profileId").value(hasItem(DEFAULT_PROFILE_ID)))
             .andExpect(jsonPath("$.[*].username").value(hasItem(DEFAULT_USERNAME)))
             .andExpect(jsonPath("$.[*].password").value(hasItem(DEFAULT_PASSWORD)));
     }
@@ -147,7 +147,7 @@ class UserProfileResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(userProfile.getId().intValue()))
-            .andExpect(jsonPath("$.userId").value(DEFAULT_USER_ID))
+            .andExpect(jsonPath("$.profileId").value(DEFAULT_PROFILE_ID))
             .andExpect(jsonPath("$.username").value(DEFAULT_USERNAME))
             .andExpect(jsonPath("$.password").value(DEFAULT_PASSWORD));
     }
@@ -171,7 +171,7 @@ class UserProfileResourceIT {
         UserProfile updatedUserProfile = userProfileRepository.findById(userProfile.getId()).get();
         // Disconnect from session so that the updates on updatedUserProfile are not directly saved in db
         em.detach(updatedUserProfile);
-        updatedUserProfile.userId(UPDATED_USER_ID).username(UPDATED_USERNAME).password(UPDATED_PASSWORD);
+        updatedUserProfile.profileId(UPDATED_PROFILE_ID).username(UPDATED_USERNAME).password(UPDATED_PASSWORD);
 
         restUserProfileMockMvc
             .perform(
@@ -185,7 +185,7 @@ class UserProfileResourceIT {
         List<UserProfile> userProfileList = userProfileRepository.findAll();
         assertThat(userProfileList).hasSize(databaseSizeBeforeUpdate);
         UserProfile testUserProfile = userProfileList.get(userProfileList.size() - 1);
-        assertThat(testUserProfile.getUserId()).isEqualTo(UPDATED_USER_ID);
+        assertThat(testUserProfile.getProfileId()).isEqualTo(UPDATED_PROFILE_ID);
         assertThat(testUserProfile.getUsername()).isEqualTo(UPDATED_USERNAME);
         assertThat(testUserProfile.getPassword()).isEqualTo(UPDATED_PASSWORD);
     }
@@ -272,7 +272,7 @@ class UserProfileResourceIT {
         List<UserProfile> userProfileList = userProfileRepository.findAll();
         assertThat(userProfileList).hasSize(databaseSizeBeforeUpdate);
         UserProfile testUserProfile = userProfileList.get(userProfileList.size() - 1);
-        assertThat(testUserProfile.getUserId()).isEqualTo(DEFAULT_USER_ID);
+        assertThat(testUserProfile.getProfileId()).isEqualTo(DEFAULT_PROFILE_ID);
         assertThat(testUserProfile.getUsername()).isEqualTo(UPDATED_USERNAME);
         assertThat(testUserProfile.getPassword()).isEqualTo(UPDATED_PASSWORD);
     }
@@ -289,7 +289,7 @@ class UserProfileResourceIT {
         UserProfile partialUpdatedUserProfile = new UserProfile();
         partialUpdatedUserProfile.setId(userProfile.getId());
 
-        partialUpdatedUserProfile.userId(UPDATED_USER_ID).username(UPDATED_USERNAME).password(UPDATED_PASSWORD);
+        partialUpdatedUserProfile.profileId(UPDATED_PROFILE_ID).username(UPDATED_USERNAME).password(UPDATED_PASSWORD);
 
         restUserProfileMockMvc
             .perform(
@@ -303,7 +303,7 @@ class UserProfileResourceIT {
         List<UserProfile> userProfileList = userProfileRepository.findAll();
         assertThat(userProfileList).hasSize(databaseSizeBeforeUpdate);
         UserProfile testUserProfile = userProfileList.get(userProfileList.size() - 1);
-        assertThat(testUserProfile.getUserId()).isEqualTo(UPDATED_USER_ID);
+        assertThat(testUserProfile.getProfileId()).isEqualTo(UPDATED_PROFILE_ID);
         assertThat(testUserProfile.getUsername()).isEqualTo(UPDATED_USERNAME);
         assertThat(testUserProfile.getPassword()).isEqualTo(UPDATED_PASSWORD);
     }

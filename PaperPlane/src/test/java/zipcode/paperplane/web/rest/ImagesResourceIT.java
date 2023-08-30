@@ -32,8 +32,8 @@ class ImagesResourceIT {
     private static final Integer DEFAULT_IMAGE_ID = 1;
     private static final Integer UPDATED_IMAGE_ID = 2;
 
-    private static final Integer DEFAULT_DOCUMENT_ID = 1;
-    private static final Integer UPDATED_DOCUMENT_ID = 2;
+    private static final Integer DEFAULT_DOCUMENT_INDEX = 1;
+    private static final Integer UPDATED_DOCUMENT_INDEX = 2;
 
     private static final String DEFAULT_IMAGE_DATA = "AAAAAAAAAA";
     private static final String UPDATED_IMAGE_DATA = "BBBBBBBBBB";
@@ -67,7 +67,7 @@ class ImagesResourceIT {
     public static Images createEntity(EntityManager em) {
         Images images = new Images()
             .imageId(DEFAULT_IMAGE_ID)
-            .documentId(DEFAULT_DOCUMENT_ID)
+            .documentIndex(DEFAULT_DOCUMENT_INDEX)
             .imageData(DEFAULT_IMAGE_DATA)
             .caption(DEFAULT_CAPTION);
         return images;
@@ -82,7 +82,7 @@ class ImagesResourceIT {
     public static Images createUpdatedEntity(EntityManager em) {
         Images images = new Images()
             .imageId(UPDATED_IMAGE_ID)
-            .documentId(UPDATED_DOCUMENT_ID)
+            .documentIndex(UPDATED_DOCUMENT_INDEX)
             .imageData(UPDATED_IMAGE_DATA)
             .caption(UPDATED_CAPTION);
         return images;
@@ -107,7 +107,7 @@ class ImagesResourceIT {
         assertThat(imagesList).hasSize(databaseSizeBeforeCreate + 1);
         Images testImages = imagesList.get(imagesList.size() - 1);
         assertThat(testImages.getImageId()).isEqualTo(DEFAULT_IMAGE_ID);
-        assertThat(testImages.getDocumentId()).isEqualTo(DEFAULT_DOCUMENT_ID);
+        assertThat(testImages.getDocumentIndex()).isEqualTo(DEFAULT_DOCUMENT_INDEX);
         assertThat(testImages.getImageData()).isEqualTo(DEFAULT_IMAGE_DATA);
         assertThat(testImages.getCaption()).isEqualTo(DEFAULT_CAPTION);
     }
@@ -143,7 +143,7 @@ class ImagesResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(images.getId().intValue())))
             .andExpect(jsonPath("$.[*].imageId").value(hasItem(DEFAULT_IMAGE_ID)))
-            .andExpect(jsonPath("$.[*].documentId").value(hasItem(DEFAULT_DOCUMENT_ID)))
+            .andExpect(jsonPath("$.[*].documentIndex").value(hasItem(DEFAULT_DOCUMENT_INDEX)))
             .andExpect(jsonPath("$.[*].imageData").value(hasItem(DEFAULT_IMAGE_DATA)))
             .andExpect(jsonPath("$.[*].caption").value(hasItem(DEFAULT_CAPTION)));
     }
@@ -161,7 +161,7 @@ class ImagesResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(images.getId().intValue()))
             .andExpect(jsonPath("$.imageId").value(DEFAULT_IMAGE_ID))
-            .andExpect(jsonPath("$.documentId").value(DEFAULT_DOCUMENT_ID))
+            .andExpect(jsonPath("$.documentIndex").value(DEFAULT_DOCUMENT_INDEX))
             .andExpect(jsonPath("$.imageData").value(DEFAULT_IMAGE_DATA))
             .andExpect(jsonPath("$.caption").value(DEFAULT_CAPTION));
     }
@@ -185,7 +185,11 @@ class ImagesResourceIT {
         Images updatedImages = imagesRepository.findById(images.getId()).get();
         // Disconnect from session so that the updates on updatedImages are not directly saved in db
         em.detach(updatedImages);
-        updatedImages.imageId(UPDATED_IMAGE_ID).documentId(UPDATED_DOCUMENT_ID).imageData(UPDATED_IMAGE_DATA).caption(UPDATED_CAPTION);
+        updatedImages
+            .imageId(UPDATED_IMAGE_ID)
+            .documentIndex(UPDATED_DOCUMENT_INDEX)
+            .imageData(UPDATED_IMAGE_DATA)
+            .caption(UPDATED_CAPTION);
 
         restImagesMockMvc
             .perform(
@@ -200,7 +204,7 @@ class ImagesResourceIT {
         assertThat(imagesList).hasSize(databaseSizeBeforeUpdate);
         Images testImages = imagesList.get(imagesList.size() - 1);
         assertThat(testImages.getImageId()).isEqualTo(UPDATED_IMAGE_ID);
-        assertThat(testImages.getDocumentId()).isEqualTo(UPDATED_DOCUMENT_ID);
+        assertThat(testImages.getDocumentIndex()).isEqualTo(UPDATED_DOCUMENT_INDEX);
         assertThat(testImages.getImageData()).isEqualTo(UPDATED_IMAGE_DATA);
         assertThat(testImages.getCaption()).isEqualTo(UPDATED_CAPTION);
     }
@@ -273,7 +277,7 @@ class ImagesResourceIT {
         Images partialUpdatedImages = new Images();
         partialUpdatedImages.setId(images.getId());
 
-        partialUpdatedImages.documentId(UPDATED_DOCUMENT_ID).imageData(UPDATED_IMAGE_DATA).caption(UPDATED_CAPTION);
+        partialUpdatedImages.documentIndex(UPDATED_DOCUMENT_INDEX).imageData(UPDATED_IMAGE_DATA).caption(UPDATED_CAPTION);
 
         restImagesMockMvc
             .perform(
@@ -288,7 +292,7 @@ class ImagesResourceIT {
         assertThat(imagesList).hasSize(databaseSizeBeforeUpdate);
         Images testImages = imagesList.get(imagesList.size() - 1);
         assertThat(testImages.getImageId()).isEqualTo(DEFAULT_IMAGE_ID);
-        assertThat(testImages.getDocumentId()).isEqualTo(UPDATED_DOCUMENT_ID);
+        assertThat(testImages.getDocumentIndex()).isEqualTo(UPDATED_DOCUMENT_INDEX);
         assertThat(testImages.getImageData()).isEqualTo(UPDATED_IMAGE_DATA);
         assertThat(testImages.getCaption()).isEqualTo(UPDATED_CAPTION);
     }
@@ -307,7 +311,7 @@ class ImagesResourceIT {
 
         partialUpdatedImages
             .imageId(UPDATED_IMAGE_ID)
-            .documentId(UPDATED_DOCUMENT_ID)
+            .documentIndex(UPDATED_DOCUMENT_INDEX)
             .imageData(UPDATED_IMAGE_DATA)
             .caption(UPDATED_CAPTION);
 
@@ -324,7 +328,7 @@ class ImagesResourceIT {
         assertThat(imagesList).hasSize(databaseSizeBeforeUpdate);
         Images testImages = imagesList.get(imagesList.size() - 1);
         assertThat(testImages.getImageId()).isEqualTo(UPDATED_IMAGE_ID);
-        assertThat(testImages.getDocumentId()).isEqualTo(UPDATED_DOCUMENT_ID);
+        assertThat(testImages.getDocumentIndex()).isEqualTo(UPDATED_DOCUMENT_INDEX);
         assertThat(testImages.getImageData()).isEqualTo(UPDATED_IMAGE_DATA);
         assertThat(testImages.getCaption()).isEqualTo(UPDATED_CAPTION);
     }

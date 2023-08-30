@@ -25,8 +25,8 @@ public class Images implements Serializable {
     @Column(name = "image_id")
     private Integer imageId;
 
-    @Column(name = "document_id", insertable = false, updatable = false)
-    private Integer documentId;
+    @Column(name = "document_index")
+    private Integer documentIndex;
 
     @Column(name = "image_data")
     private String imageData;
@@ -66,17 +66,17 @@ public class Images implements Serializable {
         this.imageId = imageId;
     }
 
-    public Integer getDocumentId() {
-        return this.documentId;
+    public Integer getDocumentIndex() {
+        return this.documentIndex;
     }
 
-    public Images documentId(Integer documentId) {
-        this.setDocumentId(documentId);
+    public Images documentIndex(Integer documentIndex) {
+        this.setDocumentIndex(documentIndex);
         return this;
     }
 
-    public void setDocumentId(Integer documentId) {
-        this.documentId = documentId;
+    public void setDocumentIndex(Integer documentIndex) {
+        this.documentIndex = documentIndex;
     }
 
     public String getImageData() {
@@ -143,7 +143,7 @@ public class Images implements Serializable {
         return "Images{" +
             "id=" + getId() +
             ", imageId=" + getImageId() +
-            ", documentId=" + getDocumentId() +
+            ", documentIndex=" + getDocumentIndex() +
             ", imageData='" + getImageData() + "'" +
             ", caption='" + getCaption() + "'" +
             "}";
