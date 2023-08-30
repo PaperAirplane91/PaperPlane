@@ -1,0 +1,39 @@
+{
+  "applications": "*",
+  "changelogDate": "20230830202631",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "images",
+  "fields": [
+    {
+      "fieldName": "imageId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "documentId",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "imageData",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "caption",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Images",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "document",
+      "otherEntityRelationshipName": "images",
+      "relationshipName": "document",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

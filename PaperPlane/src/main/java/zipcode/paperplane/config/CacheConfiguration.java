@@ -48,6 +48,10 @@ public class CacheConfiguration {
             createCache(cm, zipcode.paperplane.domain.User.class.getName());
             createCache(cm, zipcode.paperplane.domain.Authority.class.getName());
             createCache(cm, zipcode.paperplane.domain.User.class.getName() + ".authorities");
+            createCache(cm, zipcode.paperplane.domain.UserProfile.class.getName());
+            createCache(cm, zipcode.paperplane.domain.Document.class.getName());
+            createCache(cm, zipcode.paperplane.domain.Document.class.getName() + ".images");
+            createCache(cm, zipcode.paperplane.domain.Images.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
