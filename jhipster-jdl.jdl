@@ -8,27 +8,25 @@ password String
 entity Document {
 documentId Integer
 title String
-content Text
+content String
 }
 
 entity Images{
 imageId Integer
 documentId Integer
-imageData LongBlob
+imageData String
 caption String
 }
 
-entity User{
-}
 
 relationship OneToMany{
-Document{Images} to Images
+Document{Images} to Images{Document}
 }
 
-relationship OneToMany{
-User{Document} to Document
+relationship ManyToOne{
+Document to User
 }
 
 relationship OneToOne{
-UserProfile to User
+UserProfile{User} to User
 }
