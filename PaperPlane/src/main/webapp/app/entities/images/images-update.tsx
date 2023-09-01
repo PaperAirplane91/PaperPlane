@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { isNumber, ValidatedField, ValidatedForm, ValidatedBlobField } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -51,7 +51,7 @@ export const ImagesUpdate = () => {
     const entity = {
       ...imagesEntity,
       ...values,
-      document: documents.find(it => it.id.toString() === values.document.toString()),
+      referenceDocumentId: documents.find(it => it.id.toString() === values.referenceDocumentId.toString()),
     };
 
     if (isNew) {
@@ -66,7 +66,7 @@ export const ImagesUpdate = () => {
       ? {}
       : {
           ...imagesEntity,
-          document: imagesEntity?.document?.id,
+          referenceDocumentId: imagesEntity?.referenceDocumentId?.id,
         };
 
   return (
@@ -85,11 +85,16 @@ export const ImagesUpdate = () => {
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
               {!isNew ? <ValidatedField name="id" required readOnly id="images-id" label="ID" validate={{ required: true }} /> : null}
-              <ValidatedField label="Image Id" id="images-imageId" name="imageId" data-cy="imageId" type="text" />
-              <ValidatedField label="Document Index" id="images-documentIndex" name="documentIndex" data-cy="documentIndex" type="text" />
-              <ValidatedField label="Image Data" id="images-imageData" name="imageData" data-cy="imageData" type="text" />
+              <ValidatedBlobField label="Image Data" id="images-imageData" name="imageData" data-cy="imageData" isImage accept="image/*" />
               <ValidatedField label="Caption" id="images-caption" name="caption" data-cy="caption" type="text" />
-              <ValidatedField id="images-document" name="document" data-cy="document" label="Document" type="select">
+              <ValidatedField label="Image S 3 Url" id="images-imageS3Url" name="imageS3Url" data-cy="imageS3Url" type="text" />
+              <ValidatedField
+                id="images-referenceDocumentId"
+                name="referenceDocumentId"
+                data-cy="referenceDocumentId"
+                label="Reference Document Id"
+                type="select"
+              >
                 <option value="" key="0" />
                 {documents
                   ? documents.map(otherEntity => (

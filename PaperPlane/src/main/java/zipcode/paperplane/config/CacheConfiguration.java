@@ -52,6 +52,9 @@ public class CacheConfiguration {
             createCache(cm, zipcode.paperplane.domain.Document.class.getName());
             createCache(cm, zipcode.paperplane.domain.Document.class.getName() + ".images");
             createCache(cm, zipcode.paperplane.domain.Images.class.getName());
+            createCache(cm, zipcode.paperplane.domain.Document.class.getName() + ".referenceImageIds");
+            createCache(cm, zipcode.paperplane.domain.ApplicationUser.class.getName());
+            createCache(cm, zipcode.paperplane.domain.ApplicationUser.class.getName() + ".applicationUserReferenceIds");
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -29,14 +29,14 @@ import zipcode.paperplane.repository.DocumentRepository;
 @WithMockUser
 class DocumentResourceIT {
 
-    private static final Integer DEFAULT_DOCUMENT_ID = 1;
-    private static final Integer UPDATED_DOCUMENT_ID = 2;
-
     private static final String DEFAULT_TITLE = "AAAAAAAAAA";
     private static final String UPDATED_TITLE = "BBBBBBBBBB";
 
     private static final String DEFAULT_CONTENT = "AAAAAAAAAA";
     private static final String UPDATED_CONTENT = "BBBBBBBBBB";
+
+    private static final Boolean DEFAULT_ARCHIVED = false;
+    private static final Boolean UPDATED_ARCHIVED = true;
 
     private static final String ENTITY_API_URL = "/api/documents";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -62,7 +62,7 @@ class DocumentResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Document createEntity(EntityManager em) {
-        Document document = new Document().documentId(DEFAULT_DOCUMENT_ID).title(DEFAULT_TITLE).content(DEFAULT_CONTENT);
+        Document document = new Document().title(DEFAULT_TITLE).content(DEFAULT_CONTENT).archived(DEFAULT_ARCHIVED);
         return document;
     }
 
@@ -73,7 +73,7 @@ class DocumentResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Document createUpdatedEntity(EntityManager em) {
-        Document document = new Document().documentId(UPDATED_DOCUMENT_ID).title(UPDATED_TITLE).content(UPDATED_CONTENT);
+        Document document = new Document().title(UPDATED_TITLE).content(UPDATED_CONTENT).archived(UPDATED_ARCHIVED);
         return document;
     }
 
@@ -95,9 +95,9 @@ class DocumentResourceIT {
         List<Document> documentList = documentRepository.findAll();
         assertThat(documentList).hasSize(databaseSizeBeforeCreate + 1);
         Document testDocument = documentList.get(documentList.size() - 1);
-        assertThat(testDocument.getDocumentId()).isEqualTo(DEFAULT_DOCUMENT_ID);
         assertThat(testDocument.getTitle()).isEqualTo(DEFAULT_TITLE);
         assertThat(testDocument.getContent()).isEqualTo(DEFAULT_CONTENT);
+        assertThat(testDocument.getArchived()).isEqualTo(DEFAULT_ARCHIVED);
     }
 
     @Test
@@ -130,9 +130,9 @@ class DocumentResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(document.getId().intValue())))
-            .andExpect(jsonPath("$.[*].documentId").value(hasItem(DEFAULT_DOCUMENT_ID)))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
-            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT)));
+            .andExpect(jsonPath("$.[*].content").value(hasItem(DEFAULT_CONTENT)))
+            .andExpect(jsonPath("$.[*].archived").value(hasItem(DEFAULT_ARCHIVED.booleanValue())));
     }
 
     @Test
@@ -147,9 +147,9 @@ class DocumentResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(document.getId().intValue()))
-            .andExpect(jsonPath("$.documentId").value(DEFAULT_DOCUMENT_ID))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
-            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT));
+            .andExpect(jsonPath("$.content").value(DEFAULT_CONTENT))
+            .andExpect(jsonPath("$.archived").value(DEFAULT_ARCHIVED.booleanValue()));
     }
 
     @Test
@@ -171,7 +171,7 @@ class DocumentResourceIT {
         Document updatedDocument = documentRepository.findById(document.getId()).get();
         // Disconnect from session so that the updates on updatedDocument are not directly saved in db
         em.detach(updatedDocument);
-        updatedDocument.documentId(UPDATED_DOCUMENT_ID).title(UPDATED_TITLE).content(UPDATED_CONTENT);
+        updatedDocument.title(UPDATED_TITLE).content(UPDATED_CONTENT).archived(UPDATED_ARCHIVED);
 
         restDocumentMockMvc
             .perform(
@@ -185,9 +185,9 @@ class DocumentResourceIT {
         List<Document> documentList = documentRepository.findAll();
         assertThat(documentList).hasSize(databaseSizeBeforeUpdate);
         Document testDocument = documentList.get(documentList.size() - 1);
-        assertThat(testDocument.getDocumentId()).isEqualTo(UPDATED_DOCUMENT_ID);
         assertThat(testDocument.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testDocument.getContent()).isEqualTo(UPDATED_CONTENT);
+        assertThat(testDocument.getArchived()).isEqualTo(UPDATED_ARCHIVED);
     }
 
     @Test
@@ -258,7 +258,7 @@ class DocumentResourceIT {
         Document partialUpdatedDocument = new Document();
         partialUpdatedDocument.setId(document.getId());
 
-        partialUpdatedDocument.documentId(UPDATED_DOCUMENT_ID).title(UPDATED_TITLE);
+        partialUpdatedDocument.title(UPDATED_TITLE).content(UPDATED_CONTENT);
 
         restDocumentMockMvc
             .perform(
@@ -272,9 +272,9 @@ class DocumentResourceIT {
         List<Document> documentList = documentRepository.findAll();
         assertThat(documentList).hasSize(databaseSizeBeforeUpdate);
         Document testDocument = documentList.get(documentList.size() - 1);
-        assertThat(testDocument.getDocumentId()).isEqualTo(UPDATED_DOCUMENT_ID);
         assertThat(testDocument.getTitle()).isEqualTo(UPDATED_TITLE);
-        assertThat(testDocument.getContent()).isEqualTo(DEFAULT_CONTENT);
+        assertThat(testDocument.getContent()).isEqualTo(UPDATED_CONTENT);
+        assertThat(testDocument.getArchived()).isEqualTo(DEFAULT_ARCHIVED);
     }
 
     @Test
@@ -289,7 +289,7 @@ class DocumentResourceIT {
         Document partialUpdatedDocument = new Document();
         partialUpdatedDocument.setId(document.getId());
 
-        partialUpdatedDocument.documentId(UPDATED_DOCUMENT_ID).title(UPDATED_TITLE).content(UPDATED_CONTENT);
+        partialUpdatedDocument.title(UPDATED_TITLE).content(UPDATED_CONTENT).archived(UPDATED_ARCHIVED);
 
         restDocumentMockMvc
             .perform(
@@ -303,9 +303,9 @@ class DocumentResourceIT {
         List<Document> documentList = documentRepository.findAll();
         assertThat(documentList).hasSize(databaseSizeBeforeUpdate);
         Document testDocument = documentList.get(documentList.size() - 1);
-        assertThat(testDocument.getDocumentId()).isEqualTo(UPDATED_DOCUMENT_ID);
         assertThat(testDocument.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testDocument.getContent()).isEqualTo(UPDATED_CONTENT);
+        assertThat(testDocument.getArchived()).isEqualTo(UPDATED_ARCHIVED);
     }
 
     @Test
