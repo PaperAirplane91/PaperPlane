@@ -17,6 +17,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Base64Utils;
 import zipcode.paperplane.IntegrationTest;
 import zipcode.paperplane.domain.Images;
 import zipcode.paperplane.repository.ImagesRepository;
@@ -29,17 +30,16 @@ import zipcode.paperplane.repository.ImagesRepository;
 @WithMockUser
 class ImagesResourceIT {
 
-    private static final Integer DEFAULT_IMAGE_ID = 1;
-    private static final Integer UPDATED_IMAGE_ID = 2;
-
-    private static final Integer DEFAULT_DOCUMENT_INDEX = 1;
-    private static final Integer UPDATED_DOCUMENT_INDEX = 2;
-
-    private static final String DEFAULT_IMAGE_DATA = "AAAAAAAAAA";
-    private static final String UPDATED_IMAGE_DATA = "BBBBBBBBBB";
+    private static final byte[] DEFAULT_IMAGE_DATA = TestUtil.createByteArray(1, "0");
+    private static final byte[] UPDATED_IMAGE_DATA = TestUtil.createByteArray(1, "1");
+    private static final String DEFAULT_IMAGE_DATA_CONTENT_TYPE = "image/jpg";
+    private static final String UPDATED_IMAGE_DATA_CONTENT_TYPE = "image/png";
 
     private static final String DEFAULT_CAPTION = "AAAAAAAAAA";
     private static final String UPDATED_CAPTION = "BBBBBBBBBB";
+
+    private static final String DEFAULT_IMAGE_S_3_URL = "AAAAAAAAAA";
+    private static final String UPDATED_IMAGE_S_3_URL = "BBBBBBBBBB";
 
     private static final String ENTITY_API_URL = "/api/images";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -66,10 +66,10 @@ class ImagesResourceIT {
      */
     public static Images createEntity(EntityManager em) {
         Images images = new Images()
-            .imageId(DEFAULT_IMAGE_ID)
-            .documentIndex(DEFAULT_DOCUMENT_INDEX)
             .imageData(DEFAULT_IMAGE_DATA)
-            .caption(DEFAULT_CAPTION);
+            .imageDataContentType(DEFAULT_IMAGE_DATA_CONTENT_TYPE)
+            .caption(DEFAULT_CAPTION)
+            .imageS3Url(DEFAULT_IMAGE_S_3_URL);
         return images;
     }
 
@@ -81,10 +81,10 @@ class ImagesResourceIT {
      */
     public static Images createUpdatedEntity(EntityManager em) {
         Images images = new Images()
-            .imageId(UPDATED_IMAGE_ID)
-            .documentIndex(UPDATED_DOCUMENT_INDEX)
             .imageData(UPDATED_IMAGE_DATA)
-            .caption(UPDATED_CAPTION);
+            .imageDataContentType(UPDATED_IMAGE_DATA_CONTENT_TYPE)
+            .caption(UPDATED_CAPTION)
+            .imageS3Url(UPDATED_IMAGE_S_3_URL);
         return images;
     }
 
@@ -106,10 +106,10 @@ class ImagesResourceIT {
         List<Images> imagesList = imagesRepository.findAll();
         assertThat(imagesList).hasSize(databaseSizeBeforeCreate + 1);
         Images testImages = imagesList.get(imagesList.size() - 1);
-        assertThat(testImages.getImageId()).isEqualTo(DEFAULT_IMAGE_ID);
-        assertThat(testImages.getDocumentIndex()).isEqualTo(DEFAULT_DOCUMENT_INDEX);
         assertThat(testImages.getImageData()).isEqualTo(DEFAULT_IMAGE_DATA);
+        assertThat(testImages.getImageDataContentType()).isEqualTo(DEFAULT_IMAGE_DATA_CONTENT_TYPE);
         assertThat(testImages.getCaption()).isEqualTo(DEFAULT_CAPTION);
+        assertThat(testImages.getImageS3Url()).isEqualTo(DEFAULT_IMAGE_S_3_URL);
     }
 
     @Test
@@ -142,10 +142,10 @@ class ImagesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(images.getId().intValue())))
-            .andExpect(jsonPath("$.[*].imageId").value(hasItem(DEFAULT_IMAGE_ID)))
-            .andExpect(jsonPath("$.[*].documentIndex").value(hasItem(DEFAULT_DOCUMENT_INDEX)))
-            .andExpect(jsonPath("$.[*].imageData").value(hasItem(DEFAULT_IMAGE_DATA)))
-            .andExpect(jsonPath("$.[*].caption").value(hasItem(DEFAULT_CAPTION)));
+            .andExpect(jsonPath("$.[*].imageDataContentType").value(hasItem(DEFAULT_IMAGE_DATA_CONTENT_TYPE)))
+            .andExpect(jsonPath("$.[*].imageData").value(hasItem(Base64Utils.encodeToString(DEFAULT_IMAGE_DATA))))
+            .andExpect(jsonPath("$.[*].caption").value(hasItem(DEFAULT_CAPTION)))
+            .andExpect(jsonPath("$.[*].imageS3Url").value(hasItem(DEFAULT_IMAGE_S_3_URL)));
     }
 
     @Test
@@ -160,10 +160,10 @@ class ImagesResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(images.getId().intValue()))
-            .andExpect(jsonPath("$.imageId").value(DEFAULT_IMAGE_ID))
-            .andExpect(jsonPath("$.documentIndex").value(DEFAULT_DOCUMENT_INDEX))
-            .andExpect(jsonPath("$.imageData").value(DEFAULT_IMAGE_DATA))
-            .andExpect(jsonPath("$.caption").value(DEFAULT_CAPTION));
+            .andExpect(jsonPath("$.imageDataContentType").value(DEFAULT_IMAGE_DATA_CONTENT_TYPE))
+            .andExpect(jsonPath("$.imageData").value(Base64Utils.encodeToString(DEFAULT_IMAGE_DATA)))
+            .andExpect(jsonPath("$.caption").value(DEFAULT_CAPTION))
+            .andExpect(jsonPath("$.imageS3Url").value(DEFAULT_IMAGE_S_3_URL));
     }
 
     @Test
@@ -186,10 +186,10 @@ class ImagesResourceIT {
         // Disconnect from session so that the updates on updatedImages are not directly saved in db
         em.detach(updatedImages);
         updatedImages
-            .imageId(UPDATED_IMAGE_ID)
-            .documentIndex(UPDATED_DOCUMENT_INDEX)
             .imageData(UPDATED_IMAGE_DATA)
-            .caption(UPDATED_CAPTION);
+            .imageDataContentType(UPDATED_IMAGE_DATA_CONTENT_TYPE)
+            .caption(UPDATED_CAPTION)
+            .imageS3Url(UPDATED_IMAGE_S_3_URL);
 
         restImagesMockMvc
             .perform(
@@ -203,10 +203,10 @@ class ImagesResourceIT {
         List<Images> imagesList = imagesRepository.findAll();
         assertThat(imagesList).hasSize(databaseSizeBeforeUpdate);
         Images testImages = imagesList.get(imagesList.size() - 1);
-        assertThat(testImages.getImageId()).isEqualTo(UPDATED_IMAGE_ID);
-        assertThat(testImages.getDocumentIndex()).isEqualTo(UPDATED_DOCUMENT_INDEX);
         assertThat(testImages.getImageData()).isEqualTo(UPDATED_IMAGE_DATA);
+        assertThat(testImages.getImageDataContentType()).isEqualTo(UPDATED_IMAGE_DATA_CONTENT_TYPE);
         assertThat(testImages.getCaption()).isEqualTo(UPDATED_CAPTION);
+        assertThat(testImages.getImageS3Url()).isEqualTo(UPDATED_IMAGE_S_3_URL);
     }
 
     @Test
@@ -277,7 +277,7 @@ class ImagesResourceIT {
         Images partialUpdatedImages = new Images();
         partialUpdatedImages.setId(images.getId());
 
-        partialUpdatedImages.documentIndex(UPDATED_DOCUMENT_INDEX).imageData(UPDATED_IMAGE_DATA).caption(UPDATED_CAPTION);
+        partialUpdatedImages.caption(UPDATED_CAPTION).imageS3Url(UPDATED_IMAGE_S_3_URL);
 
         restImagesMockMvc
             .perform(
@@ -291,10 +291,10 @@ class ImagesResourceIT {
         List<Images> imagesList = imagesRepository.findAll();
         assertThat(imagesList).hasSize(databaseSizeBeforeUpdate);
         Images testImages = imagesList.get(imagesList.size() - 1);
-        assertThat(testImages.getImageId()).isEqualTo(DEFAULT_IMAGE_ID);
-        assertThat(testImages.getDocumentIndex()).isEqualTo(UPDATED_DOCUMENT_INDEX);
-        assertThat(testImages.getImageData()).isEqualTo(UPDATED_IMAGE_DATA);
+        assertThat(testImages.getImageData()).isEqualTo(DEFAULT_IMAGE_DATA);
+        assertThat(testImages.getImageDataContentType()).isEqualTo(DEFAULT_IMAGE_DATA_CONTENT_TYPE);
         assertThat(testImages.getCaption()).isEqualTo(UPDATED_CAPTION);
+        assertThat(testImages.getImageS3Url()).isEqualTo(UPDATED_IMAGE_S_3_URL);
     }
 
     @Test
@@ -310,10 +310,10 @@ class ImagesResourceIT {
         partialUpdatedImages.setId(images.getId());
 
         partialUpdatedImages
-            .imageId(UPDATED_IMAGE_ID)
-            .documentIndex(UPDATED_DOCUMENT_INDEX)
             .imageData(UPDATED_IMAGE_DATA)
-            .caption(UPDATED_CAPTION);
+            .imageDataContentType(UPDATED_IMAGE_DATA_CONTENT_TYPE)
+            .caption(UPDATED_CAPTION)
+            .imageS3Url(UPDATED_IMAGE_S_3_URL);
 
         restImagesMockMvc
             .perform(
@@ -327,10 +327,10 @@ class ImagesResourceIT {
         List<Images> imagesList = imagesRepository.findAll();
         assertThat(imagesList).hasSize(databaseSizeBeforeUpdate);
         Images testImages = imagesList.get(imagesList.size() - 1);
-        assertThat(testImages.getImageId()).isEqualTo(UPDATED_IMAGE_ID);
-        assertThat(testImages.getDocumentIndex()).isEqualTo(UPDATED_DOCUMENT_INDEX);
         assertThat(testImages.getImageData()).isEqualTo(UPDATED_IMAGE_DATA);
+        assertThat(testImages.getImageDataContentType()).isEqualTo(UPDATED_IMAGE_DATA_CONTENT_TYPE);
         assertThat(testImages.getCaption()).isEqualTo(UPDATED_CAPTION);
+        assertThat(testImages.getImageS3Url()).isEqualTo(UPDATED_IMAGE_S_3_URL);
     }
 
     @Test

@@ -7,9 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-import { getEntity } from './document.reducer';
+import { getEntity } from './application-user.reducer';
 
-export const DocumentDetail = () => {
+export const ApplicationUserDetail = () => {
   const dispatch = useAppDispatch();
 
   const { id } = useParams<'id'>();
@@ -18,36 +18,32 @@ export const DocumentDetail = () => {
     dispatch(getEntity(id));
   }, []);
 
-  const documentEntity = useAppSelector(state => state.document.entity);
+  const applicationUserEntity = useAppSelector(state => state.applicationUser.entity);
   return (
     <Row>
       <Col md="8">
-        <h2 data-cy="documentDetailsHeading">Document</h2>
+        <h2 data-cy="applicationUserDetailsHeading">Application User</h2>
         <dl className="jh-entity-details">
           <dt>
             <span id="id">ID</span>
           </dt>
-          <dd>{documentEntity.id}</dd>
+          <dd>{applicationUserEntity.id}</dd>
           <dt>
-            <span id="title">Title</span>
+            <span id="applicationUserId">Application User Id</span>
           </dt>
-          <dd>{documentEntity.title}</dd>
+          <dd>{applicationUserEntity.applicationUserId}</dd>
           <dt>
-            <span id="content">Content</span>
+            <span id="accessControl">Access Control</span>
           </dt>
-          <dd>{documentEntity.content}</dd>
-          <dt>
-            <span id="archived">Archived</span>
-          </dt>
-          <dd>{documentEntity.archived ? 'true' : 'false'}</dd>
-          <dt>Application User</dt>
-          <dd>{documentEntity.applicationUser ? documentEntity.applicationUser.id : ''}</dd>
+          <dd>{applicationUserEntity.accessControl ? 'true' : 'false'}</dd>
+          <dt>Internal User Reference Id</dt>
+          <dd>{applicationUserEntity.internalUserReferenceId ? applicationUserEntity.internalUserReferenceId.id : ''}</dd>
         </dl>
-        <Button tag={Link} to="/document" replace color="info" data-cy="entityDetailsBackButton">
+        <Button tag={Link} to="/application-user" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>
         </Button>
         &nbsp;
-        <Button tag={Link} to={`/document/${documentEntity.id}/edit`} replace color="primary">
+        <Button tag={Link} to={`/application-user/${applicationUserEntity.id}/edit`} replace color="primary">
           <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
         </Button>
       </Col>
@@ -55,4 +51,4 @@ export const DocumentDetail = () => {
   );
 };
 
-export default DocumentDetail;
+export default ApplicationUserDetail;

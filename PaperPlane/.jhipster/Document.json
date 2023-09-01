@@ -6,16 +6,16 @@
   "entityTableName": "document",
   "fields": [
     {
-      "fieldName": "documentId",
-      "fieldType": "Integer"
-    },
-    {
       "fieldName": "title",
       "fieldType": "String"
     },
     {
       "fieldName": "content",
       "fieldType": "String"
+    },
+    {
+      "fieldName": "archived",
+      "fieldType": "Boolean"
     }
   ],
   "fluentMethods": true,
@@ -26,14 +26,14 @@
   "relationships": [
     {
       "otherEntityName": "images",
-      "otherEntityRelationshipName": "document",
-      "relationshipName": "images",
+      "otherEntityRelationshipName": "referenceDocumentId",
+      "relationshipName": "referenceImageId",
       "relationshipType": "one-to-many"
     },
     {
-      "otherEntityName": "user",
-      "otherEntityRelationshipName": "document",
-      "relationshipName": "user",
+      "otherEntityName": "applicationUser",
+      "otherEntityRelationshipName": "applicationUserReferenceId",
+      "relationshipName": "applicationUser",
       "relationshipType": "many-to-one"
     }
   ],
