@@ -31,9 +31,9 @@
       "relationshipType": "one-to-many"
     },
     {
+      "otherEntityField": "login",
       "otherEntityName": "user",
-      "otherEntityRelationshipName": "document",
-      "relationshipName": "user",
+      "relationshipName": "assignedTo",
       "relationshipType": "many-to-one"
     }
   ],

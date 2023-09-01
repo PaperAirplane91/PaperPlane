@@ -35,7 +35,7 @@ public class Images implements Serializable {
     private String caption;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "images", "user" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "images", "assignedTo" }, allowSetters = true)
     private Document document;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

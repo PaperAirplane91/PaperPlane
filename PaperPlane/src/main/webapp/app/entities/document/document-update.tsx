@@ -51,7 +51,7 @@ export const DocumentUpdate = () => {
     const entity = {
       ...documentEntity,
       ...values,
-      user: users.find(it => it.id.toString() === values.user.toString()),
+      assignedTo: users.find(it => it.id.toString() === values.assignedTo.toString()),
     };
 
     if (isNew) {
@@ -66,7 +66,7 @@ export const DocumentUpdate = () => {
       ? {}
       : {
           ...documentEntity,
-          user: documentEntity?.user?.id,
+          assignedTo: documentEntity?.assignedTo?.id,
         };
 
   return (
@@ -88,12 +88,12 @@ export const DocumentUpdate = () => {
               <ValidatedField label="Document Id" id="document-documentId" name="documentId" data-cy="documentId" type="text" />
               <ValidatedField label="Title" id="document-title" name="title" data-cy="title" type="text" />
               <ValidatedField label="Content" id="document-content" name="content" data-cy="content" type="text" />
-              <ValidatedField id="document-user" name="user" data-cy="user" label="User" type="select">
+              <ValidatedField id="document-assignedTo" name="assignedTo" data-cy="assignedTo" label="Assigned To" type="select">
                 <option value="" key="0" />
                 {users
                   ? users.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
+                        {otherEntity.login}
                       </option>
                     ))
                   : null}

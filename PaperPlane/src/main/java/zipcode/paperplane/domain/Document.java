@@ -39,7 +39,7 @@ public class Document implements Serializable {
     private Set<Images> images = new HashSet<>();
 
     @ManyToOne
-    private User user;
+    private User assignedTo;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -126,16 +126,16 @@ public class Document implements Serializable {
         return this;
     }
 
-    public User getUser() {
-        return this.user;
+    public User getAssignedTo() {
+        return this.assignedTo;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setAssignedTo(User user) {
+        this.assignedTo = user;
     }
 
-    public Document user(User user) {
-        this.setUser(user);
+    public Document assignedTo(User user) {
+        this.setAssignedTo(user);
         return this;
     }
 

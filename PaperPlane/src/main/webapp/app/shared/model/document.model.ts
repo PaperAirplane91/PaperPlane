@@ -7,7 +7,7 @@ export interface IDocument {
   title?: string | null;
   content?: string | null;
   images?: IImages[] | null;
-  user?: IUser | null;
+  assignedTo?: IUser | null;
 }
 
 export const defaultValue: Readonly<IDocument> = {};

@@ -40,8 +40,8 @@ export const DocumentDetail = () => {
             <span id="content">Content</span>
           </dt>
           <dd>{documentEntity.content}</dd>
-          <dt>User</dt>
-          <dd>{documentEntity.user ? documentEntity.user.id : ''}</dd>
+          <dt>Assigned To</dt>
+          <dd>{documentEntity.assignedTo ? documentEntity.assignedTo.login : ''}</dd>
         </dl>
         <Button tag={Link} to="/document" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

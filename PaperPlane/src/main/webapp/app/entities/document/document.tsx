@@ -50,7 +50,7 @@ export const Document = () => {
                 <th>Document Id</th>
                 <th>Title</th>
                 <th>Content</th>
-                <th>User</th>
+                <th>Assigned To</th>
                 <th />
               </tr>
             </thead>
@@ -65,7 +65,7 @@ export const Document = () => {
                   <td>{document.documentId}</td>
                   <td>{document.title}</td>
                   <td>{document.content}</td>
-                  <td>{document.user ? document.user.id : ''}</td>
+                  <td>{document.assignedTo ? document.assignedTo.login : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/document/${document.id}`} color="info" size="sm" data-cy="entityDetailsButton">
