@@ -123,14 +123,14 @@ public class DocumentResource {
         Optional<Document> result = documentRepository
             .findById(document.getId())
             .map(existingDocument -> {
-                if (document.getDocumentId() != null) {
-                    existingDocument.setDocumentId(document.getDocumentId());
-                }
                 if (document.getTitle() != null) {
                     existingDocument.setTitle(document.getTitle());
                 }
                 if (document.getContent() != null) {
                     existingDocument.setContent(document.getContent());
+                }
+                if (document.getArchived() != null) {
+                    existingDocument.setArchived(document.getArchived());
                 }
 
                 return existingDocument;

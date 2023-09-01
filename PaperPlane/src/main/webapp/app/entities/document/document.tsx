@@ -47,10 +47,10 @@ export const Document = () => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Document Id</th>
                 <th>Title</th>
                 <th>Content</th>
-                <th>User</th>
+                <th>Archived</th>
+                <th>Application User</th>
                 <th />
               </tr>
             </thead>
@@ -62,10 +62,16 @@ export const Document = () => {
                       {document.id}
                     </Button>
                   </td>
-                  <td>{document.documentId}</td>
                   <td>{document.title}</td>
                   <td>{document.content}</td>
-                  <td>{document.user ? document.user.id : ''}</td>
+                  <td>{document.archived ? 'true' : 'false'}</td>
+                  <td>
+                    {document.applicationUser ? (
+                      <Link to={`/application-user/${document.applicationUser.id}`}>{document.applicationUser.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/document/${document.id}`} color="info" size="sm" data-cy="entityDetailsButton">

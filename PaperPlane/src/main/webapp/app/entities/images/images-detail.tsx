@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
-import {} from 'react-jhipster';
+import { openFile, byteSize } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
@@ -29,23 +29,32 @@ export const ImagesDetail = () => {
           </dt>
           <dd>{imagesEntity.id}</dd>
           <dt>
-            <span id="imageId">Image Id</span>
-          </dt>
-          <dd>{imagesEntity.imageId}</dd>
-          <dt>
-            <span id="documentIndex">Document Index</span>
-          </dt>
-          <dd>{imagesEntity.documentIndex}</dd>
-          <dt>
             <span id="imageData">Image Data</span>
           </dt>
-          <dd>{imagesEntity.imageData}</dd>
+          <dd>
+            {imagesEntity.imageData ? (
+              <div>
+                {imagesEntity.imageDataContentType ? (
+                  <a onClick={openFile(imagesEntity.imageDataContentType, imagesEntity.imageData)}>
+                    <img src={`data:${imagesEntity.imageDataContentType};base64,${imagesEntity.imageData}`} style={{ maxHeight: '30px' }} />
+                  </a>
+                ) : null}
+                <span>
+                  {imagesEntity.imageDataContentType}, {byteSize(imagesEntity.imageData)}
+                </span>
+              </div>
+            ) : null}
+          </dd>
           <dt>
             <span id="caption">Caption</span>
           </dt>
           <dd>{imagesEntity.caption}</dd>
-          <dt>Document</dt>
-          <dd>{imagesEntity.document ? imagesEntity.document.id : ''}</dd>
+          <dt>
+            <span id="imageS3Url">Image S 3 Url</span>
+          </dt>
+          <dd>{imagesEntity.imageS3Url}</dd>
+          <dt>Reference Document Id</dt>
+          <dd>{imagesEntity.referenceDocumentId ? imagesEntity.referenceDocumentId.id : ''}</dd>
         </dl>
         <Button tag={Link} to="/images" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>

@@ -121,17 +121,17 @@ public class ImagesResource {
         Optional<Images> result = imagesRepository
             .findById(images.getId())
             .map(existingImages -> {
-                if (images.getImageId() != null) {
-                    existingImages.setImageId(images.getImageId());
-                }
-                if (images.getDocumentIndex() != null) {
-                    existingImages.setDocumentIndex(images.getDocumentIndex());
-                }
                 if (images.getImageData() != null) {
                     existingImages.setImageData(images.getImageData());
                 }
+                if (images.getImageDataContentType() != null) {
+                    existingImages.setImageDataContentType(images.getImageDataContentType());
+                }
                 if (images.getCaption() != null) {
                     existingImages.setCaption(images.getCaption());
+                }
+                if (images.getImageS3Url() != null) {
+                    existingImages.setImageS3Url(images.getImageS3Url());
                 }
 
                 return existingImages;
