@@ -2,11 +2,11 @@ import { IDocument } from 'app/shared/model/document.model';
 
 export interface IImages {
   id?: number;
-  imageId?: number | null;
-  documentIndex?: number | null;
+  imageDataContentType?: string | null;
   imageData?: string | null;
   caption?: string | null;
-  document?: IDocument | null;
+  imageS3Url?: string | null;
+  referenceDocumentId?: IDocument | null;
 }
 
 export const defaultValue: Readonly<IImages> = {};

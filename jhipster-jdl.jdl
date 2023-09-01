@@ -1,32 +1,25 @@
-
-entity UserProfile {
-profileId Integer
-username String
-password String
-}
-
 entity Document {
-documentId Integer
 title String
 content String
+archived Boolean
 }
 
 entity Images{
-imageId Integer
-documentIndex Integer
-imageData String
+imageData ImageBlob
 caption String
+imageS3Url String
 }
 
+entity ApplicationUser {
+  applicationUserId Integer min(42) max(42)
+  accessControl Boolean
+}
 
 relationship OneToMany{
-Document{Images} to Images{Document}
+	Document{referenceImageId} to Images{referenceDocumentId}
+    ApplicationUser{applicationUserReferenceId} to Document
 }
 
-relationship ManyToOne{
-Document to User
-}
-
-relationship OneToOne{
-UserProfile{User} to User
+relationship OneToOne {
+  ApplicationUser{internalUserReferenceId} to User
 }
