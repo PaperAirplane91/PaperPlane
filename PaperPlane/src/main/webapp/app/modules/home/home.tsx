@@ -1,4 +1,6 @@
 import './home.scss';
+import Quill from "quill/quill";
+import TextEditor from './quill-components/TextEditor';
 
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -21,6 +23,7 @@ export const Home = () => {
         {account?.login ? (
           <div>
             <Alert color="success">You are logged in as user &quot;{account.login}&quot;.</Alert>
+
           </div>
         ) : (
           <div>
@@ -44,6 +47,21 @@ export const Home = () => {
           </div>
         )}
         <p>If you have any question on JHipster:</p>
+        <h1>Quill Text Editor Demo</h1>
+        <TextEditor />
+
+
+
+              <div id="editor">
+                  <p>Hello World!</p>
+                  <p>Some initial <strong>bold</strong> text</p>
+
+              </div>
+
+
+              <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+
 
         <ul>
           <li>
