@@ -8,8 +8,8 @@ import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateT
 import { mapIdList } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
-import { IUser } from 'app/shared/model/user.model';
-import { getUsers } from 'app/modules/administration/user-management/user-management.reducer';
+import { IApplicationUser } from 'app/shared/model/application-user.model';
+import { getEntities as getApplicationUsers } from 'app/entities/application-user/application-user.reducer';
 import { IDocument } from 'app/shared/model/document.model';
 import { getEntity, updateEntity, createEntity, reset } from './document.reducer';
 
@@ -21,7 +21,7 @@ export const DocumentUpdate = () => {
   const { id } = useParams<'id'>();
   const isNew = id === undefined;
 
-  const users = useAppSelector(state => state.userManagement.users);
+  const applicationUsers = useAppSelector(state => state.applicationUser.entities);
   const documentEntity = useAppSelector(state => state.document.entity);
   const loading = useAppSelector(state => state.document.loading);
   const updating = useAppSelector(state => state.document.updating);
@@ -38,7 +38,7 @@ export const DocumentUpdate = () => {
       dispatch(getEntity(id));
     }
 
-    dispatch(getUsers({}));
+    dispatch(getApplicationUsers({}));
   }, []);
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export const DocumentUpdate = () => {
     const entity = {
       ...documentEntity,
       ...values,
-      assignedTo: users.find(it => it.id.toString() === values.assignedTo.toString()),
+      applicationUser: applicationUsers.find(it => it.id.toString() === values.applicationUser.toString()),
     };
 
     if (isNew) {
@@ -66,7 +66,7 @@ export const DocumentUpdate = () => {
       ? {}
       : {
           ...documentEntity,
-          assignedTo: documentEntity?.assignedTo?.id,
+          applicationUser: documentEntity?.applicationUser?.id,
         };
 
   return (
@@ -85,15 +85,21 @@ export const DocumentUpdate = () => {
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
               {!isNew ? <ValidatedField name="id" required readOnly id="document-id" label="ID" validate={{ required: true }} /> : null}
-              <ValidatedField label="Document Id" id="document-documentId" name="documentId" data-cy="documentId" type="text" />
               <ValidatedField label="Title" id="document-title" name="title" data-cy="title" type="text" />
               <ValidatedField label="Content" id="document-content" name="content" data-cy="content" type="text" />
-              <ValidatedField id="document-assignedTo" name="assignedTo" data-cy="assignedTo" label="Assigned To" type="select">
+              <ValidatedField label="Archived" id="document-archived" name="archived" data-cy="archived" check type="checkbox" />
+              <ValidatedField
+                id="document-applicationUser"
+                name="applicationUser"
+                data-cy="applicationUser"
+                label="Application User"
+                type="select"
+              >
                 <option value="" key="0" />
-                {users
-                  ? users.map(otherEntity => (
+                {applicationUsers
+                  ? applicationUsers.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.login}
+                        {otherEntity.id}
                       </option>
                     ))
                   : null}

@@ -24,22 +24,23 @@ public class Document implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "document_id")
-    private Integer documentId;
-
     @Column(name = "title")
     private String title;
 
     @Column(name = "content")
     private String content;
 
-    @OneToMany(mappedBy = "document")
+    @Column(name = "archived")
+    private Boolean archived;
+
+    @OneToMany(mappedBy = "referenceDocumentId")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "document" }, allowSetters = true)
-    private Set<Images> images = new HashSet<>();
+    @JsonIgnoreProperties(value = { "referenceDocumentId" }, allowSetters = true)
+    private Set<Images> referenceImageIds = new HashSet<>();
 
     @ManyToOne
-    private User assignedTo;
+    @JsonIgnoreProperties(value = { "internalUserReferenceId", "applicationUserReferenceIds" }, allowSetters = true)
+    private ApplicationUser applicationUser;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -54,19 +55,6 @@ public class Document implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Integer getDocumentId() {
-        return this.documentId;
-    }
-
-    public Document documentId(Integer documentId) {
-        this.setDocumentId(documentId);
-        return this;
-    }
-
-    public void setDocumentId(Integer documentId) {
-        this.documentId = documentId;
     }
 
     public String getTitle() {
@@ -95,47 +83,60 @@ public class Document implements Serializable {
         this.content = content;
     }
 
-    public Set<Images> getImages() {
-        return this.images;
+    public Boolean getArchived() {
+        return this.archived;
     }
 
-    public void setImages(Set<Images> images) {
-        if (this.images != null) {
-            this.images.forEach(i -> i.setDocument(null));
+    public Document archived(Boolean archived) {
+        this.setArchived(archived);
+        return this;
+    }
+
+    public void setArchived(Boolean archived) {
+        this.archived = archived;
+    }
+
+    public Set<Images> getReferenceImageIds() {
+        return this.referenceImageIds;
+    }
+
+    public void setReferenceImageIds(Set<Images> images) {
+        if (this.referenceImageIds != null) {
+            this.referenceImageIds.forEach(i -> i.setReferenceDocumentId(null));
         }
         if (images != null) {
-            images.forEach(i -> i.setDocument(this));
+            images.forEach(i -> i.setReferenceDocumentId(this));
         }
-        this.images = images;
+        this.referenceImageIds = images;
     }
 
-    public Document images(Set<Images> images) {
-        this.setImages(images);
+    public Document referenceImageIds(Set<Images> images) {
+        this.setReferenceImageIds(images);
         return this;
     }
 
-    public Document addImages(Images images) {
-        this.images.add(images);
-        images.setDocument(this);
+    public Document addReferenceImageId(Images images) {
+        this.referenceImageIds.add(images);
+        images.setReferenceDocumentId(this);
         return this;
     }
 
-    public Document removeImages(Images images) {
-        this.images.remove(images);
-        images.setDocument(null);
+    public Document removeReferenceImageId(Images images) {
+        this.referenceImageIds.remove(images);
+        images.setReferenceDocumentId(null);
         return this;
     }
 
-    public User getAssignedTo() {
-        return this.assignedTo;
+    public ApplicationUser getApplicationUser() {
+        return this.applicationUser;
     }
 
-    public void setAssignedTo(User user) {
-        this.assignedTo = user;
+    public void setApplicationUser(ApplicationUser applicationUser) {
+        this.applicationUser = applicationUser;
     }
 
-    public Document assignedTo(User user) {
-        this.setAssignedTo(user);
+    public Document applicationUser(ApplicationUser applicationUser) {
+        this.setApplicationUser(applicationUser);
         return this;
     }
 
@@ -163,9 +164,9 @@ public class Document implements Serializable {
     public String toString() {
         return "Document{" +
             "id=" + getId() +
-            ", documentId=" + getDocumentId() +
             ", title='" + getTitle() + "'" +
             ", content='" + getContent() + "'" +
+            ", archived='" + getArchived() + "'" +
             "}";
     }
 }

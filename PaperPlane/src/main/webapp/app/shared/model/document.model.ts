@@ -1,13 +1,15 @@
 import { IImages } from 'app/shared/model/images.model';
-import { IUser } from 'app/shared/model/user.model';
+import { IApplicationUser } from 'app/shared/model/application-user.model';
 
 export interface IDocument {
   id?: number;
-  documentId?: number | null;
   title?: string | null;
   content?: string | null;
-  images?: IImages[] | null;
-  assignedTo?: IUser | null;
+  archived?: boolean | null;
+  referenceImageIds?: IImages[] | null;
+  applicationUser?: IApplicationUser | null;
 }
 
-export const defaultValue: Readonly<IDocument> = {};
+export const defaultValue: Readonly<IDocument> = {
+  archived: false,
+};

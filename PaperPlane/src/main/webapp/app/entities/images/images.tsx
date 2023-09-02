@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button, Table } from 'reactstrap';
-import { Translate } from 'react-jhipster';
+import { openFile, byteSize, Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
@@ -47,11 +47,10 @@ export const Images = () => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Image Id</th>
-                <th>Document Index</th>
                 <th>Image Data</th>
                 <th>Caption</th>
-                <th>Document</th>
+                <th>Image S 3 Url</th>
+                <th>Reference Document Id</th>
                 <th />
               </tr>
             </thead>
@@ -63,11 +62,30 @@ export const Images = () => {
                       {images.id}
                     </Button>
                   </td>
-                  <td>{images.imageId}</td>
-                  <td>{images.documentIndex}</td>
-                  <td>{images.imageData}</td>
+                  <td>
+                    {images.imageData ? (
+                      <div>
+                        {images.imageDataContentType ? (
+                          <a onClick={openFile(images.imageDataContentType, images.imageData)}>
+                            <img src={`data:${images.imageDataContentType};base64,${images.imageData}`} style={{ maxHeight: '30px' }} />
+                            &nbsp;
+                          </a>
+                        ) : null}
+                        <span>
+                          {images.imageDataContentType}, {byteSize(images.imageData)}
+                        </span>
+                      </div>
+                    ) : null}
+                  </td>
                   <td>{images.caption}</td>
-                  <td>{images.document ? <Link to={`/document/${images.document.id}`}>{images.document.id}</Link> : ''}</td>
+                  <td>{images.imageS3Url}</td>
+                  <td>
+                    {images.referenceDocumentId ? (
+                      <Link to={`/document/${images.referenceDocumentId.id}`}>{images.referenceDocumentId.id}</Link>
+                    ) : (
+                      ''
+                    )}
+                  </td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/images/${images.id}`} color="info" size="sm" data-cy="entityDetailsButton">

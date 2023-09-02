@@ -22,21 +22,22 @@ public class Images implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "image_id")
-    private Integer imageId;
-
-    @Column(name = "document_index")
-    private Integer documentIndex;
-
+    @Lob
     @Column(name = "image_data")
-    private String imageData;
+    private byte[] imageData;
+
+    @Column(name = "image_data_content_type")
+    private String imageDataContentType;
 
     @Column(name = "caption")
     private String caption;
 
+    @Column(name = "image_s_3_url")
+    private String imageS3Url;
+
     @ManyToOne
-    @JsonIgnoreProperties(value = { "images", "assignedTo" }, allowSetters = true)
-    private Document document;
+    @JsonIgnoreProperties(value = { "referenceImageIds", "applicationUser" }, allowSetters = true)
+    private Document referenceDocumentId;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -53,43 +54,30 @@ public class Images implements Serializable {
         this.id = id;
     }
 
-    public Integer getImageId() {
-        return this.imageId;
-    }
-
-    public Images imageId(Integer imageId) {
-        this.setImageId(imageId);
-        return this;
-    }
-
-    public void setImageId(Integer imageId) {
-        this.imageId = imageId;
-    }
-
-    public Integer getDocumentIndex() {
-        return this.documentIndex;
-    }
-
-    public Images documentIndex(Integer documentIndex) {
-        this.setDocumentIndex(documentIndex);
-        return this;
-    }
-
-    public void setDocumentIndex(Integer documentIndex) {
-        this.documentIndex = documentIndex;
-    }
-
-    public String getImageData() {
+    public byte[] getImageData() {
         return this.imageData;
     }
 
-    public Images imageData(String imageData) {
+    public Images imageData(byte[] imageData) {
         this.setImageData(imageData);
         return this;
     }
 
-    public void setImageData(String imageData) {
+    public void setImageData(byte[] imageData) {
         this.imageData = imageData;
+    }
+
+    public String getImageDataContentType() {
+        return this.imageDataContentType;
+    }
+
+    public Images imageDataContentType(String imageDataContentType) {
+        this.imageDataContentType = imageDataContentType;
+        return this;
+    }
+
+    public void setImageDataContentType(String imageDataContentType) {
+        this.imageDataContentType = imageDataContentType;
     }
 
     public String getCaption() {
@@ -105,16 +93,29 @@ public class Images implements Serializable {
         this.caption = caption;
     }
 
-    public Document getDocument() {
-        return this.document;
+    public String getImageS3Url() {
+        return this.imageS3Url;
     }
 
-    public void setDocument(Document document) {
-        this.document = document;
+    public Images imageS3Url(String imageS3Url) {
+        this.setImageS3Url(imageS3Url);
+        return this;
     }
 
-    public Images document(Document document) {
-        this.setDocument(document);
+    public void setImageS3Url(String imageS3Url) {
+        this.imageS3Url = imageS3Url;
+    }
+
+    public Document getReferenceDocumentId() {
+        return this.referenceDocumentId;
+    }
+
+    public void setReferenceDocumentId(Document document) {
+        this.referenceDocumentId = document;
+    }
+
+    public Images referenceDocumentId(Document document) {
+        this.setReferenceDocumentId(document);
         return this;
     }
 
@@ -142,10 +143,10 @@ public class Images implements Serializable {
     public String toString() {
         return "Images{" +
             "id=" + getId() +
-            ", imageId=" + getImageId() +
-            ", documentIndex=" + getDocumentIndex() +
             ", imageData='" + getImageData() + "'" +
+            ", imageDataContentType='" + getImageDataContentType() + "'" +
             ", caption='" + getCaption() + "'" +
+            ", imageS3Url='" + getImageS3Url() + "'" +
             "}";
     }
 }
