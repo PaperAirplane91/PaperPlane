@@ -5,13 +5,23 @@ import ReactQuill from "react-quill";
 import 'quill/dist/quill.snow.css';
 import {render} from "@testing-library/react";
 
-//import Quill from "quill/quill"; // Import Quill's CSS
-
-
-
 
 function TextEditor() {
   const [editorValue, setEditorValue] = useState('');
+
+const ID = 3;
+
+  useEffect(() => {
+    fetch(`http://localhost:8080/api/documents/${ID}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setEditorValue(data.content);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
 
   return (
       <ReactQuill
@@ -21,13 +31,4 @@ function TextEditor() {
   );
 }
 
-//theme: 'snow'
-
-// <script>
-//     var quill = new Quill('#editor', {
-//     theme: 'snow'
-// });
-// </script>
-
-// <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 export default TextEditor;
