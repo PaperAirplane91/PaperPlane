@@ -48,7 +48,7 @@ export const Home = () => {
         )}
         <p>If you have any question on JHipster:</p>
         <h1>Quill Text Editor Demo</h1>
-        <TextEditor />
+
 
 
 
