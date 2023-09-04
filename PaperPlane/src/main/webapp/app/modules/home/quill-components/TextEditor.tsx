@@ -1,47 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'quill/dist/quill.snow.css';
+import IndexPage from './index';
 
 function TextEditor() {
   const [editorValue, setEditorValue] = useState('');
-  const [searchId, setSearchId] = useState(''); // Stores the ID that gets entered
+  const [showIndexPage, setShowIndexPage] = useState(false);
 
-  const fetchData = () => {
-  //This runs an API call to go into our database, fetch the entry that has the entered ID,
-  //and then place the content listed in that into our editor
-    fetch(`http://localhost:8080/api/documents/${searchId}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setEditorValue(data.content);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  };
-
-  useEffect(() => {
-    fetchData(); //This fetches data when the component first loads.
-  }, []);
-
- //Function handles the update when an ID is entered and searched
-  const handleSearch = () => {
-    fetchData(); // Fetch data from new ID entered by user.
+  const handleDocumentSelect = async (id: number) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/documents/${id}`);
+      if (response.ok) {
+        const data = await response.json();
+        const content = data.content || '';
+        setEditorValue(content);
+        setShowIndexPage(false);
+      } else {
+        console.error('Error fetching content:', response.status);
+      }
+    } catch (error) {
+      console.error('Error fetching content:', error);
+    }
   };
 
   return (
     <div>
       <div>
-        {/* This is where our search bar starts */}
-        <input
-          type="number"
-          placeholder="Enter ID"
-          value={searchId}
-          onChange={(e) => setSearchId(e.target.value)}
-        />
-        {/* Starts the search by calling the function handleSearch on button click */}
-        <button onClick={handleSearch}>Search</button>
+        <button onClick={() => setShowIndexPage(true)}>Go to Index Page</button>
       </div>
-{/*       This is where our Quill editor is imported */}
+
+      {showIndexPage && <IndexPage onSelectDocument={handleDocumentSelect} />}
+
       <ReactQuill
         value={editorValue}
         onChange={(value) => setEditorValue(value)}
