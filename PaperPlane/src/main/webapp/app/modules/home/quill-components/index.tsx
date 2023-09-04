@@ -16,19 +16,19 @@ function IndexPage({ onSelectDocument }: { onSelectDocument: (id: number) => voi
   }, []);
 
   const handleTitleClick = (id: number) => {
-    onSelectDocument(id); // Pass the ID when a title is clicked
+    onSelectDocument(id);
   };
 
   return (
     <div>
       <h1>Document Titles</h1>
-      <ul>
+      <div className="box-container">
         {documents.map((document, index) => (
-          <li key={index}>
+          <div key={index} className="box">
             <button onClick={() => handleTitleClick(document.id)}>{document.title}</button>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
