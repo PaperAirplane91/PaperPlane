@@ -1,7 +1,7 @@
 .quill-editor {
-  height: 500px; /* Adjust the height as needed */
-  max-width: 100%; /* Ensure it doesn't exceed the container width */
-  margin: 0 auto; /* Center-align the editor */
+  height: 500px;
+  max-width: 100%;
+  margin: 0 auto;
   border: 1px solid #ccc;
-  padding: 10px; /* Add padding for a cleaner look */
+  padding: 10px;
 }
