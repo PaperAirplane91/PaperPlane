@@ -1,7 +1,6 @@
 import './home.scss';
 import Quill from "quill/quill";
 import TextEditor from './quill-components/TextEditor';
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -18,7 +17,7 @@ export const Home = () => {
 {/*         <span className="hipster rounded" /> */}
 {/*       </Col> */}
       <Col md="9">
-        <h2>Welcome, Java Hipster!</h2>
+        <h2>PaperPlane</h2>
         <p className="lead">This is your homepage</p>
         {account?.login ? (
           <div>
@@ -46,58 +45,12 @@ export const Home = () => {
             </Alert>
           </div>
         )}
-        <p>If you have any question on JHipster:</p>
         <h1>Quill Text Editor Demo</h1>
         <TextEditor />
 
 
 
-              <div id="editor">
-                  <p>Hello World!</p>
-                  <p>Some initial <strong>bold</strong> text</p>
-
-              </div>
-
-
               <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-
-
-
-        <ul>
-          <li>
-            <a href="https://www.jhipster.tech/" target="_blank" rel="noopener noreferrer">
-              JHipster homepage
-            </a>
-          </li>
-          <li>
-            <a href="https://stackoverflow.com/tags/jhipster/info" target="_blank" rel="noopener noreferrer">
-              JHipster on Stack Overflow
-            </a>
-          </li>
-          <li>
-            <a href="https://github.com/jhipster/generator-jhipster/issues?state=open" target="_blank" rel="noopener noreferrer">
-              JHipster bug tracker
-            </a>
-          </li>
-          <li>
-            <a href="https://gitter.im/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">
-              JHipster public chat room
-            </a>
-          </li>
-          <li>
-            <a href="https://twitter.com/jhipster" target="_blank" rel="noopener noreferrer">
-              follow @jhipster on Twitter
-            </a>
-          </li>
-        </ul>
-
-        <p>
-          If you like JHipster, don&apos;t forget to give us a star on{' '}
-          <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener noreferrer">
-            GitHub
-          </a>
-          !
-        </p>
       </Col>
     </Row>
   );
