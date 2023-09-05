@@ -18,7 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
         })
             .then(response => response.json())
             .then(data => {
-                alert('Post saved successfully!');
+                alert(JSON.stringify(post));
+                console.log(JSON.stringify(post));
+                console.log(post);
                 // Optionally, reset the form or perform other actions
             })
             .catch(error => {
