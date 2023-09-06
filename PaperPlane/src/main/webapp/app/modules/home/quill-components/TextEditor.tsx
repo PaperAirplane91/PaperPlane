@@ -47,8 +47,7 @@ function TextEditor() {
     fetchData(); // Fetch document titles when the component first loads.
   }, []);
 
-  const handleDocumentSelect = async (id: number) => {
-    try {
+gir     try {
       const response = await fetch(`http://localhost:8080/api/documents/${id}`);
       if (response.ok) {
         const data = await response.json();
@@ -60,6 +59,31 @@ function TextEditor() {
       }
     } catch (error) {
       console.error('Error fetching content:', error);
+    }
+  };
+
+  const handleSave = async () => {
+    if (selectedDocumentId !== null) {
+      try {
+        const response = await fetch(`http://localhost:8080/api/documents/${selectedDocumentId}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+          id: selectedDocumentId,
+            content: editorValue
+          }),
+        });
+
+        if (response.ok) {
+          console.log('Document content updated successfully');
+        } else {
+          console.error('Error updating document content:', response.status);
+        }
+      } catch (error) {
+        console.error('Error updating document content:', error);
+      }
     }
   };
 
@@ -76,10 +100,14 @@ function TextEditor() {
       </div>
 
       {selectedDocumentId !== null && (
-        <ReactQuill
-          value={editorValue}
-          onChange={(value) => setEditorValue(value)}
-        />
+        <div>
+          <ReactQuill
+            value={editorValue}
+            onChange={(value) => setEditorValue(value)}
+          />
+
+          <button onClick={handleSave}>Save</button>
+        </div>
       )}
     </div>
   );
