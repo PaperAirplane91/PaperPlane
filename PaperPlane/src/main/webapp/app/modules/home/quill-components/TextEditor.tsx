@@ -82,7 +82,7 @@ gir     try {
           console.error('Error updating document content:', response.status);
         }
       } catch (error) {
-        console.error('Error updating document content:', error);
+        cgigit onsole.error('Error updating document content:', error);
       }
     }
   };
