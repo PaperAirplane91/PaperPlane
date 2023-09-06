@@ -13,7 +13,7 @@ const EntitiesMenu = () => {
         Document
       </MenuItem>
       <MenuItem icon="asterisk" to="/images">
-        Images
+        Edit Documents
       </MenuItem>
       <MenuItem icon="asterisk" to="/application-user">
         Application User

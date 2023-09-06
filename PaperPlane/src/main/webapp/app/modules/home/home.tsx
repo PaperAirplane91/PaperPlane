@@ -1,7 +1,6 @@
 import './home.scss';
 import Quill from "quill/quill";
 import TextEditor from './quill-components/TextEditor';
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -47,13 +46,14 @@ export const Home = () => {
           </div>
         )}
         <h1>Quill Text Editor Demo</h1>
-        <TextEditor />
+
 
 
 
               <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
       </Col>
     </Row>
+
   );
 };
 

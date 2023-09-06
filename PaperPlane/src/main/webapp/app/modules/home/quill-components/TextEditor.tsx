@@ -1,18 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'quill/dist/quill.snow.css';
 
+// CSS styles for the boxes
+const boxContainerStyle: React.CSSProperties = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(5, 1fr)',
+  gap: '10px', // Adjust the gap as needed
+};
+
+const boxStyle: React.CSSProperties = {
+  width: '100px', // Adjust the width as needed
+  height: '100px', // Adjust the height as needed
+  border: '1px solid #ccc',
+  textAlign: 'center',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+};
+
 function TextEditor() {
   const [editorValue, setEditorValue] = useState('');
-  const [searchId, setSearchId] = useState(''); // Stores the ID that gets entered
+  const [selectedDocumentId, setSelectedDocumentId] = useState<number | null>(null); // Track the selected document ID
+  const [documentTitles, setDocumentTitles] = useState<string[]>([]);
 
   const fetchData = () => {
-  //This runs an API call to go into our database, fetch the entry that has the entered ID,
-  //and then place the content listed in that into our editor
-    fetch(`http://localhost:8080/api/documents/${searchId}`)
+    // Fetch document titles from your API
+    fetch('http://localhost:8080/api/documents')
       .then((response) => response.json())
       .then((data) => {
-        setEditorValue(data.content);
+        const titles = data.map((document: { title: string }) => document.title);
+        setDocumentTitles(titles);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -20,32 +38,72 @@ function TextEditor() {
   };
 
   useEffect(() => {
-    fetchData(); //This fetches data when the component first loads.
+    fetchData(); // Fetch document titles when the component first loads.
   }, []);
 
- //Function handles the update when an ID is entered and searched
-  const handleSearch = () => {
-    fetchData(); // Fetch data from new ID entered by user.
+  const handleDocumentSelect = async (id: number) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/documents/${id}`);
+      if (response.ok) {
+        const data = await response.json();
+        const content = data.content || '';
+        setEditorValue(content);
+        setSelectedDocumentId(id); // Mark a document as selected
+      } else {
+        console.error('Error fetching content:', response.status);
+      }
+    } catch (error) {
+      console.error('Error fetching content:', error);
+    }
+  };
+
+  const handleSave = async () => {
+    if (selectedDocumentId !== null) {
+      try {
+        const response = await fetch(`http://localhost:8080/api/documents/${selectedDocumentId}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+          id: selectedDocumentId,
+            content: editorValue
+          }),
+        });
+
+        if (response.ok) {
+          console.log('Document content updated successfully');
+        } else {
+          console.error('Error updating document content:', response.status);
+        }
+      } catch (error) {
+        console.error('Error updating document content:', error);
+      }
+    }
   };
 
   return (
     <div>
-      <div>
-        {/* This is where our search bar starts */}
-        <input
-          type="number"
-          placeholder="Enter ID"
-          value={searchId}
-          onChange={(e) => setSearchId(e.target.value)}
-        />
-        {/* Starts the search by calling the function handleSearch on button click */}
-        <button onClick={handleSearch}>Search</button>
+      {/* Style the boxes using the defined styles */}
+      <div style={boxContainerStyle}>
+        {documentTitles.map((title, index) => (
+          <div key={index} style={boxStyle}>
+            {/* Box content */}
+            <button onClick={() => handleDocumentSelect(index + 1)}>{title}</button>
+          </div>
+        ))}
       </div>
-{/*       This is where our Quill editor is imported */}
-      <ReactQuill
-        value={editorValue}
-        onChange={(value) => setEditorValue(value)}
-      />
+
+      {selectedDocumentId !== null && (
+        <div>
+          <ReactQuill
+            value={editorValue}
+            onChange={(value) => setEditorValue(value)}
+          />
+
+          <button onClick={handleSave}>Save</button>
+        </div>
+      )}
     </div>
   );
 }
