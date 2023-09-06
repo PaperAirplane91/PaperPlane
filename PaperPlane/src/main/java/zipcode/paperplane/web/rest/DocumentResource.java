@@ -146,12 +146,17 @@ public class DocumentResource {
     /**
      * {@code GET  /documents} : get all the documents.
      *
+     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of documents in body.
      */
     @GetMapping("/documents")
-    public List<Document> getAllDocuments() {
+    public List<Document> getAllDocuments(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Documents");
-        return documentRepository.findAll();
+        if (eagerload) {
+            return documentRepository.findAllWithEagerRelationships();
+        } else {
+            return documentRepository.findAll();
+        }
     }
 
     /**
@@ -163,7 +168,7 @@ public class DocumentResource {
     @GetMapping("/documents/{id}")
     public ResponseEntity<Document> getDocument(@PathVariable Long id) {
         log.debug("REST request to get Document : {}", id);
-        Optional<Document> document = documentRepository.findById(id);
+        Optional<Document> document = documentRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(document);
     }
 
