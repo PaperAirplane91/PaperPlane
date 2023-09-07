@@ -28,7 +28,8 @@ export const DocumentUpdate = () => {
   const updateSuccess = useAppSelector(state => state.document.updateSuccess);
 
   const handleClose = () => {
-    navigate('/document');
+    // navigate('/document');
+    navigate('/images');
   };
 
   useEffect(() => {
@@ -51,7 +52,7 @@ export const DocumentUpdate = () => {
     const entity = {
       ...documentEntity,
       ...values,
-      applicationUser: applicationUsers.find(it => it.id.toString() === values.applicationUser.toString()),
+      //applicationUser: applicationUsers.find(it => it.id.toString() === values.applicationUser.toString()),
     };
 
     if (isNew) {
@@ -66,15 +67,15 @@ export const DocumentUpdate = () => {
       ? {}
       : {
           ...documentEntity,
-          applicationUser: documentEntity?.applicationUser?.id,
+          // applicationUser: documentEntity?.applicationUser?.id,
         };
 
   return (
     <div>
       <Row className="justify-content-center">
         <Col md="8">
-          <h2 id="paperPlaneApp.document.home.createOrEditLabel" data-cy="DocumentCreateUpdateHeading">
-            Create or edit a Document
+          <h2 id="paperPlaneApp.document.home.createOrEditLabel" data-cy="DocumentCreateUpdateHeading" style={{ textAlign: 'center' }}>
+            Create or Edit a Document
           </h2>
         </Col>
       </Row>
@@ -86,34 +87,40 @@ export const DocumentUpdate = () => {
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
               {!isNew ? <ValidatedField name="id" required readOnly id="document-id" label="ID" validate={{ required: true }} /> : null}
               <ValidatedField label="Title" id="document-title" name="title" data-cy="title" type="text" />
-              <ValidatedField label="Content" id="document-content" name="content" data-cy="content" type="text" />
-              <ValidatedField label="Archived" id="document-archived" name="archived" data-cy="archived" check type="checkbox" />
-              <ValidatedField
-                id="document-applicationUser"
-                name="applicationUser"
-                data-cy="applicationUser"
-                label="Application User"
-                type="select"
-              >
-                <option value="" key="0" />
-                {applicationUsers
-                  ? applicationUsers.map(otherEntity => (
-                      <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
-                      </option>
-                    ))
-                  : null}
-              </ValidatedField>
-              <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/document" replace color="info">
+
+
+              {/*<ValidatedField label="Content" id="document-content" name="content" data-cy="content" type="text" />*/}
+              {/*<ValidatedField label="Archived" id="document-archived" name="archived" data-cy="archived" check type="checkbox" />*/}
+              {/*<ValidatedField*/}
+              {/*  id="document-applicationUser"*/}
+              {/*  name="applicationUser"*/}
+              {/*  data-cy="applicationUser"*/}
+              {/*  label="Application User"*/}
+              {/*  type="select"*/}
+              {/*>*/}
+              {/*  <option value="" key="0" />*/}
+              {/*  {applicationUsers*/}
+              {/*    ? applicationUsers.map(otherEntity => (*/}
+              {/*        <option value={otherEntity.id} key={otherEntity.id}>*/}
+              {/*          {otherEntity.id}*/}
+              {/*        </option>*/}
+              {/*      ))*/}
+              {/*    : null}*/}
+              {/*</ValidatedField>*/}
+
+              <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/images" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
                 <span className="d-none d-md-inline">Back</span>
               </Button>
               &nbsp;
+
+
               <Button color="primary" id="save-entity" data-cy="entityCreateSaveButton" type="submit" disabled={updating}>
                 <FontAwesomeIcon icon="save" />
                 &nbsp; Save
               </Button>
+
             </ValidatedForm>
           )}
         </Col>
