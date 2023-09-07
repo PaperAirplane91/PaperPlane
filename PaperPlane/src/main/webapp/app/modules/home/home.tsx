@@ -17,6 +17,7 @@ export const Home = () => {
 {/*         <span className="hipster rounded" /> */}
 {/*       </Col> */}
       <Col md="9">
+
         <h2>All Documents</h2>
 
 {/*         {account?.login ? ( */}
@@ -48,10 +49,6 @@ export const Home = () => {
 
          <TextEditor />
 
-
-
-
-              <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
       </Col>
     </Row>
 
