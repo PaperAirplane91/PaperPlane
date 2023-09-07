@@ -105,8 +105,9 @@ function TextEditor() {
             value={editorValue}
             onChange={(value) => setEditorValue(value)}
           />
-
-          <button onClick={handleSave}>Save</button>
+          <button onClick={handleSave} className="btnSave">
+            Save
+          </button>
         </div>
       )}
     </div>
