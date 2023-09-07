@@ -15,6 +15,7 @@ import { getEntities } from './images.reducer';
 import TextEditor from 'app/modules/home/quill-components/TextEditor';
 
 
+
 export const Images = () => {
   const dispatch = useAppDispatch();
 
@@ -32,20 +33,34 @@ export const Images = () => {
     dispatch(getEntities({}));
   };
 
+
+
   return (
     <div>
-      <h1 id="images-heading" data-cy="ImagesHeading">
+      <h1 id="images-heading" data-cy="ImagesHeading" style={{ textAlign: 'center' }}>
         All Documents
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
           </Button>
-          <Link to="/images/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
+          <Link to="/document/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton" >
             <FontAwesomeIcon icon="plus" />
-            &nbsp; Create a new Document
+            &nbsp; Create a New Document
           </Link>
         </div>
       </h1>
+
+      <div>
+        <h3>Select Document for editing:</h3>
+        <TextEditor />
+      </div>
+
+    </div>
+  );
+};
+
+export default Images;
+
 {/*       <div className="table-responsive"> */}
 {/*         {imagesList && imagesList.length > 0 ? ( */}
 {/*           <Table responsive> */}
@@ -111,15 +126,3 @@ export const Images = () => {
 {/*         ) : ( */}
 {/*           !loading && <div className="alert alert-warning">No Images found</div> */}
 {/*         )} */}
-      <div>
-        <h3>Select Document for editing:</h3>
-        <TextEditor />
-
-
-        <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-      </div>
-    </div>
-  );
-};
-
-export default Images;

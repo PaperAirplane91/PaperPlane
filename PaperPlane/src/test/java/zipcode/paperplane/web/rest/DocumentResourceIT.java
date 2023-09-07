@@ -147,22 +147,6 @@ class DocumentResourceIT {
             .andExpect(jsonPath("$.[*].archived").value(hasItem(DEFAULT_ARCHIVED.booleanValue())));
     }
 
-    @SuppressWarnings({ "unchecked" })
-    void getAllDocumentsWithEagerRelationshipsIsEnabled() throws Exception {
-        when(documentRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restDocumentMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
-
-        verify(documentRepositoryMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllDocumentsWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(documentRepositoryMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restDocumentMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
-        verify(documentRepositoryMock, times(1)).findAll(any(Pageable.class));
-    }
 
     @Test
     @Transactional
