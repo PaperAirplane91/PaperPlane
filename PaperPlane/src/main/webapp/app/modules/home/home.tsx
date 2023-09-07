@@ -45,6 +45,7 @@ export const Home = () => {
           </div>
         )}
         <h1>Quill Text Editor Demo</h1>
+         <TextEditor />
 
 
 

@@ -153,6 +153,7 @@ public class DocumentResource {
     public List<Document> getAllDocuments(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Documents");
             return documentRepository.findAll();
+
     }
 
     /**
