@@ -9,7 +9,7 @@ import { Row, Col, Alert } from 'reactstrap';
 import { useAppSelector } from 'app/config/store';
 
 export const Home = () => {
-  const account = useAppSelector(state => state.authentication.account);
+  //const account = useAppSelector(state => state.authentication.account);
 
   return (
     <Row>
@@ -46,10 +46,6 @@ export const Home = () => {
         )}
         <h1>Quill Text Editor Demo</h1>
          <TextEditor />
-
-
-
-
 
       </Col>
     </Row>
