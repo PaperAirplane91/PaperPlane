@@ -152,12 +152,9 @@ public class DocumentResource {
     @GetMapping("/documents")
     public List<Document> getAllDocuments(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
         log.debug("REST request to get all Documents");
-        if (eagerload) {
-            return documentRepository.findAllWithEagerRelationships();
-        } else {
             return documentRepository.findAll();
         }
-    }
+
 
     /**
      * {@code GET  /documents/:id} : get the "id" document.
@@ -168,7 +165,7 @@ public class DocumentResource {
     @GetMapping("/documents/{id}")
     public ResponseEntity<Document> getDocument(@PathVariable Long id) {
         log.debug("REST request to get Document : {}", id);
-        Optional<Document> document = documentRepository.findOneWithEagerRelationships(id);
+        Optional<Document> document = documentRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(document);
     }
 

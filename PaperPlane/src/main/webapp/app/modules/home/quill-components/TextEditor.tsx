@@ -47,7 +47,8 @@ function TextEditor() {
     fetchData(); // Fetch document titles when the component first loads.
   }, []);
 
-gir     try {
+const handleDocumentSelect = async (id: number) => {
+  try {
       const response = await fetch(`http://localhost:8080/api/documents/${id}`);
       if (response.ok) {
         const data = await response.json();
@@ -72,7 +73,7 @@ gir     try {
           },
           body: JSON.stringify({
           id: selectedDocumentId,
-            content: editorValue
+            content: editorValue,
           }),
         });
 
@@ -82,7 +83,7 @@ gir     try {
           console.error('Error updating document content:', response.status);
         }
       } catch (error) {
-        cgigit onsole.error('Error updating document content:', error);
+        console.error('Error updating document content:', error);
       }
     }
   };
