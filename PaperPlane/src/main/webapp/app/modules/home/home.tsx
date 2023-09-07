@@ -22,7 +22,6 @@ export const Home = () => {
         {account?.login ? (
           <div>
             <Alert color="success">You are logged in as user &quot;{account.login}&quot;.</Alert>
-
           </div>
         ) : (
           <div>
@@ -46,11 +45,12 @@ export const Home = () => {
           </div>
         )}
         <h1>Quill Text Editor Demo</h1>
+         <TextEditor />
 
 
 
 
-              <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
       </Col>
     </Row>
 
