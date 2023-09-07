@@ -2,21 +2,27 @@ import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'quill/dist/quill.snow.css';
 
-// CSS styles for the boxes
 const boxContainerStyle: React.CSSProperties = {
   display: 'grid',
   gridTemplateColumns: 'repeat(5, 1fr)',
-  gap: '10px', // Adjust the gap as needed
+  gap: '10px',
+  padding: '20px', // Add padding to the container
 };
 
 const boxStyle: React.CSSProperties = {
-  width: '100px', // Adjust the width as needed
-  height: '100px', // Adjust the height as needed
+  width: '100%',
+  maxWidth: '250px', // Adjust the maximum width as needed
+  minHeight: '100px', // Adjust the minimum height as needed
   border: '1px solid #ccc',
-  textAlign: 'center',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
+  boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)', // Add a subtle shadow
+  borderRadius: '4px', // Add rounded corners
+  padding: '10px', // Add padding inside the box
+  cursor: 'pointer', // Change cursor on hover
+  transition: 'transform 0.2s ease-in-out', // Add a smooth transition effect
+};
+
+const boxHoverStyle: React.CSSProperties = {
+  transform: 'scale(1.05)', // Scale up on hover
 };
 
 function TextEditor() {
@@ -41,8 +47,8 @@ function TextEditor() {
     fetchData(); // Fetch document titles when the component first loads.
   }, []);
 
-  const handleDocumentSelect = async (id: number) => {
-    try {
+const handleDocumentSelect = async (id: number) => {
+  try {
       const response = await fetch(`http://localhost:8080/api/documents/${id}`);
       if (response.ok) {
         const data = await response.json();
@@ -67,7 +73,7 @@ function TextEditor() {
           },
           body: JSON.stringify({
           id: selectedDocumentId,
-            content: editorValue
+            content: editorValue,
           }),
         });
 
