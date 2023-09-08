@@ -78,6 +78,11 @@ function TextEditor() {
     }
   };
 
+  const handleBack = () => {
+    // Close the Quill editor and show the list of documents
+    setQuillEditorOpen(false);
+  };
+
   return (
     <div>
       {quillEditorOpen ? ( // Conditional rendering based on the Quill editor state
@@ -89,6 +94,9 @@ function TextEditor() {
           />
           <button onClick={handleSave} className="btnSave">
             Save
+          </button>
+          <button onClick={handleBack} className="btnBack">
+            Back
           </button>
         </div>
       ) : (
