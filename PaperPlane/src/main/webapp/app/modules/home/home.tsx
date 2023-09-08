@@ -47,7 +47,7 @@ export const Home = () => {
 {/*             </Alert> */}
 {/*           </div> */}
 {/*         )} */}
-
+        <h2>All Documents</h2>
          <TextEditor />
 
 

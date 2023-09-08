@@ -6,6 +6,7 @@ import { Col, Row } from 'reactstrap';
 
 const Footer = () => (
   <div className="footer page-content">
+ &nbsp;
     <Row>
       <Col md="12">
           <p>
