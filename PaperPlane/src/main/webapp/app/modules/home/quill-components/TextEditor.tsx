@@ -119,6 +119,11 @@ const userRole = user ? user.role : '';
 {/*         <button onClick={handleSave} className="btnSave"> */}
 {/*         Save */}
 {/*         </button> */}
+ {isAuthenticated && (
+                      <button onClick={handleSave} className="btnSave">
+                        Save
+                      </button>
+                    )}
         <button onClick={handleBack} className="btnBack">
         Back
         </button>
@@ -128,11 +133,7 @@ const userRole = user ? user.role : '';
             onChange={(value) => setEditorValue(value)}
            readOnly={!isAuthenticated} // Set readOnly based on user authentication
           />
-          {isAuthenticated && (
-                      <button onClick={handleSave} className="btnSave">
-                        Save
-                      </button>
-                    )}
+
                   </div>
                 ) : (
         <div>
