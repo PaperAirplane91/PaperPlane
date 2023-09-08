@@ -104,7 +104,7 @@ function TextEditor() {
         <div>
           <div style={boxContainerStyle}>
             {documentTitles.map(({ id, title }) => (
-              <div key={id}>
+              <div key={id} className="parentElement">
                 <button className="document" onClick={() => handleDocumentSelect(id)}>
                   <img
                     className="img"
