@@ -6,8 +6,8 @@ import './quillcss.css'; // Import your custom CSS file
 // CSS styles for the boxes
 const boxContainerStyle: React.CSSProperties = {
   display: 'grid',
-  gridTemplateColumns: 'repeat(5, 1fr)',
-  gap: '30px', // Adjust the gap as needed
+  gridTemplateColumns: 'repeat(6, 1fr)',
+  gap: '50px', // Adjust the gap as needed
   marginLeft: '70px',
 };
 
@@ -92,14 +92,13 @@ function TextEditor() {
       {/* Style the boxes using the defined styles */}
       <div style={boxContainerStyle}>
         {documentTitles.map(({ id, title }) => (
-          <div key={id}>
+          <div key={title}>
             {/* Box content */}
 
             <button className="document" onClick={() => handleDocumentSelect(id)}>
-              <img className ="img" src="content/images/document_image.png" width="200" height="300">
+              <img className ="img" src="content/images/document_image.png" width="150" height="200">
             </button>
             <button className="docName">{title}</button>
-
 
           </div>
         ))}
