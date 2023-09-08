@@ -1,6 +1,7 @@
 import './home.scss';
 import Quill from "quill/quill";
 import TextEditor from './quill-components/TextEditor';
+import SearchBar from "app/modules/home/search-bar-component/SearchBar";
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -46,6 +47,7 @@ export const Home = () => {
         )}
         <h1>Quill Text Editor Demo</h1>
          <TextEditor />
+        <SearchBar />
 
 
 

@@ -184,4 +184,11 @@ public class DocumentResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
     }
+
+
+    @GetMapping("/documents/document-title/{title}")
+    public ResponseEntity<Document> searchByTitle(@PathVariable String title) {
+        Optional<Document> document = Optional.ofNullable(documentRepository.findByTitle(title));
+        return ResponseUtil.wrapOrNotFound(document);
+    }
 }
