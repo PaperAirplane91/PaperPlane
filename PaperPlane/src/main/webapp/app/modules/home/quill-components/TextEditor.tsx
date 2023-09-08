@@ -116,15 +116,13 @@ const userRole = user ? user.role : '';
     <div>
       {quillEditorOpen ? ( // Conditional rendering based on the Quill editor state
         <div>
-{/*         <button onClick={handleSave} className="btnSave"> */}
-{/*         Save */}
-{/*         </button> */}
- {isAuthenticated && (
+
+          {isAuthenticated && (
                       <button onClick={handleSave} className="btnSave">
                         Save
                       </button>
                     )}
-        <button onClick={handleBack} className="btnBack">
+        <button onClick={handleBack} className="btnBack google-settings-btn">
         Back
         </button>
           <ReactQuill
