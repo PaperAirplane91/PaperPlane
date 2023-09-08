@@ -1,5 +1,8 @@
-import React, {useEffect, useState} from 'react';
-
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import DisplayResult from "app/modules/home/search-bar-component/DisplayResult";
+import 'react-quill/dist/quill.snow.css';
+import './SearchBar.css';
 
 function DocumentSearchBar() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -10,9 +13,9 @@ function DocumentSearchBar() {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`/api/documents/titles/${searchQuery}`);
-      if (response.ok) {
-        const data = await response.json();
+      const response = await axios.get(`/api/documents/document-title/${searchQuery}`);
+      if (response.status === 200) {
+        const data = response.data;
         setDocumentContent(data.content);
       } else {
         // Handle errors if needed
@@ -26,24 +29,25 @@ function DocumentSearchBar() {
   };
 
   return (
-    <div>
+    <div className="search-bar-container">
       <input
+        className="search-input"
         type="text"
         placeholder="Search for a document by title"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
       />
-      <button onClick={handleSearch} disabled={isLoading}>
+      <button className="search-button" onClick={handleSearch} disabled={isLoading}>
         {isLoading ? 'Searching...' : 'Search'}
       </button>
-      {documentContent && (
-        <div>
-          <h2>Document Content</h2>
-          <p>{documentContent}</p>
-        </div>
-      )}
+      {documentContent && <DisplayResult content={documentContent} />}
     </div>
   );
 }
 
 export default DocumentSearchBar;
+
+
+
+
+
