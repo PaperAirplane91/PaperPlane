@@ -20,7 +20,6 @@ const rootReducer: ReducersMapObject = {
   administration,
   userManagement,
   register,
-  activate,
   passwordReset,
   password,
   settings,
