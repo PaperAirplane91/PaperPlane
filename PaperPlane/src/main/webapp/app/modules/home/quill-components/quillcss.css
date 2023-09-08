@@ -1,9 +1,9 @@
 .quill-editor {
-  height: 500px;
-  max-width: 100%;
+  height: 11in;
+  max-width: 8.5in;
   margin: 0 auto;
-  border: 1px solid #ccc;
-  padding: 10px;
+  align-items: center;
+  justify-content: center;
 }
 .btnSave {
   background-color: #0f58b1; /* Google Docs blue */
