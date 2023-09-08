@@ -7,7 +7,7 @@ const editor = new Quill('#editor-container', {
 document.getElementById('createDocument').addEventListener('click', () => {
   const title = document.getElementById('title').value;
   const content = editor.root.innerHTML;
-  const archived = true; 
+  const archived = true;
 
   // Send a POST request to document post endpoint
   fetch('/api/documents', {

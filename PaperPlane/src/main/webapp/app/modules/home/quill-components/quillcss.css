@@ -5,3 +5,36 @@
   align-items: center;
   justify-content: center;
 }
+.btnSave {
+  background-color: #0f58b1; /* Google Docs blue */
+  color: #ffffff; /* White text color */
+  border: none;
+  border-radius: 4px; /* Slightly reduced border radius for the Google Docs style */
+  padding: 10px 16px; /* Adjusted padding for a larger button */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 10px; /* Adjust margin as needed */
+  font-size: 14px; /* Adjust font size */
+  font-weight: 600; /* Adjust font weight */
+  text-transform: uppercase; /* Convert text to uppercase */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+.btnSave:hover {
+  background-color: #0c4599; /* Slightly darker blue on hover */
+}
+
+.docName {
+  background-color: white;
+  color: black;
+  border: none;
+}
+
+.document {
+  background-color: white;
+  border: none;
+}
+
+.img {
+  border: 1px solid #555;
+}

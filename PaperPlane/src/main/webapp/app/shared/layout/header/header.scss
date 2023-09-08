@@ -1,10 +1,10 @@
 // red line in the left top conner
 
 
-// $header-color: #fff;
-// $header-color-secondary: #bbb;
-// $header-color-hover: darken($header-color, 20%);
-//
+$header-color: #fff;
+$header-color-secondary: #bbb;
+$header-color-hover: darken($header-color, 20%);
+
 // /* ==========================================================================
 // Developement Ribbon
 // ========================================================================== */
@@ -37,51 +37,55 @@
 //   }
 // }
 //
-// /* ==========================================================================
-// Navbar styles
-// ========================================================================== */
-// .navbar-brand {
-//   overflow: hidden;
-// }
-//
-// .jh-navbar .navbar-nav .nav-link {
-//   padding-right: 0;
-//   padding-left: 0;
-// }
-//
-// .navbar-version {
-//   font-size: 10px;
-//   color: $header-color-secondary;
-//   padding: 0 0 0 10px;
-// }
-//
-// .brand-logo {
-//   &:hover {
-//     text-decoration: none;
-//   }
-//   .brand-icon {
-//     height: 35px;
-//     width: auto;
-//     display: inline-block;
-//     img {
-//       height: 45px;
-//     }
-//   }
-// }
-//
-// .brand-title {
-//   font-size: 24px;
-//   color: $header-color;
-//   &:hover {
-//     color: $header-color-hover;
-//     text-decoration: none;
-//   }
-// }
-//
-// .loading-bar {
-//   height: 3px;
-//   background-color: #009cd8;
-//   position: absolute;
-//   top: 0px;
-//   z-index: 1031;
-// }
+/* ==========================================================================
+Navbar styles
+========================================================================== */
+.navbar-brand {
+  overflow: hidden;
+}
+
+.jh-navbar .navbar-nav .nav-link {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.navbar-version {
+  font-size: 10px;
+  color: $header-color-secondary;
+  padding: 0 0 0 10px;
+}
+
+.navbar{
+height: 80px;
+}
+
+.brand-logo {
+  &:hover {
+    text-decoration: none;
+  }
+  .brand-icon {
+    height: 35px;
+    width: auto;
+    display: inline-block;
+    img {
+      height: 45px;
+    }
+  }
+}
+
+.brand-title {
+  font-size: 24px;
+  color: $header-color;
+  &:hover {
+    color: $header-color-hover;
+    text-decoration: none;
+  }
+}
+
+.loading-bar {
+  height: 3px;
+  background-color: #009cd8;
+  position: absolute;
+  top: 0px;
+  z-index: 1031;
+}

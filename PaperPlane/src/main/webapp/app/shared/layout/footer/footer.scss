@@ -1,3 +1,24 @@
 .footer {
   height: 50px;
+
+  a:link {
+    color: #2B70E4;
+    font-family: sans-serif;
+  }
+  a:hover {
+    color: hotpink;
+    font-family: sans-serif;
+  }
+
+  a:visited {
+    color: green;
+  }
+
 }
+
+.tab {
+    display: inline-block;
+    margin-left: 200px;
+}
+
+
