@@ -8,8 +8,9 @@ import './quillcss.css';
 
 const boxContainerStyle = {
   display: 'grid',
-  gridTemplateColumns: 'repeat(5, 1fr)',
-  gap: '30px',
+  gridTemplateColumns: 'repeat(6, 1fr)',
+  gap: '50px', // Adjust the gap as needed
+
   marginLeft: '70px',
 };
 
@@ -91,7 +92,12 @@ const userRole = user ? user.role : '';
     }
   };
 
-  return (
+  const handleBack = () => {
+    // Close the Quill editor and show the list of documents
+    setQuillEditorOpen(false);
+  };
+
+ return (
     <div>
       {quillEditorOpen ? ( // Conditional rendering based on the Quill editor state
         <div>
@@ -104,6 +110,9 @@ const userRole = user ? user.role : '';
           <button onClick={handleSave} className="btnSave">
             Save
           </button>
+          <button onClick={handleBack} className="btnBack">
+            Back
+          </button>
         </div>
       ) : (
         <div>
@@ -114,8 +123,8 @@ const userRole = user ? user.role : '';
                   <img
                     className="img"
                     src="content/images/document_image.png"
-                    width="200"
-                    height="300"
+                    width="150"
+                    height="200"
                     alt="Document"
                   />
                 </button>
