@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
+import { useSelector } from 'react-redux';
+import { AuthenticationState, UserState } from './reduxTypes'; // Adjust the import path accordingly
+
 import 'quill/dist/quill.snow.css';
 import './quillcss.css';
 
@@ -35,8 +38,18 @@ function TextEditor() {
     fetchData();
   }, []);
 
+const isAuthenticated = useSelector((state: { authentication: AuthenticationState }) => state.authentication.isAuthenticated);
+const user = useSelector((state: { user: UserState }) => state.user);
+const userRole = user ? user.role : '';
+
+
   const handleDocumentSelect = async (id: number) => {
     try {
+
+      if (!isAuthenticated) {
+            console.error('Unauthorized to edit documents. Please log in.');
+            return;
+          }
       const response = await fetch(`http://localhost:8080/api/documents/${id}`);
       if (response.ok) {
         const data = await response.json();
@@ -86,6 +99,7 @@ function TextEditor() {
             className="quill-editor"
             value={editorValue}
             onChange={(value) => setEditorValue(value)}
+            readOnly={userRole !== 'admin'} // Make the editor read-only for non-admin users
           />
           <button onClick={handleSave} className="btnSave">
             Save
