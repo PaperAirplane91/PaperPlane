@@ -59,10 +59,10 @@ const userRole = user ? user.role : '';
   const handleDocumentSelect = async (id: number) => {
     try {
 
-      if (!isAuthenticated) {
-            console.error('Unauthorized to edit documents. Please log in.');
-            return;
-          }
+//       if (!isAuthenticated) {
+//             console.error('Unauthorized to edit documents. Please log in.');
+//             return;
+//           }
       const response = await fetch(`http://localhost:8080/api/documents/${id}`);
       if (response.ok) {
         const data = await response.json();
@@ -113,9 +113,9 @@ const userRole = user ? user.role : '';
     <div>
       {quillEditorOpen ? ( // Conditional rendering based on the Quill editor state
         <div>
-        <button onClick={handleSave} className="btnSave">
-        Save
-        </button>
+{/*         <button onClick={handleSave} className="btnSave"> */}
+{/*         Save */}
+{/*         </button> */}
         <button onClick={handleBack} className="btnBack">
         Back
         </button>
@@ -123,11 +123,15 @@ const userRole = user ? user.role : '';
             className="quill-editor"
             value={editorValue}
             onChange={(value) => setEditorValue(value)}
-            readOnly={userRole !== 'admin'} // Make the editor read-only for non-admin users
+           readOnly={!isAuthenticated} // Set readOnly based on user authentication
           />
-
-        </div>
-      ) : (
+          {isAuthenticated && (
+                      <button onClick={handleSave} className="btnSave">
+                        Save
+                      </button>
+                    )}
+                  </div>
+                ) : (
         <div>
             <h2>All Documents</h2>
           <div style={boxContainerStyle}>
