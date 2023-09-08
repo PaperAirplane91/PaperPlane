@@ -84,26 +84,9 @@ function TextEditor() {
     setQuillEditorOpen(false);
   };
 
-  return (
+ return (
     <div>
-
-      {/* Style the boxes using the defined styles */}
-      <div style={boxContainerStyle}>
-        {documentTitles.map(({ id, title }) => (
-          <div key={title} className="parentElement">
-            {/* Box content */}
-
-            <button className="document" onClick={() => handleDocumentSelect(id)}>
-               <img className ="img" src="content/images/document_image.png" width="150" height="200">
-            </button>
-            <button className="docName">{title}</button>
-
-          </div>
-        ))}
-      </div>
-
-      {selectedDocumentId !== null && (
-
+      {quillEditorOpen ? ( // Conditional rendering based on the Quill editor state
         <div>
           <ReactQuill
             className="quill-editor"
@@ -116,6 +99,25 @@ function TextEditor() {
           <button onClick={handleBack} className="btnBack">
             Back
           </button>
+        </div>
+      ) : (
+        <div>
+          <div style={boxContainerStyle}>
+            {documentTitles.map(({ id, title }) => (
+              <div key={id}>
+                <button className="document" onClick={() => handleDocumentSelect(id)}>
+                  <img
+                    className="img"
+                    src="content/images/document_image.png"
+                    width="150"
+                    height="200"
+                    alt="Document"
+                  />
+                </button>
+                <button className="docName">{title}</button>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
