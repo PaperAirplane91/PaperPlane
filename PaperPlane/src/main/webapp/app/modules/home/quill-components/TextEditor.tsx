@@ -1,33 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'quill/dist/quill.snow.css';
-import './quillcss.css'; // Import your custom CSS file
+import './quillcss.css';
 
-// CSS styles for the boxes
-const boxContainerStyle: React.CSSProperties = {
+const boxContainerStyle = {
   display: 'grid',
   gridTemplateColumns: 'repeat(5, 1fr)',
-  gap: '30px', // Adjust the gap as needed
+  gap: '30px',
   marginLeft: '70px',
-};
-
-const boxStyle: React.CSSProperties = {
-  width: '200px', // Adjust the width as needed
-  height: '200px', // Adjust the height as needed
-  border: '1px solid #ccc',
-  textAlign: 'center',
-//   display: 'flex',
-//   flexDirection: 'column',
-  justifyContent: 'center',
 };
 
 function TextEditor() {
   const [editorValue, setEditorValue] = useState('');
-  const [selectedDocumentId, setSelectedDocumentId] = useState<number | null>(null); // Track the selected document ID
+  const [selectedDocumentId, setSelectedDocumentId] = useState<number | null>(null);
   const [documentTitles, setDocumentTitles] = useState<{ id: number; title: string }[]>([]);
+  const [quillEditorOpen, setQuillEditorOpen] = useState(false);
 
   const fetchData = () => {
-    // Fetch document titles and IDs from your API
     fetch('http://localhost:8080/api/documents')
       .then((response) => response.json())
       .then((data) => {
@@ -43,7 +32,7 @@ function TextEditor() {
   };
 
   useEffect(() => {
-    fetchData(); // Fetch document titles when the component first loads.
+    fetchData();
   }, []);
 
   const handleDocumentSelect = async (id: number) => {
@@ -52,8 +41,10 @@ function TextEditor() {
       if (response.ok) {
         const data = await response.json();
         const content = data.content || '';
+        setSelectedDocumentId(id);
+
         setEditorValue(content);
-        setSelectedDocumentId(id); // Mark a document as selected
+        setQuillEditorOpen(true); // Open the Quill editor within the same component
       } else {
         console.error('Error fetching content:', response.status);
       }
@@ -89,32 +80,35 @@ function TextEditor() {
 
   return (
     <div>
-      {/* Style the boxes using the defined styles */}
-      <div style={boxContainerStyle}>
-        {documentTitles.map(({ id, title }) => (
-          <div key={id}>
-            {/* Box content */}
-
-            <button className="document" onClick={() => handleDocumentSelect(id)}>
-              <img className ="img" src="content/images/document_image.png" width="200" height="300">
-            </button>
-            <button className="docName">{title}</button>
-
-
-          </div>
-        ))}
-      </div>
-
-      {selectedDocumentId !== null && (
+      {quillEditorOpen ? ( // Conditional rendering based on the Quill editor state
         <div>
           <ReactQuill
-            className="quill-editor" // Apply the CSS class here
+            className="quill-editor"
             value={editorValue}
             onChange={(value) => setEditorValue(value)}
           />
           <button onClick={handleSave} className="btnSave">
             Save
           </button>
+        </div>
+      ) : (
+        <div>
+          <div style={boxContainerStyle}>
+            {documentTitles.map(({ id, title }) => (
+              <div key={id}>
+                <button className="document" onClick={() => handleDocumentSelect(id)}>
+                  <img
+                    className="img"
+                    src="content/images/document_image.png"
+                    width="200"
+                    height="300"
+                    alt="Document"
+                  />
+                </button>
+                <button className="docName">{title}</button>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
