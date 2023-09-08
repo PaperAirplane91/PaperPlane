@@ -25,11 +25,12 @@ a {
 .app-container {
   box-sizing: border-box;
   .view-container {
-    width: 100%;
-    height: calc(100% - 40px);
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 1rem;
+      width: 100%;
+      max-width: 100%; // Ensure the container stretches to the full width
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 1rem;
     .card {
       padding: 1rem;
     }
