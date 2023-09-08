@@ -38,8 +38,8 @@ export const Images = () => {
 
   return (
     <div>
-      <h1 id="images-heading" data-cy="ImagesHeading" style={{ textAlign: 'center' }}>
-        View Document
+      <h1 id="images-heading" data-cy="ImagesHeading" >
+      <h2>Edit Documents</h2>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
@@ -52,8 +52,10 @@ export const Images = () => {
       </h1>
 
       <div>
-        <h3>Select Document for editing:</h3>
-        <SearchBar />
+        <div style={{ textAlign: 'center' }}>
+          <SearchBar />
+        </div>
+
         <TextEditor />
       </div>
 

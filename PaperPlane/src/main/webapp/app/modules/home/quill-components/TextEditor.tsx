@@ -114,6 +114,7 @@ const userRole = user ? user.role : '';
 
  return (
     <div>
+      &nbsp;
       {quillEditorOpen ? ( // Conditional rendering based on the Quill editor state
         <div>
 
@@ -135,7 +136,6 @@ const userRole = user ? user.role : '';
                   </div>
                 ) : (
         <div>
-            <h2>All Documents</h2>
           <div style={boxContainerStyle}>
             {documentTitles.map(({ id, title }) => (
               <div key={id} className="parentElement">
@@ -154,6 +154,7 @@ const userRole = user ? user.role : '';
           </div>
         </div>
       )}
+      &emsp;
     </div>
   );
 }
