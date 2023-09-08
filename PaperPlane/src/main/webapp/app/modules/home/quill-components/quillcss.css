@@ -28,6 +28,7 @@
   background-color: white;
   color: black;
   border: none;
+  text-align: center;
 }
 
 .document {
@@ -38,3 +39,5 @@
 .img {
   border: 1px solid #A6A6A6;
 }
+
+div.parentElement{text-align: center;}
