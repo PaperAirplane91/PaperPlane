@@ -85,11 +85,11 @@ function TextEditor() {
       {/* Style the boxes using the defined styles */}
       <div style={boxContainerStyle}>
         {documentTitles.map(({ id, title }) => (
-          <div key={title}>
+          <div key={title} className="parentElement">
             {/* Box content */}
 
             <button className="document" onClick={() => handleDocumentSelect(id)}>
-              <img className ="img" src="content/images/document_image.png" width="150" height="200">
+               <img className ="img" src="content/images/document_image.png" width="150" height="200">
             </button>
             <button className="docName">{title}</button>
 
