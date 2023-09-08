@@ -5,8 +5,9 @@ import './quillcss.css';
 
 const boxContainerStyle = {
   display: 'grid',
-  gridTemplateColumns: 'repeat(5, 1fr)',
-  gap: '30px',
+  gridTemplateColumns: 'repeat(6, 1fr)',
+  gap: '50px', // Adjust the gap as needed
+
   marginLeft: '70px',
 };
 
@@ -80,7 +81,24 @@ function TextEditor() {
 
   return (
     <div>
-      {quillEditorOpen ? ( // Conditional rendering based on the Quill editor state
+
+      {/* Style the boxes using the defined styles */}
+      <div style={boxContainerStyle}>
+        {documentTitles.map(({ id, title }) => (
+          <div key={title}>
+            {/* Box content */}
+
+            <button className="document" onClick={() => handleDocumentSelect(id)}>
+              <img className ="img" src="content/images/document_image.png" width="150" height="200">
+            </button>
+            <button className="docName">{title}</button>
+
+          </div>
+        ))}
+      </div>
+
+      {selectedDocumentId !== null && (
+
         <div>
           <ReactQuill
             className="quill-editor"
