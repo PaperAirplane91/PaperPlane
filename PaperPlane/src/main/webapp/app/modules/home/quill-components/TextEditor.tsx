@@ -109,25 +109,6 @@ function TextEditor() {
             Save
           </button>
         </div>
-      ) : (
-        <div>
-          <div style={boxContainerStyle}>
-            {documentTitles.map(({ id, title }) => (
-              <div key={id}>
-                <button className="document" onClick={() => handleDocumentSelect(id)}>
-                  <img
-                    className="img"
-                    src="content/images/document_image.png"
-                    width="200"
-                    height="300"
-                    alt="Document"
-                  />
-                </button>
-                <button className="docName">{title}</button>
-              </div>
-            ))}
-          </div>
-        </div>
       )}
     </div>
   );
