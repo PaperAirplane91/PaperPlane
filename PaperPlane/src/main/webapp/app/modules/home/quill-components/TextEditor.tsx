@@ -79,6 +79,11 @@ function TextEditor() {
     }
   };
 
+  const handleBack = () => {
+    // Close the Quill editor and show the list of documents
+    setQuillEditorOpen(false);
+  };
+
   return (
     <div>
 
@@ -108,25 +113,9 @@ function TextEditor() {
           <button onClick={handleSave} className="btnSave">
             Save
           </button>
-        </div>
-      ) : (
-        <div>
-          <div style={boxContainerStyle}>
-            {documentTitles.map(({ id, title }) => (
-              <div key={id} className="parentElement">
-                <button className="document" onClick={() => handleDocumentSelect(id)}>
-                  <img
-                    className="img"
-                    src="content/images/document_image.png"
-                    width="150"
-                    height="200"
-                    alt="Document"
-                  />
-                </button>
-                <button className="docName">{title}</button>
-              </div>
-            ))}
-          </div>
+          <button onClick={handleBack} className="btnBack">
+            Back
+          </button>
         </div>
       )}
     </div>
