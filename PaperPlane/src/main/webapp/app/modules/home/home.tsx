@@ -49,7 +49,7 @@ export const Home = () => {
 {/*         )} */}
 
          <TextEditor />
-        <SearchBar />
+
 
       </Col>
     </Row>

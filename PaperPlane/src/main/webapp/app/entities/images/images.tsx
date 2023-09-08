@@ -13,6 +13,7 @@ import { IImages } from 'app/shared/model/images.model';
 import { getEntities } from './images.reducer';
 
 import TextEditor from 'app/modules/home/quill-components/TextEditor';
+import SearchBar from "app/modules/home/search-bar-component/SearchBar";
 
 
 
@@ -38,7 +39,7 @@ export const Images = () => {
   return (
     <div>
       <h1 id="images-heading" data-cy="ImagesHeading" style={{ textAlign: 'center' }}>
-        All Documents
+        View Document
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
@@ -52,6 +53,7 @@ export const Images = () => {
 
       <div>
         <h3>Select Document for editing:</h3>
+        <SearchBar />
         <TextEditor />
       </div>
 

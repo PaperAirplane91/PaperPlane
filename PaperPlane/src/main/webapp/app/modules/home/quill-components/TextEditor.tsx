@@ -88,17 +88,18 @@ function TextEditor() {
     <div>
       {quillEditorOpen ? ( // Conditional rendering based on the Quill editor state
         <div>
+        <button onClick={handleSave} className="btnSave">
+        Save
+        </button>
+        <button onClick={handleBack} className="btnBack">
+        Back
+        </button>
           <ReactQuill
             className="quill-editor"
             value={editorValue}
             onChange={(value) => setEditorValue(value)}
           />
-          <button onClick={handleSave} className="btnSave">
-            Save
-          </button>
-          <button onClick={handleBack} className="btnBack">
-            Back
-          </button>
+
         </div>
       ) : (
         <div>
