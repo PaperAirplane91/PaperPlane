@@ -12,14 +12,11 @@ const Footer = () => (
           &emsp;
           &emsp;
           &emsp;
-          &emsp;
-          &emsp;
-          &emsp;
-          <a href="https://www.linkedin.com/in/brentcubbage1" target = "_blank">Brent Cubbage</a>
+          <a href="https://www.linkedin.com/in/brentcubbage1/" target = "_blank">Brent Cubbage</a>
           <span className="tab"></span>
           <a href="https://www.linkedin.com/in/margaret-snyder" target = "_blank">Margaret Snyder</a>
           <span className="tab"></span>
-          <a href="https://www.linkedin.com/in/emmanuelmontales" target = "_blank">Emmanuel Montales</a>
+          <a href="https://www.linkedin.com/in/emmanuelmontales/" target = "_blank">Emmanuel Montales</a>
           <span className="tab"></span>
           <a href="https://www.linkedin.com/in/dimaromaniv" target = "_blank">Dmytro Romaniv</a>
           </p>
