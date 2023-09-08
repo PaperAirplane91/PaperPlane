@@ -103,6 +103,7 @@ function TextEditor() {
         </div>
       ) : (
         <div>
+            <h2>All Documents</h2>
           <div style={boxContainerStyle}>
             {documentTitles.map(({ id, title }) => (
               <div key={id} className="parentElement">
