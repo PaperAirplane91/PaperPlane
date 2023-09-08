@@ -1,51 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import DisplayResult from "app/modules/home/search-bar-component/DisplayResult";
-import 'react-quill/dist/quill.snow.css';
-import './SearchBar.css';
+  import React, { useState, useEffect } from 'react';
+  import axios from 'axios';
+  import DisplayResult from "app/modules/home/search-bar-component/DisplayResult";
+  import 'react-quill/dist/quill.snow.css';
+  import './SearchBar.css';
 
-function DocumentSearchBar() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [documentContent, setDocumentContent] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  function DocumentSearchBar() {
+    const [searchQuery, setSearchQuery] = useState('');
+    const [documentContent, setDocumentContent] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
-  const handleSearch = async () => {
-    setIsLoading(true);
+    const handleSearch = async () => {
+      setIsLoading(true);
 
-    try {
-      const response = await axios.get(`/api/documents/document-title/${searchQuery}`);
-      if (response.status === 200) {
-        const data = response.data;
-        setDocumentContent(data.content);
-      } else {
-        // Handle errors if needed
-        console.error('Error searching for document:', response.statusText);
+      try {
+
+          const regex = new RegExp(searchQuery, 'i');
+
+  //       const response = await axios.get(`/api/documents/document-title/${searchQuery}`);
+          const response = await axios.get(`/api/documents/document-titles`);
+        if (response.status === 200) {
+          const data = response.data;
+          const matchingTitles = data.filter((title) => regex.test(title));
+//           setDocumentContent(data.content);
+        } else {
+          // Handle errors if needed
+          console.error('Error searching for document:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error searching for document:', error);
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error) {
-      console.error('Error searching for document:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    };
+     const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+          // Prevent the default behavior of form submission
+          event.preventDefault();
+          handleSearch();
+        }
+      };
 
-  return (
-    <div className="search-bar-container">
-      <input
-        className="search-input"
-        type="text"
-        placeholder="Search for a document by title"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
-      <button className="search-button" onClick={handleSearch} disabled={isLoading}>
-        {isLoading ? 'Searching...' : 'Search'}
-      </button>
-      {documentContent && <DisplayResult content={documentContent} />}
-    </div>
-  );
-}
+    return (
+      <div className="search-bar-container">
+        <input
+          className="search-input"
+          type="text"
+          placeholder="Search for a document by title"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyPress={handleKeyPress}
+        />
+        <button className="search-button" onClick={handleSearch} disabled={isLoading}>
+          {isLoading ? 'Searching...' : 'Search'}
+        </button>
+        {documentContent && <DisplayResult content={documentContent} />}
+      </div>
+    );
+  }
 
-export default DocumentSearchBar;
+  export default DocumentSearchBar;
 
 
 
