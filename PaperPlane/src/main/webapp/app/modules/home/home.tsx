@@ -19,7 +19,7 @@ export const Home = () => {
 {/*       </Col> */}
       <Col md="9">
 
-        <h2>All Documents</h2>
+{/*         <h2>All Documents</h2> */}
 
 {/*         {account?.login ? ( */}
 {/*           <div> */}
@@ -49,7 +49,7 @@ export const Home = () => {
 {/*         )} */}
 
          <TextEditor />
-        <SearchBar />
+
 
       </Col>
     </Row>

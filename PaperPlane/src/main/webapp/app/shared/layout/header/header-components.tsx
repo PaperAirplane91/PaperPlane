@@ -21,7 +21,6 @@ export const Brand = () => (
 export const Home = () => (
   <NavItem>
     <NavLink tag={Link} to="/" className="d-flex align-items-center">
-      <FontAwesomeIcon icon="home" />
       <span>Home</span>
     </NavLink>
   </NavItem>
