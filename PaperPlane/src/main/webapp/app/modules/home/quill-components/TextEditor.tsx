@@ -17,20 +17,32 @@ function TextEditor() {
   const [documentTitles, setDocumentTitles] = useState<{ id: number; title: string }[]>([]);
   const [quillEditorOpen, setQuillEditorOpen] = useState(false);
 
-  const fetchData = () => {
-    fetch('http://localhost:8080/api/documents')
-      .then((response) => response.json())
-      .then((data) => {
-        const titlesAndIds = data.map((document: { id: number; title: string }) => ({
-          id: document.id,
-          title: document.title,
-        }));
-        setDocumentTitles(titlesAndIds);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  };
+ const fetchData = () => {
+   fetch('http://localhost:8080/api/documents')
+     .then((response) => response.json())
+     .then((data) => {
+       const titlesAndIds = data.map((document) => ({
+         id: document.id,
+         title: document.title,
+       }));
+
+       // Grab the titles and IDs.
+       //We want them to sort alphabetically instead of by ID.
+       //So we use the .sort method.
+       titlesAndIds.sort((a, b) => {
+         const titleA = a.title.toLowerCase();
+         const titleB = b.title.toLowerCase();
+         if (titleA < titleB) return -1;
+         if (titleA > titleB) return 1;
+         return 0;
+       });
+
+       setDocumentTitles(titlesAndIds);
+     })
+     .catch((error) => {
+       console.error('Error fetching data:', error);
+     });
+ };
 
   useEffect(() => {
     fetchData();
