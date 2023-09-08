@@ -5,11 +5,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { Row, Col, Alert } from 'reactstrap';
+import SearchBar from "app/modules/home/search-bar-component/SearchBar";
 
-import { useAppSelector } from 'app/config/store';
+// import { useAppSelector } from 'app/config/store';
 
 export const Home = () => {
-  //const account = useAppSelector(state => state.authentication.account);
+//const account = useAppSelector(state => state.authentication.account);
 
   return (
     <Row>
@@ -48,6 +49,7 @@ export const Home = () => {
 {/*         )} */}
 
          <TextEditor />
+        <SearchBar />
 
       </Col>
     </Row>

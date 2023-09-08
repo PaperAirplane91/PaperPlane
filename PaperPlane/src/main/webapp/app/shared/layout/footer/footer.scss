@@ -1,5 +1,6 @@
 .footer {
-  height: 50px;
+  height: 30px;
+//   bottom: 0;
 
   a:link {
     color: #2B70E4;
@@ -8,6 +9,10 @@
   a:hover {
     color: hotpink;
     font-family: sans-serif;
+  }
+
+  a:visited {
+    color: green;
   }
 
 }
