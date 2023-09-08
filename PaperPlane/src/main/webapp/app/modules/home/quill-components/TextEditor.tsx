@@ -95,6 +95,8 @@ const userRole = user ? user.role : '';
 
         if (response.ok) {
           console.log('Document content updated successfully');
+          // Add the alert here
+          window.alert('File saved');
         } else {
           console.error('Error updating document content:', response.status);
         }
@@ -103,6 +105,7 @@ const userRole = user ? user.role : '';
       }
     }
   };
+
 
   const handleBack = () => {
     // Close the Quill editor and show the list of documents
