@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import { useSelector } from 'react-redux';
-import { AuthenticationState, UserState } from './reduxTypes'; // Adjust the import path accordingly
+import { AuthenticationState, UserState } from './reduxTypes';
+
 
 import 'quill/dist/quill.snow.css';
 import './quillcss.css';
@@ -9,7 +10,7 @@ import './quillcss.css';
 const boxContainerStyle = {
   display: 'grid',
   gridTemplateColumns: 'repeat(6, 1fr)',
-  gap: '50px', // Adjust the gap as needed
+  gap: '50px',
 
   marginLeft: '70px',
 };
@@ -64,6 +65,8 @@ const openDeleteConfirmation = () => {
 const closeDeleteConfirmation = () => {
   setDeleteConfirmationOpen(false);
 };
+
+
 
 const handleDelete = async () => {
   if (selectedDocumentId !== null) {
@@ -147,6 +150,20 @@ const handleDelete = async () => {
     setQuillEditorOpen(false);
   };
 
+  const DeleteConfirmationDialog = ({ isOpen, onCancel, onConfirm }) => {
+      return (
+        isOpen && (
+          <div className="delete-confirmation-modal">
+            <div className="delete-confirmation-content">
+              <p>Are you sure you want to delete this document?</p>
+              <button onClick={onConfirm}>Yes</button>
+              <button onClick={onCancel}>No</button>
+            </div>
+          </div>
+        )
+      );
+    };
+
 return (
     <div>
       &nbsp;
@@ -195,14 +212,12 @@ return (
         </div>
       )}
 
-      {/* Delete Confirmation Dialog */}
-      {deleteConfirmationOpen && (
-        <div className="delete-confirmation">
-          <p>Are you sure you want to delete this document?</p>
-          <button onClick={handleDelete}>Yes</button>
-          <button onClick={closeDeleteConfirmation}>No</button>
-        </div>
-      )}
+    <DeleteConfirmationDialog
+      isOpen={deleteConfirmationOpen}
+      onCancel={closeDeleteConfirmation}
+      onConfirm={handleDelete}
+    />
+
     </div>
   );
 }
