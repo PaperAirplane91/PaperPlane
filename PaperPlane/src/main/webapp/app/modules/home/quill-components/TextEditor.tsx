@@ -20,6 +20,8 @@ function TextEditor() {
   const [documentTitles, setDocumentTitles] = useState<{ id: number; title: string }[]>([]);
   const [quillEditorOpen, setQuillEditorOpen] = useState(false);
 
+  const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
+
  const fetchData = () => {
    fetch('http://localhost:8080/api/documents')
      .then((response) => response.json())
@@ -55,14 +57,47 @@ const isAuthenticated = useSelector((state: { authentication: AuthenticationStat
 const user = useSelector((state: { user: UserState }) => state.user);
 const userRole = user ? user.role : '';
 
+const openDeleteConfirmation = () => {
+  setDeleteConfirmationOpen(true);
+};
+
+const closeDeleteConfirmation = () => {
+  setDeleteConfirmationOpen(false);
+};
+
+const handleDelete = async () => {
+  if (selectedDocumentId !== null) {
+    try {
+      const response = await fetch(`http://localhost:8080/api/documents/${selectedDocumentId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        console.log('Document deleted successfully');
+        // Add the alert here
+        window.alert('File deleted');
+
+        // Reset the state to the initial state
+        //Then fetchData to make sure the page is refreshed
+        setQuillEditorOpen(false);
+        setSelectedDocumentId(null);
+        closeDeleteConfirmation();
+
+        fetchData();
+      } else {
+        console.error('Error deleting document:', response.status);
+      }
+    } catch (error) {
+      console.error('Error deleting document:', error);
+    }
+  }
+};
+
+
+
 
   const handleDocumentSelect = async (id: number) => {
     try {
-
-//       if (!isAuthenticated) {
-//             console.error('Unauthorized to edit documents. Please log in.');
-//             return;
-//           }
       const response = await fetch(`http://localhost:8080/api/documents/${id}`);
       if (response.ok) {
         const data = await response.json();
@@ -112,31 +147,34 @@ const userRole = user ? user.role : '';
     setQuillEditorOpen(false);
   };
 
- return (
+return (
     <div>
       &nbsp;
-      {quillEditorOpen ? ( // Conditional rendering based on the Quill editor state
+      {quillEditorOpen ? (
         <div>
-
           {isAuthenticated && (
-                      <button onClick={handleSave} className="btnSave">
-                        Save
-                      </button>
-                    )}
-        <button onClick={handleBack} className="btnBack google-settings-btn">
-        Back
-        </button>
+            <>
+              <button onClick={handleSave} className="btnSave">
+                Save
+              </button>
+              <button onClick={openDeleteConfirmation} className="btnDelete">
+                Delete
+              </button>
+            </>
+          )}
+          <button onClick={handleBack} className="btnBack google-settings-btn">
+            Back
+          </button>
           <ReactQuill
             className="quill-editor"
             value={editorValue}
             onChange={(value) => setEditorValue(value)}
-           readOnly={!isAuthenticated} // Set readOnly based on user authentication
+            readOnly={!isAuthenticated}
           />
-
-                  </div>
-                ) : (
+        </div>
+      ) : (
         <div>
-        <h2>Documents:</h2>
+          <h2>Documents:</h2>
           &emsp;
           <div style={boxContainerStyle}>
             {documentTitles.map(({ id, title }) => (
@@ -156,7 +194,15 @@ const userRole = user ? user.role : '';
           </div>
         </div>
       )}
-      &emsp;
+
+      {/* Delete Confirmation Dialog */}
+      {deleteConfirmationOpen && (
+        <div className="delete-confirmation">
+          <p>Are you sure you want to delete this document?</p>
+          <button onClick={handleDelete}>Yes</button>
+          <button onClick={closeDeleteConfirmation}>No</button>
+        </div>
+      )}
     </div>
   );
 }
