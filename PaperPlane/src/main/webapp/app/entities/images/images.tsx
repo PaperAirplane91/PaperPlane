@@ -39,7 +39,7 @@ export const Images = () => {
   return (
     <div>
       <h1 id="images-heading" data-cy="ImagesHeading" >
-      <h2>Edit Documents</h2>
+      <h2>Edit</h2>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
             <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
