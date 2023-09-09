@@ -17,7 +17,7 @@ export const Home = () => {
 {/*       <Col md="3" className="pad"> */}
 {/*         <span className="hipster rounded" /> */}
 {/*       </Col> */}
-      <Col md="9">
+
 
 {/*         <h2>All Documents</h2> */}
 
@@ -51,7 +51,7 @@ export const Home = () => {
          <TextEditor />
 
 
-      </Col>
+
     </Row>
 
   );
