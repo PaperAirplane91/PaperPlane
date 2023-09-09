@@ -136,6 +136,8 @@ const userRole = user ? user.role : '';
                   </div>
                 ) : (
         <div>
+        <h2>Documents:</h2>
+          &emsp;
           <div style={boxContainerStyle}>
             {documentTitles.map(({ id, title }) => (
               <div key={id} className="parentElement">
