@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import { useSelector } from 'react-redux';
 import { AuthenticationState, UserState } from './reduxTypes';
+import SearchBar from "app/modules/home/search-bar-component/SearchBar";
 
 
 import 'quill/dist/quill.snow.css';
@@ -182,6 +183,7 @@ return (
           <button onClick={handleBack} className="btnBack google-settings-btn">
             Back
           </button>
+
           <ReactQuill
             className="quill-editor"
             value={editorValue}
@@ -191,7 +193,9 @@ return (
         </div>
       ) : (
         <div>
-          <h2>Documents:</h2>
+        <div style={{ textAlign: 'center' }}>
+                  <SearchBar />
+        </div>
           &emsp;
           <div style={boxContainerStyle}>
             {documentTitles.map(({ id, title }) => (

@@ -38,8 +38,9 @@ export const Images = () => {
 
   return (
     <div>
-      <h1 id="images-heading" data-cy="ImagesHeading" >
-      <h2>Edit</h2>
+
+      &nbsp;
+      <h2>Edit Document:</h2>
         <div className="d-flex justify-content-end">
 
           <Link to="/document/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton" >
@@ -47,12 +48,9 @@ export const Images = () => {
             &nbsp; Create a New Document
           </Link>
         </div>
-      </h1>
+
 
       <div>
-        <div style={{ textAlign: 'center' }}>
-          <SearchBar />
-        </div>
 
         <TextEditor />
       </div>
