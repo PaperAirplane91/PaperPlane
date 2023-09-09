@@ -1,6 +1,6 @@
   import React, { useState, useEffect } from 'react';
   import axios from 'axios';
-  import DisplayResult from "app/modules/home/search-bar-component/DisplayResult";
+//   import DisplayResult from "app/modules/home/search-bar-component/DisplayResult";
   import 'react-quill/dist/quill.snow.css';
   import './SearchBar.css';
 //
@@ -47,6 +47,7 @@
        </div>
      );
    };
+
 
    export default SearchBar;
 
