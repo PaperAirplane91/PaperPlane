@@ -16,7 +16,7 @@ const boxContainerStyle = {
   marginLeft: '70px',
 };
 
-function TextEditor() {
+function TextEditor({ setSelectedDocumentName }) {
   const [editorValue, setEditorValue] = useState('');
   const [selectedDocumentId, setSelectedDocumentId] = useState<number | null>(null);
   const [documentTitles, setDocumentTitles] = useState<{ id: number; title: string }[]>([]);
@@ -100,7 +100,7 @@ const handleDelete = async () => {
 
 
 
-  const handleDocumentSelect = async (id: number) => {
+const handleDocumentSelect = async (id: number) => {
     try {
       const response = await fetch(`http://localhost:8080/api/documents/${id}`);
       if (response.ok) {
@@ -108,6 +108,8 @@ const handleDelete = async () => {
         const content = data.content || '';
         setSelectedDocumentId(id);
 
+        // Set the selected document's name in the Home component
+        setSelectedDocumentName(data.title || ''); // Assuming the document title is in data.title
         setEditorValue(content);
         setQuillEditorOpen(true); // Open the Quill editor within the same component
       } else {
