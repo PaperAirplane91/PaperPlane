@@ -1,0 +1,7 @@
+.search-result {
+  padding: 10px 20px; /* Removed the space between 20 and px */
+}
+
+.search-result:hover {
+  background-color: #efefef;
+}

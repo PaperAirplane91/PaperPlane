@@ -3,8 +3,13 @@ import ReactQuill from 'react-quill';
 import { useSelector } from 'react-redux';
 import { AuthenticationState, UserState } from './reduxTypes'; // Adjust the import path accordingly
 
+
+
+
 import 'quill/dist/quill.snow.css';
 import './quillcss.css';
+
+
 
 const boxContainerStyle = {
   display: 'grid',
@@ -19,6 +24,7 @@ function TextEditor() {
   const [selectedDocumentId, setSelectedDocumentId] = useState<number | null>(null);
   const [documentTitles, setDocumentTitles] = useState<{ id: number; title: string }[]>([]);
   const [quillEditorOpen, setQuillEditorOpen] = useState(false);
+
 
  const fetchData = () => {
    fetch('http://localhost:8080/api/documents')

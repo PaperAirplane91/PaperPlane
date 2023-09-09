@@ -1,0 +1,12 @@
+.results-list {
+  width: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column; /* Corrected typo */
+  box-shadow: 0px 0px 8px #ddd; /* Corrected typo and added units */
+  margin-top: 1rem; /* Added units */
+  max-height: 300px; /* Added units */
+  overflow-y: auto; /* Use "auto" to show scrollbar only when necessary */
+  border-radius: 5px; /* Add border radius for a nicer look */
+  padding: 10px; /* Add some padding for content spacing */
+}

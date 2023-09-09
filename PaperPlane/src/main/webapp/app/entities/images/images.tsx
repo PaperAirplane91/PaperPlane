@@ -13,11 +13,16 @@ import { IImages } from 'app/shared/model/images.model';
 import { getEntities } from './images.reducer';
 
 import TextEditor from 'app/modules/home/quill-components/TextEditor';
-import SearchBar from "app/modules/home/search-bar-component/SearchBar";
+import SearchBar from 'app/modules/home/search-bar-component/SearchBar';
+
+import SearchResultsList from 'app/modules/home/search-bar-component/SearchResultsList';
 
 
 
 export const Images = () => {
+
+
+
   const dispatch = useAppDispatch();
 
   const location = useLocation();
@@ -33,9 +38,15 @@ export const Images = () => {
   const handleSyncList = () => {
     dispatch(getEntities({}));
   };
+  const handleDocumentSelection = (selectedDocument) => {
+    // Handle the selected document here
+    console.log('Selected document:', selectedDocument);
+  };
 
 
+// import {DocumentSearchBar} from './search-bar-component/SearchBar' // updated searchBar testing
 
+   const [results , setResults] = useState([]); // searchBar component
   return (
     <div>
       <h1 id="images-heading" data-cy="ImagesHeading" >
@@ -53,7 +64,11 @@ export const Images = () => {
 
       <div>
         <div style={{ textAlign: 'center' }}>
-          <SearchBar />
+          <SearchBar setResults={setResults } />
+          </div>
+          <div className="results-list">
+{/*           <SearchResultsList results={results} /> */}
+           <SearchResultsList results={results} onSelectDocument={handleDocumentSelection} />
         </div>
 
         <TextEditor />
