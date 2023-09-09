@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import { useSelector } from 'react-redux';
-import { AuthenticationState, UserState } from './reduxTypes'; // Adjust the import path accordingly
-
-
+import { AuthenticationState, UserState } from './reduxTypes';
 
 
 import 'quill/dist/quill.snow.css';
 import './quillcss.css';
-
-
 
 const boxContainerStyle = {
   display: 'grid',
@@ -25,6 +21,7 @@ function TextEditor() {
   const [documentTitles, setDocumentTitles] = useState<{ id: number; title: string }[]>([]);
   const [quillEditorOpen, setQuillEditorOpen] = useState(false);
 
+  const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
 
  const fetchData = () => {
    fetch('http://localhost:8080/api/documents')
@@ -60,6 +57,46 @@ function TextEditor() {
 const isAuthenticated = useSelector((state: { authentication: AuthenticationState }) => state.authentication.isAuthenticated);
 const user = useSelector((state: { user: UserState }) => state.user);
 const userRole = user ? user.role : '';
+
+const openDeleteConfirmation = () => {
+  setDeleteConfirmationOpen(true);
+};
+
+const closeDeleteConfirmation = () => {
+  setDeleteConfirmationOpen(false);
+};
+
+
+
+const handleDelete = async () => {
+  if (selectedDocumentId !== null) {
+    try {
+      const response = await fetch(`http://localhost:8080/api/documents/${selectedDocumentId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        console.log('Document deleted successfully');
+        // Add the alert here
+        window.alert('File deleted');
+
+        // Reset the state to the initial state
+        //Then fetchData to make sure the page is refreshed
+        setQuillEditorOpen(false);
+        setSelectedDocumentId(null);
+        closeDeleteConfirmation();
+
+        fetchData();
+      } else {
+        console.error('Error deleting document:', response.status);
+      }
+    } catch (error) {
+      console.error('Error deleting document:', error);
+    }
+  }
+};
+
+
 
 
   const handleDocumentSelect = async (id: number) => {
@@ -118,31 +155,48 @@ const userRole = user ? user.role : '';
     setQuillEditorOpen(false);
   };
 
- return (
+  const DeleteConfirmationDialog = ({ isOpen, onCancel, onConfirm }) => {
+      return (
+        isOpen && (
+          <div className="delete-confirmation-modal">
+            <div className="delete-confirmation-content">
+              <p>Are you sure you want to delete this document?</p>
+              <button onClick={onConfirm}>Yes</button>
+              <button onClick={onCancel}>No</button>
+            </div>
+          </div>
+        )
+      );
+    };
+
+return (
     <div>
       &nbsp;
-      {quillEditorOpen ? ( // Conditional rendering based on the Quill editor state
+      {quillEditorOpen ? (
         <div>
-
           {isAuthenticated && (
-                      <button onClick={handleSave} className="btnSave">
-                        Save
-                      </button>
-                    )}
-        <button onClick={handleBack} className="btnBack google-settings-btn">
-        Back
-        </button>
+            <>
+              <button onClick={handleSave} className="btnSave">
+                Save
+              </button>
+              <button onClick={openDeleteConfirmation} className="btnDelete">
+                Delete
+              </button>
+            </>
+          )}
+          <button onClick={handleBack} className="btnBack google-settings-btn">
+            Back
+          </button>
           <ReactQuill
             className="quill-editor"
             value={editorValue}
             onChange={(value) => setEditorValue(value)}
-           readOnly={!isAuthenticated} // Set readOnly based on user authentication
+            readOnly={!isAuthenticated}
           />
-
-                  </div>
-                ) : (
+        </div>
+      ) : (
         <div>
-        <h2>Documents:</h2>
+          <h2>Documents:</h2>
           &emsp;
           <div style={boxContainerStyle}>
             {documentTitles.map(({ id, title }) => (
@@ -162,7 +216,13 @@ const userRole = user ? user.role : '';
           </div>
         </div>
       )}
-      &emsp;
+
+    <DeleteConfirmationDialog
+      isOpen={deleteConfirmationOpen}
+      onCancel={closeDeleteConfirmation}
+      onConfirm={handleDelete}
+    />
+
     </div>
   );
 }
