@@ -18,8 +18,8 @@ export const Home = () => {
 {/*         <span className="hipster rounded" /> */}
 {/*       </Col> */}
 
-
-{/*         <h2>All Documents</h2> */}
+      &ensp;
+        <h2>View Document:</h2>
 
 {/*         {account?.login ? ( */}
 {/*           <div> */}
