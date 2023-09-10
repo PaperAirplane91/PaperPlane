@@ -11,7 +11,7 @@ import './quillcss.css';
 const boxContainerStyle = {
   display: 'grid',
   gridTemplateColumns: 'repeat(6, 1fr)',
-  gap: '50px',
+  gap: '50px', // Adjust the gap as needed
 
   marginLeft: '70px',
 };
@@ -102,6 +102,11 @@ const handleDelete = async () => {
 
 const handleDocumentSelect = async (id: number) => {
     try {
+
+//       if (!isAuthenticated) {
+//             console.error('Unauthorized to edit documents. Please log in.');
+//             return;
+//           }
       const response = await fetch(`http://localhost:8080/api/documents/${id}`);
       if (response.ok) {
         const data = await response.json();
@@ -196,7 +201,7 @@ return (
       ) : (
         <div>
         <div style={{ textAlign: 'center' }}>
-                  <SearchBar />
+{/*                   <SearchBar /> */}
         </div>
           &emsp;
           <div style={boxContainerStyle}>
