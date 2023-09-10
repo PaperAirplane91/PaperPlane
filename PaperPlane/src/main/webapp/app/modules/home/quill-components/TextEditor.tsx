@@ -152,6 +152,8 @@ const handleFileUpload = async (file) => {
       // Assuming 'data.content' contains the HTML content of the uploaded .txt file
       setEditorValue(data.content); // Set the editor content with the uploaded file content
       console.log('File uploaded successfully');
+              window.alert('File uploaded successfully');
+
       fetchData();
     } else {
       console.error('Error uploading file:', response.status);
