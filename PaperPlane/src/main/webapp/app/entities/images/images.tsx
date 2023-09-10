@@ -13,12 +13,17 @@ import { IImages } from 'app/shared/model/images.model';
 import { getEntities } from './images.reducer';
 
 import TextEditor from 'app/modules/home/quill-components/TextEditor';
-import SearchBar from "app/modules/home/search-bar-component/SearchBar";
+import SearchBar from 'app/modules/home/search-bar-component/SearchBar';
+
+import SearchResultsList from 'app/modules/home/search-bar-component/SearchResultsList';
 
 import TextEditorWithSelectedDocumentName from './TextEditorWithSelectedDocument'; // Import the new component
 
 
 export const Images = () => {
+
+
+
   const dispatch = useAppDispatch();
 
   const location = useLocation();
@@ -34,9 +39,16 @@ export const Images = () => {
   const handleSyncList = () => {
     dispatch(getEntities({}));
   };
+  const handleDocumentSelection = (selectedDocument) => {
+    // Handle the selected document here
+    console.log('Selected document:', selectedDocument);
+  };
 
 
- return (
+
+
+   const [results , setResults] = useState([]); // searchBar component
+  return (
     <div>
       &nbsp;
       <h2>Edit Document:</h2>
@@ -44,7 +56,14 @@ export const Images = () => {
         {/* ... */}
       </div>
       <div>
-        <TextEditorWithSelectedDocumentName /> {/* Use the new component */}
+        <div style={{ textAlign: 'center' }}>
+          <SearchBar setResults={setResults } />
+          </div>
+          <div className="results-list">
+{/*           <SearchResultsList results={results} /> */}
+           <SearchResultsList results={results} onSelectDocument={handleDocumentSelection} />
+        </div>
+        <TextEditorWithSelectedDocumentName /> {/* Use the new component */
       </div>
     </div>
   );

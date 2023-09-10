@@ -11,6 +11,8 @@ export async function updateDocumentContent(documentId, content) {
       }),
     });
 
+
+
     if (response.ok) {
       console.log('Document content updated successfully');
     } else {
