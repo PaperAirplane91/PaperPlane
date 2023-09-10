@@ -1,8 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import SearchResult from "./SearchResult";
 
-// import ReactQuill from 'react-quill';
-// import 'quill/dist/quill.snow.css';
 interface SearchResultsListProps {
   results: any[]; // Adjust the type to match the actual data type of results
   onSelectDocument: (selectedDocument: any) => void;

@@ -103,10 +103,6 @@ const handleDelete = async () => {
 const handleDocumentSelect = async (id: number) => {
     try {
 
-//       if (!isAuthenticated) {
-//             console.error('Unauthorized to edit documents. Please log in.');
-//             return;
-//           }
       const response = await fetch(`http://localhost:8080/api/documents/${id}`);
       if (response.ok) {
         const data = await response.json();
