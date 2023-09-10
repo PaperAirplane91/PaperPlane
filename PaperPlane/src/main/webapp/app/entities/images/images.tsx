@@ -61,7 +61,7 @@ export const Images = () => {
            <SearchResultsList results={results} onSelectDocument={handleDocumentSelection} />
         </div>
 
-        <TextEditor />
+{/*         <TextEditor /> */}
         <TextEditorWithSelectedDocumentName /> {/* Use the new component */}
       </div>
     </div>

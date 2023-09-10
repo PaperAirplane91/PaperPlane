@@ -201,7 +201,7 @@ return (
       ) : (
         <div>
         <div style={{ textAlign: 'center' }}>
-                  <SearchBar />
+{/*                   <SearchBar /> */}
         </div>
           &emsp;
           <div style={boxContainerStyle}>
