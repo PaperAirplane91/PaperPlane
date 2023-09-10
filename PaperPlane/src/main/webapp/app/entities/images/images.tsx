@@ -21,9 +21,6 @@ import TextEditorWithSelectedDocumentName from './TextEditorWithSelectedDocument
 
 
 export const Images = () => {
-
-
-
   const dispatch = useAppDispatch();
 
   const location = useLocation();
@@ -44,9 +41,6 @@ export const Images = () => {
     console.log('Selected document:', selectedDocument);
   };
 
-
-
-
    const [results , setResults] = useState([]); // searchBar component
   return (
     <div>
@@ -63,7 +57,9 @@ export const Images = () => {
 {/*           <SearchResultsList results={results} /> */}
            <SearchResultsList results={results} onSelectDocument={handleDocumentSelection} />
         </div>
-        <TextEditorWithSelectedDocumentName /> {/* Use the new component */
+
+{/*         <TextEditor /> */}
+        <TextEditorWithSelectedDocumentName />
       </div>
     </div>
   );

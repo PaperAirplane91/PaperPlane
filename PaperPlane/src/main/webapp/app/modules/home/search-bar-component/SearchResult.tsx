@@ -1,29 +1,3 @@
-// import React from 'react';
-// import "./SearchResult.css";
-//
-// const SearchResult = ({ result }) => {
-//
-//   const handleKeyPress = (event) => {
-//           if (event.key === 'Enter') {
-//             // Prevent the default behavior of form submission
-//             event.preventDefault();
-//
-//           }
-//         };
-//
-//   return (
-//     <div
-//     className="search-result"
-//     onClick={(e) => alert('You clicked on ${result}')}
-//     onKeyPress={handleKeyPress}
-//     >
-//     {result.title}
-//     </div>
-//   );
-// };
-//
-// export default SearchResult;
-
 import React from 'react';
 import './SearchResult.css';
 
@@ -32,6 +6,8 @@ const SearchResult = ({ result, onSelectDocument }) => {
     // Call the onSelectDocument function and pass the selected document
     onSelectDocument(result);
   };
+
+
 
   return (
     <div
