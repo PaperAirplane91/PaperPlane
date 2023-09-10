@@ -41,9 +41,6 @@ export const Images = () => {
     console.log('Selected document:', selectedDocument);
   };
 
-
-// import {DocumentSearchBar} from './search-bar-component/SearchBar' // updated searchBar testing
-
    const [results , setResults] = useState([]); // searchBar component
   return (
     <div>
@@ -62,7 +59,7 @@ export const Images = () => {
         </div>
 
 {/*         <TextEditor /> */}
-        <TextEditorWithSelectedDocumentName /> {/* Use the new component */}
+        <TextEditorWithSelectedDocumentName />
       </div>
     </div>
   );
