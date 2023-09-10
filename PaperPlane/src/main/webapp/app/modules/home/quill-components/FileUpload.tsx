@@ -14,9 +14,27 @@ function FileUpload({ onFileUpload }) {
     }
   };
 
+  const convertTxtToHtml = async (file) => {
+    try {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const fileContent = event.target.result;
+
+        // Wrap the file content in <pre> tags to preserve formatting
+        const htmlContent = `<pre>${fileContent}</pre>`;
+
+        // Now, 'htmlContent' contains the file content as HTML with preserved formatting
+        // You can use or display it as needed
+      };
+      reader.readAsText(file);
+    } catch (error) {
+      console.error('Error converting .txt file to HTML:', error);
+    }
+  };
+
   return (
     <div>
-      <input type="file" accept=".txt" onChange={handleFileChange} />
+      <input type="file" accept=".txt, .rtf, .rtfd, .html" onChange={handleFileChange} />
       <button onClick={handleUpload}>Upload</button>
     </div>
   );

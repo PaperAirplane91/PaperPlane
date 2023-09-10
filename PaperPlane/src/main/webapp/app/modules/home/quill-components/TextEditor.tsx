@@ -126,36 +126,40 @@ const handleDocumentSelect = async (id: number) => {
     }
   };
 
- const handleFileUpload = async (file) => {
-   try {
-     const formData = new FormData();
-     formData.append('file', file);
+const handleFileUpload = async (file) => {
+  try {
+    const formData = new FormData();
+    formData.append('file', file);
 
-     // Assuming you have a variable `documentTitle` that holds the title of the document
-     // You should replace this with the actual title you want to use.
-     const documentTitle = file.name; // You can modify this to extract the title from user input
+    // Assuming you have a variable `documentTitle` that holds the title of the document
+    // You should replace this with the actual title you want to use.
+    const documentTitle = file.name; // You can modify this to extract the title from user input
 
-     formData.append('title', documentTitle); // Add the document title to the form data
+    formData.append('title', documentTitle); // Add the document title to the form data
 
-     // Read the file content and append it to the form data
-     const fileContent = await file.text();
-     formData.append('content', fileContent);
+    // Read the file content and append it to the form data
+    const fileContent = await file.text();
+    formData.append('content', fileContent);
 
-     const response = await fetch('http://localhost:8080/api/documents/upload', {
-       method: 'POST',
-       body: formData,
-     });
+    const response = await fetch('http://localhost:8080/api/documents/upload', {
+      method: 'POST',
+      body: formData,
+    });
 
-     if (response.ok) {
-       console.log('File uploaded successfully');
-       // You can update the UI or trigger a fetch to refresh the document list
-     } else {
-       console.error('Error uploading file:', response.status);
-     }
-   } catch (error) {
-     console.error('Error uploading file:', error);
-   }
- };
+    if (response.ok) {
+      const data = await response.json();
+
+      // Assuming 'data.content' contains the HTML content of the uploaded .txt file
+      setEditorValue(data.content); // Set the editor content with the uploaded file content
+      console.log('File uploaded successfully');
+    } else {
+      console.error('Error uploading file:', response.status);
+    }
+  } catch (error) {
+    console.error('Error uploading file:', error);
+  }
+};
+
 
 
 
