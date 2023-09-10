@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import { useSelector } from 'react-redux';
 import { AuthenticationState, UserState } from './reduxTypes';
+import SearchBar from "app/modules/home/search-bar-component/SearchBar";
 
 
 import 'quill/dist/quill.snow.css';
@@ -15,7 +16,7 @@ const boxContainerStyle = {
   marginLeft: '70px',
 };
 
-function TextEditor() {
+function TextEditor({ setSelectedDocumentName }) {
   const [editorValue, setEditorValue] = useState('');
   const [selectedDocumentId, setSelectedDocumentId] = useState<number | null>(null);
   const [documentTitles, setDocumentTitles] = useState<{ id: number; title: string }[]>([]);
@@ -99,7 +100,7 @@ const handleDelete = async () => {
 
 
 
-  const handleDocumentSelect = async (id: number) => {
+const handleDocumentSelect = async (id: number) => {
     try {
 
 //       if (!isAuthenticated) {
@@ -112,6 +113,8 @@ const handleDelete = async () => {
         const content = data.content || '';
         setSelectedDocumentId(id);
 
+        // Set the selected document's name in the Home component
+        setSelectedDocumentName(data.title || ''); // Assuming the document title is in data.title
         setEditorValue(content);
         setQuillEditorOpen(true); // Open the Quill editor within the same component
       } else {
@@ -187,6 +190,7 @@ return (
           <button onClick={handleBack} className="btnBack google-settings-btn">
             Back
           </button>
+
           <ReactQuill
             className="quill-editor"
             value={editorValue}
@@ -196,7 +200,9 @@ return (
         </div>
       ) : (
         <div>
-          <h2>Documents:</h2>
+        <div style={{ textAlign: 'center' }}>
+                  <SearchBar />
+        </div>
           &emsp;
           <div style={boxContainerStyle}>
             {documentTitles.map(({ id, title }) => (
