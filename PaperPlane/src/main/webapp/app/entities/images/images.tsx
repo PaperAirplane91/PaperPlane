@@ -17,6 +17,7 @@ import SearchBar from 'app/modules/home/search-bar-component/SearchBar';
 
 import SearchResultsList from 'app/modules/home/search-bar-component/SearchResultsList';
 
+import TextEditorWithSelectedDocumentName from './TextEditorWithSelectedDocument'; // Import the new component
 
 
 export const Images = () => {
@@ -44,22 +45,16 @@ export const Images = () => {
   };
 
 
-// import {DocumentSearchBar} from './search-bar-component/SearchBar' // updated searchBar testing
+
 
    const [results , setResults] = useState([]); // searchBar component
   return (
     <div>
-      <h1 id="images-heading" data-cy="ImagesHeading" >
-      <h2>Edit</h2>
-        <div className="d-flex justify-content-end">
-
-          <Link to="/document/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton" >
-            <FontAwesomeIcon icon="plus" />
-            &nbsp; Create a New Document
-          </Link>
-        </div>
-      </h1>
-
+      &nbsp;
+      <h2>Edit Document:</h2>
+      <div className="d-flex justify-content-end">
+        {/* ... */}
+      </div>
       <div>
         <div style={{ textAlign: 'center' }}>
           <SearchBar setResults={setResults } />
@@ -68,78 +63,10 @@ export const Images = () => {
 {/*           <SearchResultsList results={results} /> */}
            <SearchResultsList results={results} onSelectDocument={handleDocumentSelection} />
         </div>
-
-        <TextEditor />
+        <TextEditorWithSelectedDocumentName /> {/* Use the new component */
       </div>
-
     </div>
   );
 };
 
 export default Images;
-
-{/*       <div className="table-responsive"> */}
-{/*         {imagesList && imagesList.length > 0 ? ( */}
-{/*           <Table responsive> */}
-{/*             <thead> */}
-{/*               <tr> */}
-{/*                 <th>ID</th> */}
-{/*                 <th>Image Data</th> */}
-{/*                 <th>Caption</th> */}
-{/*                 <th>Image S 3 Url</th> */}
-{/*                 <th>Reference Document Id</th> */}
-{/*                 <th /> */}
-{/*               </tr> */}
-{/*             </thead> */}
-{/*             <tbody> */}
-{/*               {imagesList.map((images, i) => ( */}
-{/*                 <tr key={`entity-${i}`} data-cy="entityTable"> */}
-{/*                   <td> */}
-{/*                     <Button tag={Link} to={`/images/${images.id}`} color="link" size="sm"> */}
-{/*                       {images.id} */}
-{/*                     </Button> */}
-{/*                   </td> */}
-{/*                   <td> */}
-{/*                     {images.imageData ? ( */}
-{/*                       <div> */}
-{/*                         {images.imageDataContentType ? ( */}
-{/*                           <a onClick={openFile(images.imageDataContentType, images.imageData)}> */}
-{/*                             <img src={`data:${images.imageDataContentType};base64,${images.imageData}`} style={{ maxHeight: '30px' }} /> */}
-{/*                             &nbsp; */}
-{/*                           </a> */}
-{/*                         ) : null} */}
-{/*                         <span> */}
-{/*                           {images.imageDataContentType}, {byteSize(images.imageData)} */}
-{/*                         </span> */}
-{/*                       </div> */}
-{/*                     ) : null} */}
-{/*                   </td> */}
-{/*                   <td>{images.caption}</td> */}
-{/*                   <td>{images.imageS3Url}</td> */}
-{/*                   <td> */}
-{/*                     {images.referenceDocumentId ? ( */}
-{/*                       <Link to={`/document/${images.referenceDocumentId.id}`}>{images.referenceDocumentId.id}</Link> */}
-{/*                     ) : ( */}
-{/*                       '' */}
-{/*                     )} */}
-{/*                   </td> */}
-{/*                   <td className="text-end"> */}
-{/*                     <div className="btn-group flex-btn-group-container"> */}
-{/*                       <Button tag={Link} to={`/images/${images.id}`} color="info" size="sm" data-cy="entityDetailsButton"> */}
-{/*                         <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span> */}
-{/*                       </Button> */}
-{/*                       <Button tag={Link} to={`/images/${images.id}/edit`} color="primary" size="sm" data-cy="entityEditButton"> */}
-{/*                         <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span> */}
-{/*                       </Button> */}
-{/*                       <Button tag={Link} to={`/images/${images.id}/delete`} color="danger" size="sm" data-cy="entityDeleteButton"> */}
-{/*                         <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span> */}
-{/*                       </Button> */}
-{/*                     </div> */}
-{/*                   </td> */}
-{/*                 </tr> */}
-{/*               ))} */}
-{/*             </tbody> */}
-{/*           </Table> */}
-{/*         ) : ( */}
-{/*           !loading && <div className="alert alert-warning">No Images found</div> */}
-{/*         )} */}
