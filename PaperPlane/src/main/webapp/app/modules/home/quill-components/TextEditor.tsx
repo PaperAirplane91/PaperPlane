@@ -67,6 +67,18 @@ const closeDeleteConfirmation = () => {
   setDeleteConfirmationOpen(false);
 };
 
+  const toolbarOptions = [
+    [{ 'font': [] }],
+    [{ 'size': ['small', false, 'large', 'huge'] }],
+    ['bold', 'italic', 'underline', 'strike'],
+    [{ 'color': [] }, { 'background': [] }],
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+    ['blockquote', 'code-block'],
+    [{ 'align': [] }],
+    ['link', 'image', 'video'],
+    ['clean']
+  ];
+
 
 
 const handleDelete = async () => {
@@ -189,6 +201,9 @@ return (
 
           <ReactQuill
             className="quill-editor"
+            modules={{
+              toolbar: toolbarOptions, // Set the custom toolbar
+            }}
             value={editorValue}
             onChange={(value) => setEditorValue(value)}
             readOnly={!isAuthenticated}
