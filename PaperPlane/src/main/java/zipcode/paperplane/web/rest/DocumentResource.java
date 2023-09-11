@@ -16,6 +16,12 @@ import tech.jhipster.web.util.ResponseUtil;
 import zipcode.paperplane.domain.Document;
 import zipcode.paperplane.repository.DocumentRepository;
 import zipcode.paperplane.web.rest.errors.BadRequestAlertException;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.MediaType;
+import org.springframework.http.HttpStatus;
+import java.io.IOException;
+
+
 
 /**
  * REST controller for managing {@link zipcode.paperplane.domain.Document}.
@@ -45,6 +51,35 @@ public class DocumentResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new document, or with status {@code 400 (Bad Request)} if the document has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
+    @PostMapping(value = "/documents/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Document> createDocument(
+        @RequestParam("file") MultipartFile file,
+        @RequestParam("title") String title,
+        @RequestParam("content") String content
+
+    ) throws URISyntaxException {
+        try {
+            // Handle the uploaded file
+            byte[] fileBytes = file.getBytes();
+
+            // Create a new Document entity
+            Document document = new Document();
+            document.setTitle(title);
+            document.setContent(content);
+            // Save the document to the database or perform any other necessary operations
+            document = documentRepository.save(document);
+
+            // Return a response indicating success
+            return ResponseEntity
+                .created(new URI("/api/documents/" + document.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, document.getId().toString()))
+                .body(document);
+        } catch (IOException e) {
+            // Handle the exception (e.g., file processing error)
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
     @PostMapping("/documents")
     public ResponseEntity<Document> createDocument(@RequestBody Document document) throws URISyntaxException {
         log.debug("REST request to save Document : {}", document);
