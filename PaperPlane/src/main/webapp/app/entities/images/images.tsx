@@ -47,7 +47,10 @@ export const Images = () => {
       &nbsp;
       <h2>Edit Document:</h2>
       <div className="d-flex justify-content-end">
-        {/* ... */}
+        <Link to="/document/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
+                    <FontAwesomeIcon icon="plus" />
+                    &nbsp; Create a new Document
+        </Link>
       </div>
       <div>
         <div style={{ textAlign: 'center' }}>
