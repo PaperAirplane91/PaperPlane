@@ -18,6 +18,9 @@ import tech.jhipster.config.DefaultProfileUtil;
 import tech.jhipster.config.JHipsterConstants;
 import zipcode.paperplane.config.ApplicationProperties;
 import zipcode.paperplane.config.CRLFLogConverter;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.context.annotation.Bean;
+
 
 @SpringBootApplication
 @EnableConfigurationProperties({ LiquibaseProperties.class, ApplicationProperties.class })
@@ -69,6 +72,13 @@ public class PaperPlaneApp {
         DefaultProfileUtil.addDefaultProfile(app);
         Environment env = app.run(args).getEnvironment();
         logApplicationStartup(env);
+    }
+
+    @Bean(name = "multipartResolver")
+    public CommonsMultipartResolver multipartResolver() {
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+        multipartResolver.setMaxUploadSizePerFile(5242880); // Set your max file size
+        return multipartResolver;
     }
 
     private static void logApplicationStartup(Environment env) {
