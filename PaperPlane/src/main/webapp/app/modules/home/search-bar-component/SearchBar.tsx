@@ -1,31 +1,93 @@
+//   import React, { useState, useEffect } from 'react';
+//   import axios from 'axios';
+//   import 'react-quill/dist/quill.snow.css';
+//   import './SearchBar.css';
+//
+//   const SearchBar = ({ setResults }) => {
+//     const [input, setInput] = useState('');
+//
+//      const fetchData = (value) => {
+//     fetch(`http://localhost:8080/api/documents?eagerload=false`)
+//       .then((response) => response.json())
+//       .then((json) => {
+//
+//         const results = json.filter((document) => {
+//             return (
+//             value &&
+//             document &&
+//             document.title &&
+//             document.title.toLowerCase().includes(value)
+//             );
+//         });
+//          console.log(results);
+//          setResults(results);
+//
+//       });
+//   };
+//
+//      const handleChange = (value) => {
+//        setInput(value);
+//        fetchData(value);
+//      };
+//
+//      const handleClear = () => {
+//        setInput(''); // Clear the input field
+//        setResults([]); // Optionally, clear the search results as well
+//      };
+//
+//      return (
+//  <div className="search-bar-container">
+//    <input
+//      className="search-input"
+//      type="text"
+//      placeholder="Search for a document by title"
+//      value={input}
+//      onChange={(e) => handleChange(e.target.value)}
+//    />
+//    {input && ( // Render the button only if there is text in the input
+//      <button
+//        className="clear-button"
+//        onClick={handleClear}
+//      >
+//        Clear
+//      </button>
+//    )}
+//  </div>)
+//
+//    export default SearchBar;
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import DisplayResult from "app/modules/home/search-bar-component/DisplayResult";
 import 'react-quill/dist/quill.snow.css';
 import './SearchBar.css';
 
-function DocumentSearchBar() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [documentContent, setDocumentContent] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+const SearchBar = ({ setResults }) => {
+  const [input, setInput] = useState('');
 
-  const handleSearch = async () => {
-    setIsLoading(true);
+  const fetchData = (value) => {
+    fetch(`http://localhost:8080/api/documents?eagerload=false`)
+      .then((response) => response.json())
+      .then((json) => {
+        const results = json.filter((document) => {
+          return (
+            value &&
+            document &&
+            document.title &&
+            document.title.toLowerCase().includes(value)
+          );
+        });
+        console.log(results);
+        setResults(results);
+      });
+  };
 
-    try {
-      const response = await axios.get(`/api/documents/document-title/${searchQuery}`);
-      if (response.status === 200) {
-        const data = response.data;
-        setDocumentContent(data.content);
-      } else {
-        // Handle errors if needed
-        console.error('Error searching for document:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Error searching for document:', error);
-    } finally {
-      setIsLoading(false);
-    }
+  const handleChange = (value) => {
+    setInput(value);
+    fetchData(value);
+  };
+
+  const handleClear = () => {
+    setInput(''); // Clear the input field
+    setResults([]); // Optionally, clear the search results as well
   };
 
   return (
@@ -34,20 +96,16 @@ function DocumentSearchBar() {
         className="search-input"
         type="text"
         placeholder="Search for a document by title"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
+        value={input}
+        onChange={(e) => handleChange(e.target.value)}
       />
-      <button className="search-button" onClick={handleSearch} disabled={isLoading}>
-        {isLoading ? 'Searching...' : 'Search'}
-      </button>
-      {documentContent && <DisplayResult content={documentContent} />}
+      {input && ( // Render the button only if there is text in the input
+        <button className="clear-button" onClick={handleClear}>
+          Clear
+        </button>
+      )}
     </div>
   );
-}
+};
 
-export default DocumentSearchBar;
-
-
-
-
-
+export default SearchBar;

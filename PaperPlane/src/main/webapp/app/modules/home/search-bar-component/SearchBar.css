@@ -39,41 +39,38 @@
   color: #fff; /* Text color on hover */
 }
 
+.clear-button {
+  background-color: transparent;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px;
+}
 
+/* Style the button on hover */
+.clear-button:hover {
+  text-decoration: underline;
+}
 
-/*!* Container for the search bar *!*/
-/*.search-bar-container {*/
-/*  display: flex;*/
-/*  align-items: center;*/
-/*  margin-bottom: 20px;*/
-/*}*/
+.results-list {
+  width: 400px; /* Match the width of the main search bar */
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 8px; /* Reduce padding */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-/*!* Input field for the search query *!*/
-/*.search-input {*/
-/*  flex: 1;*/
-/*  padding: 10px;*/
-/*  font-size: 16px;*/
-/*  border: 1px solid #ccc;*/
-/*  border-radius: 4px;*/
-/*  margin-right: 10px;*/
-/*}*/
+/* Style each search result item */
+.search-result {
+  padding: 6px 0; /* Further reduce padding */
+  font-size: 12px; /* Reduce font size */
+  border-bottom: 1px solid #ddd;
+}
 
-/*!* Search button *!*/
-/*.search-button {*/
-/*  background-color: #007bff;*/
-/*  color: #fff;*/
-/*  border: none;*/
-/*  border-radius: 4px;*/
-/*  padding: 10px 20px;*/
-/*  font-size: 16px;*/
-/*  cursor: pointer;*/
-/*}*/
-
-/*!* Style the button when it's disabled *!*/
-/*.search-button:disabled {*/
-/*  background-color: #ccc;*/
-/*  cursor: not-allowed;*/
-/*}*/
-
-
-
+/* Style the last search result item to remove the border */
+.search-result:last-child {
+  border-bottom: none;
+}

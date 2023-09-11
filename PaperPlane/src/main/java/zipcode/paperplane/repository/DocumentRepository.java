@@ -13,7 +13,6 @@ import java.util.List;
 @SuppressWarnings("unused")
 @Repository
 public interface DocumentRepository extends JpaRepository<Document, Long> {
-
     @Query("SELECT d FROM Document d WHERE lower(d.title) = lower(:title)")
     Document findByTitle(@Param("title") String title);
 }
