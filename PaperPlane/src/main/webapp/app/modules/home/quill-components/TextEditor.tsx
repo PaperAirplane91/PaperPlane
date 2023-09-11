@@ -249,7 +249,9 @@ return (
             value={editorValue}
             onChange={(value) => setEditorValue(value)}
             readOnly={!isAuthenticated}
+
           />
+          &emsp;
         </div>
       ) : (
         <div>

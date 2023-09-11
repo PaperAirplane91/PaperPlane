@@ -64,6 +64,8 @@ export const Images = () => {
 {/*         <TextEditor /> */}
         <TextEditorWithSelectedDocumentName />
       </div>
+      &emsp;
+      &emsp;
     </div>
   );
 };
