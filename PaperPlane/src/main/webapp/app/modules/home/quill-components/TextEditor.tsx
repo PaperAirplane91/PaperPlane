@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import { useSelector } from 'react-redux';
 import { AuthenticationState, UserState } from './reduxTypes';
+import SearchBar from "app/modules/home/search-bar-component/SearchBar";
 
 
 import 'quill/dist/quill.snow.css';
@@ -10,12 +11,12 @@ import './quillcss.css';
 const boxContainerStyle = {
   display: 'grid',
   gridTemplateColumns: 'repeat(6, 1fr)',
-  gap: '50px',
+  gap: '50px', // Adjust the gap as needed
 
   marginLeft: '70px',
 };
 
-function TextEditor() {
+function TextEditor({ setSelectedDocumentName }) {
   const [editorValue, setEditorValue] = useState('');
   const [selectedDocumentId, setSelectedDocumentId] = useState<number | null>(null);
   const [documentTitles, setDocumentTitles] = useState<{ id: number; title: string }[]>([]);
@@ -99,14 +100,17 @@ const handleDelete = async () => {
 
 
 
-  const handleDocumentSelect = async (id: number) => {
+const handleDocumentSelect = async (id: number) => {
     try {
+
       const response = await fetch(`http://localhost:8080/api/documents/${id}`);
       if (response.ok) {
         const data = await response.json();
         const content = data.content || '';
         setSelectedDocumentId(id);
 
+        // Set the selected document's name in the Home component
+        setSelectedDocumentName(data.title || ''); // Assuming the document title is in data.title
         setEditorValue(content);
         setQuillEditorOpen(true); // Open the Quill editor within the same component
       } else {
@@ -182,6 +186,7 @@ return (
           <button onClick={handleBack} className="btnBack google-settings-btn">
             Back
           </button>
+
           <ReactQuill
             className="quill-editor"
             value={editorValue}
@@ -191,7 +196,9 @@ return (
         </div>
       ) : (
         <div>
-          <h2>Documents:</h2>
+        <div style={{ textAlign: 'center' }}>
+{/*                   <SearchBar /> */}
+        </div>
           &emsp;
           <div style={boxContainerStyle}>
             {documentTitles.map(({ id, title }) => (
