@@ -22,9 +22,10 @@ const Header = (props: IHeaderProps) => {
   const renderDevRibbon = () =>
     props.isInProduction === false ? (
       <div className="ribbon dev">
-        <a href=""><></a>
+        <a href=""></a> {/* Fix the anchor tag */}
       </div>
     ) : null;
+
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 

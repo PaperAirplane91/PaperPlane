@@ -52,7 +52,7 @@ export const DocumentUpdate = () => {
     const entity = {
       ...documentEntity,
       ...values,
-      //applicationUser: applicationUsers.find(it => it.id.toString() === values.applicationUser.toString()),
+        //applicationUser: applicationUsers.find(it => it.id.toString() === values.applicationUser.toString()),
     };
 
     if (isNew) {

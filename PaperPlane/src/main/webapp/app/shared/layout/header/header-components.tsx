@@ -14,7 +14,7 @@ export const Brand = () => (
   <NavbarBrand tag={Link} to="/" className="brand-logo">
     <BrandIcon />
     <span className="brand-title"></span>
-    <span className="navbar-version"><></span>
+    <span className="navbar-version"></span> {/* Remove the empty fragment */}
   </NavbarBrand>
 );
 
@@ -26,3 +26,4 @@ export const Home = () => (
     </NavLink>
   </NavItem>
 );
+

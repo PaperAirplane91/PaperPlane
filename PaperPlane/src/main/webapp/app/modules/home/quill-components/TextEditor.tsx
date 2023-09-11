@@ -7,7 +7,6 @@ const boxContainerStyle = {
   display: 'grid',
   gridTemplateColumns: 'repeat(6, 1fr)',
   gap: '50px', // Adjust the gap as needed
-
   marginLeft: '70px',
 };
 
@@ -81,24 +80,20 @@ function TextEditor() {
 
   return (
     <div>
-
       {/* Style the boxes using the defined styles */}
       <div style={boxContainerStyle}>
         {documentTitles.map(({ id, title }) => (
           <div key={title} className="parentElement">
             {/* Box content */}
-
             <button className="document" onClick={() => handleDocumentSelect(id)}>
-               <img className ="img" src="content/images/document_image.png" width="150" height="200">
+              <img className="img" src="content/images/document_image.png" width="150" height="200" alt="Document" />
             </button>
             <button className="docName">{title}</button>
-
           </div>
         ))}
       </div>
 
       {selectedDocumentId !== null && (
-
         <div>
           <ReactQuill
             className="quill-editor"
@@ -109,28 +104,28 @@ function TextEditor() {
             Save
           </button>
         </div>
-      ) : (
+      ) } (
         <div>
-          <div style={boxContainerStyle}>
-            {documentTitles.map(({ id, title }) => (
-              <div key={id}>
-                <button className="document" onClick={() => handleDocumentSelect(id)}>
-                  <img
-                    className="img"
-                    src="content/images/document_image.png"
-                    width="200"
-                    height="300"
-                    alt="Document"
-                  />
-                </button>
-                <button className="docName">{title}</button>
-              </div>
-            ))}
-          </div>
+        <div style={boxContainerStyle}>
+      {documentTitles.map(({ id, title }) => (
+        <div key={id}>
+          <button className="document" onClick={() => handleDocumentSelect(id)}>
+            <img
+              className="img"
+              src="content/images/document_image.png"
+              width="200"
+              height="300"
+              alt="Document"
+            />
+          </button>
+          <button className="docName">{title}</button>
         </div>
-      )}
+      ))}
     </div>
-  );
+</div>
+)
+</div>
+);
 }
 
 export default TextEditor;
