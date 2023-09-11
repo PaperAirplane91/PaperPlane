@@ -68,6 +68,18 @@ const closeDeleteConfirmation = () => {
   setDeleteConfirmationOpen(false);
 };
 
+  const toolbarOptions = [
+    [{ 'font': [] }],
+    [{ 'size': ['small', false, 'large', 'huge'] }],
+    ['bold', 'italic', 'underline', 'strike'],
+    [{ 'color': [] }, { 'background': [] }],
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+    ['blockquote', 'code-block'],
+    [{ 'align': [] }],
+    ['link', 'image', 'video'],
+    ['clean']
+  ];
+
 
 
 const handleDelete = async () => {
@@ -104,10 +116,6 @@ const handleDelete = async () => {
 const handleDocumentSelect = async (id: number) => {
     try {
 
-//       if (!isAuthenticated) {
-//             console.error('Unauthorized to edit documents. Please log in.');
-//             return;
-//           }
       const response = await fetch(`http://localhost:8080/api/documents/${id}`);
       if (response.ok) {
         const data = await response.json();
@@ -215,33 +223,37 @@ const handleFileUpload = async (file) => {
     };
 
 return (
-  <div>
-    &nbsp;
-    {quillEditorOpen ? (
-      <div>
-        {isAuthenticated && (
-          <>
-            <button onClick={handleSave} className="btnSave">
-              Save
-            </button>
-            <button onClick={openDeleteConfirmation} className="btnDelete">
-              Delete
-            </button>
-          </>
-        )}
-        <button onClick={handleBack} className="btnBack google-settings-btn">
-          Back
-        </button>
+    <div>
+      &nbsp;
+      {quillEditorOpen ? (
+        <div>
+          {isAuthenticated && (
+            <>
+              <button onClick={handleSave} className="btnSave">
+                Save
+              </button>
+              <button onClick={openDeleteConfirmation} className="btnDelete">
+                Delete
+              </button>
+            </>
+          )}
+          <button onClick={handleBack} className="btnBack google-settings-btn">
+            Back
+          </button>
 
-        <ReactQuill
-          className="quill-editor"
-          value={editorValue}
-          onChange={(value) => setEditorValue(value)}
-          readOnly={!isAuthenticated}
-        />
-      </div>
-    ) : (
-      <div>
+          <ReactQuill
+            className="quill-editor"
+            modules={{
+              toolbar: toolbarOptions, // Set the custom toolbar
+            }}
+            value={editorValue}
+            onChange={(value) => setEditorValue(value)}
+            readOnly={!isAuthenticated}
+          />
+        </div>
+      ) : (
+        <div>
+
         <div style={{ textAlign: 'center' }}>
           {/* <SearchBar /> */}
         </div>
