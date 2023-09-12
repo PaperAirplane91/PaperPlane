@@ -16,7 +16,7 @@ function QuillEditorPage() {
   const handleSave = async () => {
     try {
       // Send the updated content back to the server
-      const response = await fetch(`http://localhost:8080/api/documents/${documentId}`, {
+      const response = await fetch(`http://localhost:8086/api/documents/${documentId}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
