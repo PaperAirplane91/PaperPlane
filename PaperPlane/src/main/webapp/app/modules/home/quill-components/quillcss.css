@@ -122,6 +122,7 @@ div.parentElement{text-align: center;}
   cursor: pointer;
   transition: background-color 0.3s ease;
   margin-right: 10px; /* Add space between the label and the button */
+
 }
 
 .file-input-label:hover {
@@ -140,8 +141,17 @@ div.parentElement{text-align: center;}
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+
 }
 
 .upload-button:hover {
   background-color: #2d8e00;
+}
+
+
+.grid {
+  display: grid;
+  grid-gap: 30px;
+  grid-template-columns: repeat(auto-fill, 186px);
+  justify-content: center;
 }
