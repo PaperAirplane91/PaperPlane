@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './quillcss.css';
 
 function FileUpload({ onFileUpload }) {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -33,11 +34,34 @@ function FileUpload({ onFileUpload }) {
   };
 
   return (
-    <div>
-      <input type="file" accept=".txt, .rtf, .rtfd, .html" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Upload</button>
-    </div>
+//     <div>
+//       <input type="file" accept=".txt, .rtf, .rtfd, .html" onChange={handleFileChange} />
+//       <button onClick={handleUpload}>Upload</button>
+//     </div>
+
+        <div>
+          <label htmlFor="fileInput" className="file-input-label">
+            <span>Choose a file</span>
+            <input
+              type="file"
+              id="fileInput"
+              accept=".txt, .rtf, .rtfd, .html"
+              onChange={handleFileChange}
+              style={{ display: 'none' }}
+            />
+          </label>
+          <button className="upload-button" onClick={handleUpload}>
+            Upload
+          </button>
+        </div>
+
+
+
+
+
   );
 }
+
+
 
 export default FileUpload;
