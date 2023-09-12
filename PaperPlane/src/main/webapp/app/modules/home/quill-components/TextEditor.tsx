@@ -214,6 +214,7 @@ const handleFileUpload = async (file) => {
   const handleBack = () => {
     // Close the Quill editor and show the list of documents
     setQuillEditorOpen(false);
+    setSelectedDocumentName(null);
   };
 
   const DeleteConfirmationDialog = ({ isOpen, onCancel, onConfirm }) => {
