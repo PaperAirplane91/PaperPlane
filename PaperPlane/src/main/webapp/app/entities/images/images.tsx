@@ -53,17 +53,13 @@ export const Images = () => {
         </Link>
       </div>
       <div>
-        <div style={{ textAlign: 'center' }}>
-          <SearchBar setResults={setResults } />
-          </div>
-          <div className="results-list">
-{/*           <SearchResultsList results={results} /> */}
-           <SearchResultsList results={results} onSelectDocument={handleDocumentSelection} />
-        </div>
+
 
 {/*         <TextEditor /> */}
         <TextEditorWithSelectedDocumentName />
       </div>
+      &emsp;
+      &emsp;
     </div>
   );
 };

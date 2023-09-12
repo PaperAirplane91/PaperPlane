@@ -110,3 +110,38 @@
 
 
 div.parentElement{text-align: center;}
+
+
+/* Add these styles to your CSS file */
+.file-input-label {
+  display: inline-block;
+  background-color: #4285f4;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 10px; /* Add space between the label and the button */
+}
+
+.file-input-label:hover {
+  background-color: #357ae8;
+}
+
+.file-input-label span {
+  font-weight: bold;
+}
+
+.upload-button {
+  background-color: #34a853;
+  color: #fff;
+  padding: 10px 15px; /* Match the padding to the label */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.upload-button:hover {
+  background-color: #2d8e00;
+}
