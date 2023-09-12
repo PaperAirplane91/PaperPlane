@@ -42,10 +42,12 @@ export const Images = () => {
   };
 
    const [results , setResults] = useState([]); // searchBar component
+   const [selectedDocumentName, setSelectedDocumentName] = useState('');
+
   return (
     <div>
       &nbsp;
-      <h2>Edit Document:</h2>
+      <h2>Edit Document: {selectedDocumentName}</h2>
       <div className="d-flex justify-content-end">
         <Link to="/document/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
                     <FontAwesomeIcon icon="plus" />
@@ -53,10 +55,7 @@ export const Images = () => {
         </Link>
       </div>
       <div>
-
-
-{/*         <TextEditor /> */}
-        <TextEditorWithSelectedDocumentName />
+        <TextEditor setSelectedDocumentName={setSelectedDocumentName} />
       </div>
       &emsp;
       &emsp;
