@@ -268,9 +268,9 @@ return (
           <SearchBar setResults={setResults } />
         </div>
         <div className="results-list">
-          {results.map((result, id, title) => (
-            <div className="search-result" key={id}>
-              <button onClick={() => handleDocumentSelect(id)}>
+          {results.map((result, title) => (
+            <div className="search-result" key={title}>
+              <button onClick={() => handleDocumentSelect(result.id)}>
               {result.title}
               </button>
             </div>
