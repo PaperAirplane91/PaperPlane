@@ -66,11 +66,9 @@
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 6px 0; /* Further reduce padding */
-  font-size: 14px; /* Reduce font size */
+  font-size: 12px; /* Reduce font size */
   border-bottom: 1px solid #ddd;
-  background-color: white;
-  text-align: left;
 }
 
-
+/* Style the last search result item to remove the border */
 

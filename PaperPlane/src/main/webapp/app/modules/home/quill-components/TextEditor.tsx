@@ -6,7 +6,7 @@ import FileUpload from './FileUpload';
 
 import SearchBar from 'app/modules/home/search-bar-component/SearchBar';
 import SearchResultsList from 'app/modules/home/search-bar-component/SearchResultsList';
-import '../search-bar-component/SearchBar.css';
+import '../search-bar-component/SearchResult.css';
 
 import 'quill/dist/quill.snow.css';
 import './quillcss.css';
@@ -270,9 +270,8 @@ return (
         </div>
         <div className="results-list">
           {results.map((result, title) => (
-            <div key={title}>
-              <button className="search-result" onClick={() => handleDocumentSelect(result.id)}>
-              &emsp;
+            <div className="search-result" key={title}>
+              <button onClick={() => handleDocumentSelect(result.id)}>
               {result.title}
               </button>
             </div>
