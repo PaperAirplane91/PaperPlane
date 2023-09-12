@@ -210,11 +210,17 @@ const handleFileUpload = async (file) => {
     }
   };
 
+  const [input, setInput] = useState('');
+const handleClear = () => {
+    setInput(''); // Clear the input field
+    setResults([]); // Optionally, clear the search results as well
+  };
 
   const handleBack = () => {
     // Close the Quill editor and show the list of documents
     setQuillEditorOpen(false);
     setSelectedDocumentName(null);
+    handleClear();
   };
 
   const DeleteConfirmationDialog = ({ isOpen, onCancel, onConfirm }) => {
