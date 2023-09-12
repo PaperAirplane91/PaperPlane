@@ -10,7 +10,9 @@ const SearchResult = ({ result, onSelectDocument }) => {
 
 
   return (
+
     <div
+
       className="search-result"
       onClick={handleSelection} // Call handleSelection when the div is clicked
       onKeyDown={(e) => {
@@ -22,8 +24,10 @@ const SearchResult = ({ result, onSelectDocument }) => {
       role="button" // Make it accessible as a button
       tabIndex={0} // Allow it to be focused
     >
+    &emsp;
       {result.title}
     </div>
+
   );
 };
 
