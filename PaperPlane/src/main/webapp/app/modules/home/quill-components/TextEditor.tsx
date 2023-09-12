@@ -28,7 +28,7 @@ function TextEditor({ setSelectedDocumentName }) {
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
 
  const fetchData = () => {
-   fetch('http://localhost:8080/api/documents')
+   fetch('http://localhost:8086/api/documents')
      .then((response) => response.json())
      .then((data) => {
        const titlesAndIds = data.map((document) => ({
@@ -93,7 +93,7 @@ const closeDeleteConfirmation = () => {
 const handleDelete = async () => {
   if (selectedDocumentId !== null) {
     try {
-      const response = await fetch(`http://localhost:8080/api/documents/${selectedDocumentId}`, {
+      const response = await fetch(`http://localhost:8086/api/documents/${selectedDocumentId}`, {
         method: 'DELETE',
       });
 
@@ -124,7 +124,7 @@ const handleDelete = async () => {
 const handleDocumentSelect = async (id: number) => {
     try {
 
-      const response = await fetch(`http://localhost:8080/api/documents/${id}`);
+      const response = await fetch(`http://localhost:8086/api/documents/${id}`);
       if (response.ok) {
         const data = await response.json();
         const content = data.content || '';
@@ -157,7 +157,7 @@ const handleFileUpload = async (file) => {
     const fileContent = await file.text();
     formData.append('content', fileContent);
 
-    const response = await fetch('http://localhost:8080/api/documents/upload', {
+    const response = await fetch('http://localhost:8086/api/documents/upload', {
       method: 'POST',
       body: formData,
     });
@@ -186,7 +186,7 @@ const handleFileUpload = async (file) => {
   const handleSave = async () => {
     if (selectedDocumentId !== null) {
       try {
-        const response = await fetch(`http://localhost:8080/api/documents/${selectedDocumentId}`, {
+        const response = await fetch(`http://localhost:8086/api/documents/${selectedDocumentId}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
