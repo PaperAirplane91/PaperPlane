@@ -1,0 +1,168 @@
+# flyctl launch added from .idea/.gitignore
+# Default ignored files
+.idea/shelf
+.idea/workspace.xml
+
+# flyctl launch added from PaperPlane/.gitignore
+######################
+# Project Specific
+######################
+PaperPlane/src/main/webapp/content/css/main.css
+PaperPlane/target/classes/static/**
+PaperPlane/src/test/javascript/coverage
+
+######################
+# Node
+######################
+PaperPlane/node
+PaperPlane/**/node_tmp
+PaperPlane/**/node_modules
+PaperPlane/**/npm-debug.log.*
+PaperPlane/.awcache/*
+PaperPlane/.cache-loader/*
+
+######################
+# SASS
+######################
+PaperPlane/**/.sass-cache
+
+######################
+# Eclipse
+######################
+PaperPlane/**/*.pydevproject
+PaperPlane/**/.project
+PaperPlane/**/.metadata
+PaperPlane/**/tmp
+PaperPlane/**/tmp/**/*
+PaperPlane/**/*.tmp
+PaperPlane/**/*.bak
+PaperPlane/**/*.swp
+PaperPlane/**/*~.nib
+PaperPlane/**/local.properties
+PaperPlane/**/.classpath
+PaperPlane/**/.settings
+PaperPlane/**/.loadpath
+PaperPlane/**/.factorypath
+PaperPlane/src/main/resources/rebel.xml
+
+# External tool builders
+PaperPlane/**/.externalToolBuilders/**
+
+# Locally stored "Eclipse launch configurations"
+PaperPlane/**/*.launch
+
+# CDT-specific
+PaperPlane/**/.cproject
+
+# PDT-specific
+PaperPlane/**/.buildpath
+
+# STS-specific
+PaperPlane/.sts4-cache/*
+
+######################
+# IntelliJ
+######################
+PaperPlane/**/.idea
+PaperPlane/**/*.iml
+PaperPlane/**/*.iws
+PaperPlane/**/*.ipr
+PaperPlane/**/*.ids
+PaperPlane/**/*.orig
+PaperPlane/**/classes
+PaperPlane/**/out
+
+######################
+# Visual Studio Code
+######################
+PaperPlane/**/.vscode/*
+!PaperPlane/**/.vscode/settings.json
+!PaperPlane/**/.vscode/tasks.json
+!PaperPlane/**/.vscode/launch.json
+!PaperPlane/**/.vscode/extensions.json
+PaperPlane/**/*.code-workspace
+
+######################
+# Maven
+######################
+PaperPlane/log
+PaperPlane/target
+
+######################
+# Gradle
+######################
+PaperPlane/**/.gradle
+PaperPlane/build
+
+######################
+# Package Files
+######################
+PaperPlane/**/*.jar
+PaperPlane/**/*.war
+PaperPlane/**/*.ear
+PaperPlane/**/*.db
+
+######################
+# Windows
+######################
+# Windows image file caches
+PaperPlane/**/Thumbs.db
+
+# Folder config file
+PaperPlane/**/Desktop.ini
+
+######################
+# Mac OSX
+######################
+PaperPlane/**/.DS_Store
+PaperPlane/**/.svn
+
+# Thumbnails
+PaperPlane/**/._*
+
+# Files that might appear on external disk
+PaperPlane/**/.Spotlight-V100
+PaperPlane/**/.Trashes
+
+######################
+# Directories
+######################
+PaperPlane/bin
+PaperPlane/deploy
+
+######################
+# Logs
+######################
+PaperPlane/**/*.log*
+
+######################
+# Others
+######################
+PaperPlane/**/*.class
+PaperPlane/**/*.*~
+PaperPlane/**/*~
+PaperPlane/**/.merge_file*
+
+######################
+# Gradle Wrapper
+######################
+!PaperPlane/**/gradle/wrapper/gradle-wrapper.jar
+
+######################
+# Maven Wrapper
+######################
+!PaperPlane/**/.mvn/wrapper/maven-wrapper.jar
+
+######################
+# ESLint
+######################
+PaperPlane/**/.eslintcache
+
+######################
+# Code coverage
+######################
+PaperPlane/coverage
+PaperPlane/.nyc_output
+
+PaperPlane/**/.DS_Store
+fly.toml
