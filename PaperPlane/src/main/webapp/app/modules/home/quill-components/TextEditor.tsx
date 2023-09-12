@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import { useSelector } from 'react-redux';
 import { AuthenticationState, UserState } from './reduxTypes';
-import SearchBar from "app/modules/home/search-bar-component/SearchBar";
 import FileUpload from './FileUpload';
 
+import SearchBar from 'app/modules/home/search-bar-component/SearchBar';
+import SearchResultsList from 'app/modules/home/search-bar-component/SearchResultsList';
+import '../search-bar-component/SearchResult.css';
 
 import 'quill/dist/quill.snow.css';
 import './quillcss.css';
@@ -55,6 +57,12 @@ function TextEditor({ setSelectedDocumentName }) {
   useEffect(() => {
     fetchData();
   }, []);
+
+const handleDocumentSelection = (selectedDocument) => {
+      // Handle the selected document here
+      console.log('Selected document:', selectedDocument);
+  };
+const [results , setResults] = useState([]);
 
 const isAuthenticated = useSelector((state: { authentication: AuthenticationState }) => state.authentication.isAuthenticated);
 const user = useSelector((state: { user: UserState }) => state.user);
@@ -249,13 +257,24 @@ return (
             value={editorValue}
             onChange={(value) => setEditorValue(value)}
             readOnly={!isAuthenticated}
+
           />
+          &emsp;
         </div>
       ) : (
         <div>
 
         <div style={{ textAlign: 'center' }}>
-          {/* <SearchBar /> */}
+          <SearchBar setResults={setResults } />
+        </div>
+        <div className="results-list">
+          {results.map((result, title) => (
+            <div className="search-result" key={title}>
+              <button onClick={() => handleDocumentSelect(result.id)}>
+              {result.title}
+              </button>
+            </div>
+          ))}
         </div>
         &emsp;
         <div style={boxContainerStyle}>

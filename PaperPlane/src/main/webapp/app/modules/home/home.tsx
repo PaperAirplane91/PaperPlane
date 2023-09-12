@@ -18,6 +18,7 @@ export const Home = () => {
       &ensp;
       <h2>View Document: {selectedDocumentName}</h2>
       <TextEditor setSelectedDocumentName={setSelectedDocumentName} />
+      &emsp;
     </Row>
   );
 };
