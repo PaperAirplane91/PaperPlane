@@ -59,7 +59,6 @@ spring:
           use_second_level_cache: true
           use_query_cache: false
           generate_statistics: false
-        jdbc:
           batch_size: 25
         order_inserts: true
         order_updates: true
