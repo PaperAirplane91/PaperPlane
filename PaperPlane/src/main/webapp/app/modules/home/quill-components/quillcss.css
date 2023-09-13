@@ -132,7 +132,7 @@ div.parentElement{text-align: center;}
 }
 
 .file-input-label span {
-  /*font-weight: bold;*/
+  font-weight: bold;
 }
 
 .upload-button {
@@ -144,6 +144,7 @@ div.parentElement{text-align: center;}
   cursor: pointer;
   transition: background-color 0.3s ease;
   font-size: 18px;
+  font-weight: bold;
 }
 
 .upload-button:hover {
