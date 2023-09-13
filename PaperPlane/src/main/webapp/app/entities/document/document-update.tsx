@@ -75,7 +75,7 @@ export const DocumentUpdate = () => {
       <Row className="justify-content-center">
         <Col md="8">
           <h2 id="paperPlaneApp.document.home.createOrEditLabel" data-cy="DocumentCreateUpdateHeading" style={{ textAlign: 'center' }}>
-            Create or Edit a Document
+            Create Document
           </h2>
         </Col>
       </Row>
