@@ -3,6 +3,8 @@ import ReactQuill from 'react-quill';
 import { useSelector } from 'react-redux';
 import { AuthenticationState, UserState } from './reduxTypes';
 import FileUpload from './FileUpload';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import SearchBar from 'app/modules/home/search-bar-component/SearchBar';
 import SearchResultsList from 'app/modules/home/search-bar-component/SearchResultsList';
@@ -272,7 +274,12 @@ return (
         </div>
       ) : (
         <div>
-
+          <div className="d-flex justify-content-end">
+            <Link to="/document/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
+              <FontAwesomeIcon icon="plus" />
+              &nbsp; Create a new Document
+              </Link>
+          </div>
         <div style={{ textAlign: 'center' }}>
           <SearchBar setResults={setResults } />
         </div>
@@ -286,6 +293,7 @@ return (
             </div>
           ))}
         </div>
+
         &emsp;
         <div className="grid">
           {documentTitles.map(({ id, title }) => (

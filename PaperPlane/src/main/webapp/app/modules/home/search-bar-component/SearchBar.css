@@ -9,13 +9,14 @@
   width: 400px; /* Set a fixed width for the search bar */
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Add a box shadow for depth */
   height: 30px;
+  font-size: 18px;
 }
 
 /* Input field for the search query */
 .search-input {
   flex: 1;
   padding: 10px;
-  font-size: 16px;
+  font-size: 18px;
   border: none;
   outline: none;
   background: transparent; /* Remove input background */
@@ -44,7 +45,7 @@
   border: none;
   color: #007bff;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
   padding: 5px;
 }
 
@@ -66,7 +67,7 @@
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 6px 0; /* Further reduce padding */
-  font-size: 14px; /* Reduce font size */
+  font-size: 18px; /* Reduce font size */
   border-bottom: 1px solid #ddd;
   background-color: white;
   text-align: left;
