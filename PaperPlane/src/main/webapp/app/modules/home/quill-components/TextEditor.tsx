@@ -259,7 +259,6 @@ return (
           <button onClick={handleBack} className="btnBack google-settings-btn">
             Back
           </button>
-
           <ReactQuill
             className="quill-editor"
             modules={{
