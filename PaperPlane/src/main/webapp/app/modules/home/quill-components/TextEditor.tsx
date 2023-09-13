@@ -274,12 +274,6 @@ return (
         </div>
       ) : (
         <div>
-          <div className="d-flex justify-content-end">
-            <Link to="/document/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
-              <FontAwesomeIcon icon="plus" />
-              &nbsp; Create a new Document
-              </Link>
-          </div>
         <div style={{ textAlign: 'center' }}>
           <SearchBar setResults={setResults } />
         </div>
