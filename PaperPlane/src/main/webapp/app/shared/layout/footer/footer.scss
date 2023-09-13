@@ -22,4 +22,14 @@
     margin-left: 200px;
 }
 
+.section {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  gap: 30px;
+
+}
+
 
