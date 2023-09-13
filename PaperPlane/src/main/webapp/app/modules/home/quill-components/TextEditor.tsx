@@ -3,6 +3,8 @@ import ReactQuill from 'react-quill';
 import { useSelector } from 'react-redux';
 import { AuthenticationState, UserState } from './reduxTypes';
 import FileUpload from './FileUpload';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import SearchBar from 'app/modules/home/search-bar-component/SearchBar';
 import SearchResultsList from 'app/modules/home/search-bar-component/SearchResultsList';
@@ -12,12 +14,12 @@ import 'quill/dist/quill.snow.css';
 import './quillcss.css';
 
 const boxContainerStyle = {
-  display: 'grid',
+  display: 'flex',
   gridTemplateColumns: 'repeat(6, 1fr)',
   gap: '50px', // Adjust the gap as needed
-
   marginLeft: '70px',
 };
+
 
 function TextEditor({ setSelectedDocumentName }) {
   const [editorValue, setEditorValue] = useState('');
@@ -26,6 +28,8 @@ function TextEditor({ setSelectedDocumentName }) {
   const [quillEditorOpen, setQuillEditorOpen] = useState(false);
 
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
+
+const [flexWrap, setFlexWrap] = useState('wrap');
 
  const fetchData = () => {
    fetch('https://pp.zipcode.rocks/api/documents')
@@ -255,7 +259,6 @@ return (
           <button onClick={handleBack} className="btnBack google-settings-btn">
             Back
           </button>
-
           <ReactQuill
             className="quill-editor"
             modules={{
@@ -270,7 +273,6 @@ return (
         </div>
       ) : (
         <div>
-
         <div style={{ textAlign: 'center' }}>
           <SearchBar setResults={setResults } />
         </div>
@@ -284,9 +286,11 @@ return (
             </div>
           ))}
         </div>
+
         &emsp;
-        <div style={boxContainerStyle}>
+        <div className="grid">
           {documentTitles.map(({ id, title }) => (
+
             <div key={id} className="parentElement">
               <button className="document" onClick={() => handleDocumentSelect(id)}>
                 <img
@@ -300,9 +304,15 @@ return (
               <button className="docName">{title}</button>
             </div>
           ))}
+
         </div>
+
         {/* Place the FileUpload component outside the map loop */}
-        <FileUpload onFileUpload={handleFileUpload} />
+        <div>
+          &emsp;
+          &emsp;
+          <FileUpload onFileUpload={handleFileUpload} />
+        </div>
       </div>
     )}
 

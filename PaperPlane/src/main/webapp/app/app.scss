@@ -24,6 +24,7 @@ a {
 
 .app-container {
   box-sizing: border-box;
+  border-color: transparent;
   .view-container {
     width: 100%;
     height: calc(100% - 40px);
