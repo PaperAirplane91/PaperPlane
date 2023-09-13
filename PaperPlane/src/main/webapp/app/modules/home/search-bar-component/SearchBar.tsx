@@ -64,7 +64,7 @@ const SearchBar = ({ setResults }) => {
   const [input, setInput] = useState('');
 
   const fetchData = (value) => {
-    fetch(`http://localhost:8080/api/documents?eagerload=false`)
+    fetch(`https://pp.zipcode.rocks/api/documents?eagerload=false`)
       .then((response) => response.json())
       .then((json) => {
         const results = json.filter((document) => {
