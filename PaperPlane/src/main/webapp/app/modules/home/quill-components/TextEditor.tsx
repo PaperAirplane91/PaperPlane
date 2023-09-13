@@ -259,7 +259,8 @@ return (
           <button onClick={handleBack} className="btnBack google-settings-btn">
             Back
           </button>
-
+          &emsp;
+          &emsp;
           <ReactQuill
             className="quill-editor"
             modules={{
@@ -270,7 +271,7 @@ return (
             readOnly={!isAuthenticated}
 
           />
-          &emsp;
+
         </div>
       ) : (
         <div>
@@ -316,8 +317,6 @@ return (
 
         {/* Place the FileUpload component outside the map loop */}
         <div>
-          &emsp;
-          &emsp;
           <FileUpload onFileUpload={handleFileUpload} />
         </div>
       </div>
