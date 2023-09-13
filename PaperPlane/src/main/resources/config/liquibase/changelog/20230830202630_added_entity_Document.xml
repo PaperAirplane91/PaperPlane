@@ -17,7 +17,7 @@
             <column name="title" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="content" type="varchar(5000000)">
+            <column name="content" type="TEXT">
                 <constraints nullable="true" />
             </column>
             <column name="archived" type="boolean">
